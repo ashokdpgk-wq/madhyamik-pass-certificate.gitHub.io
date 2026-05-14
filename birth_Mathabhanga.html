@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Certificate</title>
+
+<style>
+@page{
+  size:A4;
+  margin:0;
+}
+
+body{
+  margin:0;
+  background:#ddd;
+}
+  
+ /*.page-border{
+  width:210mm;
+  height:297mm;
+  margin:auto;
+  background:#fff;
+  border:4px double #000;
+  box-sizing:border-box;
+}*/
+  
+.container{
+  width:190mm;
+  height:270mm;
+  margin:auto;
+  background:#fff;
+  margin-top:20px;
+  padding:10mm;
+  box-sizing:border-box;
+  border:4px double #000;
+}
+
+/* Column control */
+table col:nth-child(4){
+  width:1%;
+}
+
+table{
+  width:100%;
+  height:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+  font-family:Arial;
+}
+
+td{
+  vertical-align:middle;
+  text-align:center;
+  font-size:13px;
+  padding:5px;
+}
+
+.left{
+  text-align:left;
+  padding-left:10px;
+}
+
+.center{
+  text-align:center;
+}
+
+.bold{
+  font-weight:bold;
+}
+
+.big{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.logo{
+  width:55px;
+  height:55px;
+}
+
+/* Header center logo */
+.header-logo{
+  display:block;
+  margin:0 auto 6px auto;
+  width:60px;
+}
+
+/* Overlay block */
+.overlay-box{
+  position:relative;
+  padding-top:20px;
+}
+
+.overlay-logo{
+  position:absolute;
+  top:35px;
+  left:50%;
+  transform:translateX(-50%);
+  width:110px;
+}
+
+.qr img{
+  width:90px;
+}
+@media print{
+  div[style*="position:fixed"]{
+    display:none;
+  }
+  body{
+    background:#fff;
+  }
+}
+</style>
+
+</head>
+
+<body>
+  <!-- FORM -->
+<div style="position:fixed; 
+  top:10px;
+  left:10px; 
+  background:#fff;
+  padding:10px; 
+  border:1px solid #000;
+  z-index:999;
+  height:70vh;
+  overflow:auto;">
+
+<input id="name" placeholder="Name"><br><br>
+<input id="sex" placeholder="Sex"><br><br>
+<input id="dob" placeholder="DOB"><br><br>
+<input id="dobWords" placeholder="DOB In Words"><br><br>
+<input id="place" placeholder="Birth Place"><br><br>
+
+<input id="mother" placeholder="Mother Name"><br><br>
+<input id="father" placeholder="Father Name"><br><br>
+
+<input id="motherA" placeholder="Mother Aadhaar"><br><br>
+<input id="fatherA" placeholder="Father Aadhaar"><br><br>
+
+<input id="addr1" placeholder="Address 1"><br><br>
+<input id="addr2" placeholder="Address 2"><br><br>
+
+<input id="regno" placeholder="Registration No"><br><br>
+<input id="regdate" placeholder="Registration Date"><br><br>
+
+<input id="remarkInput" placeholder="Remark"><br><br>
+<input id="authorityInput" placeholder="Authority"><br><br>
+<input id="updateTime" placeholder="Updated Time"><br><br>
+
+<button onclick="updateAll()">Update</button>
+<button onclick="downloadPDF()">PDF</button>
+<button onclick="printPage()">Print</button>
+</div>
+
+<div class="page-border">
+<div class="container">
+<table>
+<colgroup>
+  <col style="width:10%;">  <!-- 1 -->
+  <col style="width:14%;">  <!-- 2 -->
+  <col style="width:20%;">  <!-- 3 -->
+  <col style="width:1%;">   <!-- 4 (middle gap small) -->
+  <col style="width:20%;">  <!-- 5 -->
+  <col style="width:14%;">  <!-- 6 -->
+  <col style="width:10%;">  <!-- 7 -->
+</colgroup>
+
+<!-- Row 1 -->
+<tr>
+<td colspan="2"><img src="birth_3.2.jpg" class="logo" style="height:80px;"></td>
+
+<td colspan="3" class="bold">
+<img src="birth_1.2.png" class="header-logo" style="width:20px;">
+
+পশ্চিমবঙ্গ সরকার<br>
+GOVERNMENT OF WEST BENGAL<br>
+GOVERNMENT OF WEST BENGAL COLONY<br><br>
+
+SUB DIVISIONAL HOSPITAL MATHABHANGA<br><br>
+
+<span class="big" style="font-size:14px;color:green;">জম্ম শংসাপত্র<br>Birth Certificate</span>
+</td>
+
+<td colspan="2"><img src="birth_2.2.jpg" class="logo" style="height:80px;"></td>
+</tr>
+
+<!-- Row 2 -->
+<tr>
+<td colspan="7" class="left" style="font-size:10px;">
+ (১৯৬৯ সালে জম্ম-মৃত্যু নিবন্ধীকরণ আইনের ধারা ১২/১৭ এবং 2000 সালের পশ্চিম বঙ্গের জম্ম-মৃত্যু নিবন্ধীকরণ বিধি ৮/১৩ অনুযায়ী জারি করা হইতেছে।)
+(ISSUED UNDER SECTION 12/17 OF THE REGISTRATION OF BIRTHS & DEATHS ACT. 1969 AND RULE 8/13 OF THE WEST BENGAL REGISTRATION OF BIRTHS & DEATHS RULES 2000)
+</td>
+</tr>
+
+<!-- Row 3 -->
+<tr>
+<td colspan="7" class="left" style="font-size:9px;">
+এই মর্মে জ্ঞাতকরা যাইতেছে যে নিম্নবর্ণিত বিবরণী মূল জম্ম নথি হইতে লওয়া হইয়াছে, উক্ত নথি পশ্চিম বঙ্গ রাজ্যের, কোচবিহার জেলার, মাথাভাঙ্গা ব্লক এর জম্ম নিবন্ধে লিপিবদ্ধ আছে। <br>
+THIS IS TO CERTIFICATE THE FOLLOWING INFORMATION HAS BEEN TAKEN FROM THE ORGINAL RECORD OF BIRTH WHICH IS THE REGISTER FOR SUB DIVISIONAL 
+  HOSPITAL MATHABHANGA OF TASHIL/BLOCK MATHABHANGA OF DISTRICT COOCHBEHAR OF STATE/UNION TERRITORY WEST BENGAL, INDIA 2000.
+</td>
+</tr>
+
+<!-- Row 4 -->
+<td colspan="3" class="left" id="nameField">নাম / NAME : ASHOK SARKAR</td>
+<td></td>
+<td colspan="3" class="left" id="sexField">লিঙ্গ / SEX : Male
+</td>
+
+<!-- Row 5 -->
+<tr>
+<td colspan="3" class="left" id="dobField">
+জন্মতারিখ / DATE OF BIRTH : <br> 01/02/2002<br>
+<span id="dobWordsField">ONE- JANUARY- TWO THOUSAND AND TWO</span>
+</td>
+<td></td>
+<td colspan="3" class="left" id="placeField">
+জন্মস্থান / PLACE OF BIRTH : <br> SUB DIVISIONAL HOSPITAL MATHABHANGA
+</td>
+</tr>
+
+<!-- Row 6 -->
+<tr>
+<td colspan="3" class="left" id="motherField">মাতার নাম / NAME OF MOTHER : <br>ANJALI BISWAS</td>
+<td></td>
+<td colspan="3" class="left" id="fatherField">পিতার নাম / NAME OG FATHER : <br>ANIL CHANDRA BISWAS</td>
+</tr>
+
+<!-- Row 7 -->
+<tr>
+<td colspan="3" class="left" id="motherAadhaar">আধার সংখ্যা / MOTHER'S AADHAAR NO : <br> XXXXXXXX2356</td>
+<td></td>
+<td colspan="3" class="left" id="fatherAadhaar"> আধার সংখ্যা / FATHER'S AADHAAR NO : <br> XXXXXXXX5698</td>
+</tr>
+
+<!-- Row 8 -->
+<tr>
+<td colspan="3" class="left" id="address1">
+শিশুর জম্মের সময় পিতা - মাতার ঠিকানা / ADDRESS OF PARENTS AT THE TIME OF BIRTH OF CHILD :<br>
+KALIRHAT, DHUPGURI, JALPAIGURI, WEST BENGAL, 735210
+</td>
+<td></td>
+<td colspan="3" class="left" id="address2">
+ পিতা - মাতার স্থায়ী / PERMANENT ADDRESS OF PARENTS :<br>
+KALIRHAT, DHUPGURI, JALPAIGURI, WEST BENGAL, 735210
+</td>
+</tr>
+
+<!-- Row 9 -->
+<tr>
+<td colspan="3" class="left" id="regNo">
+নিবন্ধীকরণ নং / REGISTRATION NUMBER :<br> B-2020: 19-00123-567890
+</td>
+<td></td>
+<td colspan="3" class="left" id="regDate">
+নিবন্ধীকরণ তারিখ REGISTRATION DATE : <br> 02/03/2025
+</td>
+</tr>
+
+<!-- Row 10 -->
+<tr>
+<td colspan="3" class="left" id="remark">REMARK : ___</td>
+<td></td>
+<td colspan="3" class="left" id="authority">প্রদানকারী কর্তৃপক্ষ / ISSUING AUTHORITY :</td>
+</tr>
+
+<!-- Row 11 -->
+<tr>
+<td></td><td></td><td></td><td></td>
+
+<td colspan="3" rowspan="2" class="overlay-box center bold">
+
+<img src="birth_4.2.png" class="overlay-logo" style="width:230px; height:110px;">
+
+নিবন্ধীকরণ (জম্ম ও মৃত্যু)<br><br>
+SUB REGISTER (DEATH & BIRTH)<br><br><br>
+SUB DIVISIONAL HOSPITAL MATHABHANGA
+
+</td>
+</tr>
+
+<!-- Row 12 -->
+<tr>
+<td colspan="3" class="left">
+<br><br><br><br>UPDATED ON : <br>
+  <span id="updateTimeField">09:03:2025 12:16:24</span>
+</td>
+<td></td>
+</tr>
+
+<!-- Row 13 -->
+<tr>
+<td colspan="3" class="left qr">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=AshokSarkar-2002-Mathabhanga">
+</td>
+<td colspan="4"></td>
+</tr>
+
+<!-- Row 14 -->
+<tr>
+<td></td>
+<td colspan="5" class="center" style="font-size:10px;">
+"THIS IS A COMPUTER GENARATED CERTIFICATE"<br>
+"THE GOVT. OF INDIA VIDE CIRCULAR NO. 1/12/2024-VS(CRS) DATED 27 - JULY - 2015 HAS APPROVED THIS CERTIFICATE AS A VALID LEGAL DOCUMENT FOR ALL OFFICIAL PURPOSES".<br>
+
+</td>
+<td></td>
+</tr>
+
+<!-- Row 15 -->
+<tr>
+<td></td>
+<td colspan="5" class="center" style="font-size:10px;">
+*প্রতিটি জম্ম - মৃত্যু নিবন্ধীকরণ সুনিশ্চিত করুন* / ENSURE REGISTRATION OF EVERY BIRTH AND DEATH"
+</td>
+<td></td>
+</tr>
+
+ <!-- Row 16 -->
+<tr>
+<td></td>
+<td></td>
+
+<td colspan="3" class="center">
+<img src="https://barcode.tec-it.com/barcode.ashx?data=ASHOKSARKAR2002&code=Code128&dpi=96" style="width:220px; height:20px;">
+</td>
+
+<td></td>
+<td></td>
+</tr>
+  
+</table>
+
+</div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+
+function updateAll(){
+
+let name = nameInput("name");
+let sex = nameInput("sex");
+let dob = nameInput("dob");
+let place = nameInput("place");
+
+let mother = nameInput("mother");
+let father = nameInput("father");
+
+let mA = nameInput("motherA");
+let fA = nameInput("fatherA");
+
+let a1 = nameInput("addr1");
+let a2 = nameInput("addr2");
+
+let regno = nameInput("regno");
+let regdate = nameInput("regdate");
+
+let remark = nameInput("remarkInput");
+let auth = nameInput("authorityInput");
+  let dobWords = nameInput("dobWords");
+let updateTime = nameInput("updateTime");
+
+// Update Fields
+set("nameField", "নাম / NAME : " + name);
+set("sexField", "লিঙ্গ / Sex : " + sex);
+
+set("dobField", "জন্মতারিখ / DATE OF BIRTH : <br>" + dob);
+set("placeField", "জন্মস্থান / BIRTH PLACE : <br>" + place);
+
+set("motherField", "মাতার নাম : <br>" + mother);
+set("fatherField", "পিতার নাম : <br>" + father);
+
+set("motherAadhaar", "MOTHER'S AADHAAR NO : <br>" + mA);
+set("fatherAadhaar", "FATHER'S AADHAAR NO : <br>" + fA);
+
+set("address1", "ADDRESS OF PARENTS:<br>" + a1);
+set("address2", "PERMANENT ADDRESS:<br>" + a2);
+
+set("regNo", "REGISTRATION NO :<br>" + regno);
+set("regDate", "REGISTRATION DATE :<br>" + regdate);
+
+set("remark", "REMARK : " + remark);
+set("authority", "ISSUING AUTHORITY : " + auth);
+  set("updateTimeField", updateTime);
+
+// 🔳 QR + Barcode Sync
+let data = name + "-" + dob + "-" + regno;
+
+document.querySelector(".qr img").src =
+"https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" + encodeURIComponent(data);
+
+document.querySelector("img[src*='barcode']").src =
+"https://barcode.tec-it.com/barcode.ashx?data=" + encodeURIComponent(data);
+
+}
+
+function set(id, val){
+document.getElementById(id).innerHTML = val;
+}
+
+function nameInput(id){
+return document.getElementById(id).value;
+}
+
+function downloadPDF(){
+html2pdf().from(document.querySelector(".container")).save();
+}
+  
+function printPage(){
+  window.print();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Final Certificate</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Times New Roman", serif;
+}
+
+.wrapper{
+  display:flex;
+  height:100vh;
+}
+
+/* LEFT FORM */
+.form{
+  width:320px;
+  background:#fff;
+  padding:15px;
+  border-right:2px solid #000;
+  overflow:auto;
+}
+
+.form input, .form button{
+  width:100%;
+  margin-bottom:8px;
+  padding:8px;
+}
+
+/* RIGHT CERTIFICATE */
+.viewer{
+  flex:1;
+  overflow:auto;
+  padding:10px;
+}
+
+.page{
+  width:200mm;
+  height:270mm;        /* 👈 কম height (bottom gap এর জন্য) */
+  margin:10mm auto 17mm auto;  
+  border:3px solid #000;
+  padding:18mm 15mm;
+  box-sizing:border-box;
+  position:relative;
+}
+
+.center{margin-top:-150; 
+  text-align:center; 
+  line-height:0.5;}
+
+.line{
+  flex:1;
+  border-bottom:1px dashed #000;
+  min-width:120px;
+  text-align:center;
+}
+
+.row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:8px 0;
+  align-items:center;
+}
+
+.label{white-space:nowrap;}
+
+.flex{
+  display:flex;
+  justify-content:space-between;
+}
+
+.photo{
+  position:absolute;
+  bottom:30px;
+  left:30px;
+  width:110px;
+  height:130px;
+  border:2px solid #000;
+  object-fit:cover;   /* important */
+}
+
+.qr{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+}
+
+.signature{
+  position:absolute;
+  bottom:30px;
+  right:30px;
+  text-align:right;
+  position:absolute;
+}
+
+.tick{
+  position:absolute;
+  top:-20px;
+  right:20px;
+  font-size:60px;
+  color:green;
+  font-weight:bold;
+  opacity:0.8;
+}
+  
+  .no-line{
+  border:none !important;
+  text-decoration:none;
+  padding:0 2px;
+  font-weight:bold; /* optional */
+}
+
+.logo{width:50px;}
+  @page{
+  size:A4;
+  margin:0;
+}
+
+@media print{
+
+  html, body{
+    width:210mm;
+    height:297mm;
+    margin:0;
+    padding:0;
+    overflow:hidden;   /* 👈 extra content কাটবে */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .wrapper{
+    display:block;
+  }
+
+  .viewer{
+    padding:0;
+    margin:0;
+  }
+
+  .page{
+    width:200mm;
+    height:250mm;   /* 👈 কমাও (very important) */
+    margin:10mm auto 10mm auto;  /* 👈 total fit */
+    border:3px solid #000;
+    page-break-inside:avoid;
+    page-break-after:avoid;
+  }
+
+  .form{
+    display:none;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- FORM -->
+<div class="form">
+
+<h3>EDIT PANEL</h3>
+
+<input id="certInput" placeholder="Certificate No">
+<input id="dateInput" type="date">
+
+<input id="nameInput" placeholder="Name">
+<input placeholder="Son/Daughter_of" oninput="set('son_of',this.value)">
+<input id="fatherInput" placeholder="Father Name">
+
+<input id="villageInput" placeholder="Village">
+<input id="poInput" placeholder="Post Office">
+<input id="psInput" placeholder="Police Station">
+
+<input id="districtInput" placeholder="District">
+<input id="stateInput" placeholder="State">
+<input id="casteInput" placeholder="Caste">
+
+<input id="placeInput" placeholder="Place">
+  <label>Upload Photo</label>
+<input type="file" id="photoInput" accept="image/*">
+
+<button onclick="updateAll()">Update</button>
+  <button onclick="printPage()">Print</button>
+
+</div>
+
+<!-- CERTIFICATE -->
+<div class="viewer">
+
+<div class="page">
+
+<div class="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="logo">
+<h2>GOVERNMENT OF WEST BENGAL</h2>
+<h3>OFFICE OF THE SUB-DIVISIONAL OFFICER</h3>
+<h3>JALPAIGURI (SADAR)</h3>
+<h3>DIST. - JALPAIGURI</h3>
+<h3>CASTE / TRIBE CERTIFICATE</h3>
+</div>
+
+<br>
+
+<div class="flex">
+<div>Certificate No: <span class="no-line" id="certNo">WBXXXXXXX</span></div>
+<div>Date: <span class="no-line" id="dateField">15/04/2026</span></div>
+</div>
+
+<!-- FULL TEXT -->
+<div class="row">
+<span class="label">This is to certify that</span>
+<span class="line" id="nameField">NAME HERE</span>
+<span class="label" id="son_of">son</span>of
+<span class="line" id="fatherField">FATHER NAME</span>
+</div>
+
+<div class="row">
+<span class="label">of village</span>
+<span class="line" id="villageField">VILLAGE</span>
+<span class="label">P.O.</span>
+<span class="line" id="poField">POST OFFICE</span>
+<span class="label">P.S.</span>
+<span class="line" id="psField">POLICE STATION</span>
+</div>
+
+<div class="row">
+<span class="label">in the district</span>
+<span class="line" id="districtField">DISTRICT</span>
+<span class="label">of the State</span>
+<span class="line" id="stateField">WEST BENGAL</span>
+</div>
+
+<div class="row">
+<span class="label">belongs to the</span>
+<span class="line" id="casteField">CASTE NAME</span>
+<div class="row" style="display:block; text-align:justify; line-height:1.4;">
+caste which is recognized as SCHEDULED CASTE under the Constitution (Scheduled Caste)
+Order 1950 and the Constitution (Scheduled Tribes) Order 1950 as amended by the Scheduled Castes and Scheduled Tribes list (Modification) order 1956 and 
+the Scheduled Castes and Scheduled Tribes Order (Amendment) Act, 1976
+</div>
+</div><br>
+
+<div class="row">
+<span class="line" id="nameField2">NAME HERE</span>
+<span class="label">and his/her family ordinarily resides in village</span>
+<span class="line" id="villageField2">VILLAGE</span>
+</div>
+
+<div class="row">
+<span class="label">of district</span>
+<span class="line" id="districtField2">DISTRICT</span>
+<span class="label">State</span>
+<span class="line" id="stateField2">WEST BENGAL</span>
+</div>
+
+<br>
+
+<div class="footer-block">
+  <div>
+    Place: <span class="no-line" id="placeField">JALPAIGURI</span>
+  </div>
+  <div style="margin-top:6px;">
+    Date: <span class="no-line" id="dateField2">15/04/2026</span>
+  </div>
+</div>
+
+<!-- IMAGE -->
+<img id="photoPreview" src="https://via.placeholder.com/110x130" class="photo">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=test" class="qr">
+
+<!-- Signature -->
+<div class="signature">
+  <div class="tick">✔</div>
+  <span style="margin-right:20px;">Signature Not Verified</span><br>
+  <span style="font-size:12px;margin-right:20px;">Digitally signed by TOMOJEET</span><br>
+  <span style="font-size:12px; margin-right:100px;">CHAKRABORTY</span><br>
+  <span style="font-size:12px;margin-right:40px;">Reason:Certified True Copy</span><br>
+  
+<b>Sub-Divisional Officer</b><br>
+JALPAIGURI (SADAR)<br>
+DIST - JALPAIGURI<br>
+STATE - WEST BENGAL
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function updateAll(){
+
+set("certNo", val("certInput"));
+
+let d = val("dateInput");
+if(d){
+let p = d.split("-");
+let f = p[2]+"/"+p[1]+"/"+p[0];
+set("dateField", f);
+set("dateField2", f);
+}
+
+set("nameField", val("nameInput"));
+set("nameField2", val("nameInput"));
+
+set("fatherField", val("fatherInput"));
+
+set("villageField", val("villageInput"));
+set("villageField2", val("villageInput"));
+
+set("poField", val("poInput"));
+set("psField", val("psInput"));
+
+set("districtField", val("districtInput"));
+set("districtField2", val("districtInput"));
+
+set("stateField", val("stateInput"));
+set("stateField2", val("stateInput"));
+
+set("casteField", val("casteInput"));
+
+set("placeField", val("placeInput"));
+
+}
+
+function set(id,val){
+if(val) document.getElementById(id).innerText = val;
+}
+
+function val(id){
+return document.getElementById(id).value;
+}
+document.getElementById("photoInput").addEventListener("change", function(e){
+
+  let file = e.target.files[0];
+  if(!file) return;
+
+  let reader = new FileReader();
+
+  reader.onload = function(ev){
+    document.getElementById("photoPreview").src = ev.target.result;
+  }
+
+  reader.readAsDataURL(file);
+});
+  
+  function printPage(){
+  window.print();
+}
+</script>
+
+</body>
+</html>
