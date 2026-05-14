@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EPIC Final Secure System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+font-family:'Noto Sans Bengali',Arial;
+padding:20px;
+background:#fff;
+}
+
+/* HEADER */
+.header{
+text-align:center;
+margin-bottom:15px;
+}
+
+.titleBn{
+font-size:18px;
+font-weight:bold;
+}
+
+.titleEn{
+font-size:20px;
+font-weight:bold;
+letter-spacing:1px;
+margin-top:3px;
+}
+
+/* HEADER LINE */
+.headerLine{
+width:55%;
+height:5px;
+background:#111;
+margin:6px auto 12px auto;
+}
+
+/* FORM */
+.form{
+background:#fff;
+padding:10px;
+margin-bottom:15px;
+border:2px solid #000;
+}
+.form input, textarea{
+margin:5px;
+padding:6px;
+font-weight:bold;
+width:220px;
+}
+
+/* TOP SECTION */
+.topSection{
+border:2px dotted #999;
+padding:20px;
+position:relative;
+margin-bottom:20px;
+}
+
+/* middle dotted divider */
+.topSection::after{
+content:"";
+position:absolute;
+top:10px;
+bottom:10px;
+left:50%;
+border-left:2px dotted #999;
+}
+
+/* CARD ROW */
+.row{
+display:flex;
+gap:20px;
+position:relative;
+z-index:1;
+}
+
+/* CARD */
+.card{
+width:95mm;
+height:60mm;
+border-radius:6px;
+position:relative;
+overflow:hidden;
+background-size:100% 100%;
+background-repeat:no-repeat;
+box-shadow:none;
+}
+
+.front{background:url('voter3.jpg') no-repeat center/cover;}
+.back{background:url('voter4.jpg') no-repeat center/cover;}
+
+/* PHOTO */
+.photoFront{
+position:absolute;
+top:80px;
+left:12px;
+width:85px;
+height:100px;
+border:2px solid #000;
+object-fit:cover;
+}
+
+.photoSmall{
+position:absolute;
+top:60px;
+right:15px;
+width:45px;
+height:50px;
+border:1px solid #000;
+object-fit:cover;
+filter:grayscale(100%);
+}
+
+/* TEXT INFO */
+.info{
+position:absolute;
+left:105px;
+top:80px;
+font-size:10px;
+line-height:1.3;
+}
+
+.epic{
+position:absolute;
+top:65px;
+left:20px;
+font-size:12px;
+font-weight:bold;
+}
+
+.epic-2{
+position:absolute;
+top:165px;
+left:25px;
+font-size:12px;
+}
+
+.footer{
+position:absolute;
+bottom:5px;
+left:20%;
+font-size:12px;
+}
+
+/* QR */
+.qr{
+position:absolute;
+top:60px;
+left:15px;
+width:90px;
+}
+
+/* ADDRESS */
+.address{
+position:absolute;
+top:30px;
+left:130px;
+width:200px;
+font-size:8px;
+}
+
+.Elec-1{
+position:absolute;
+top:130px;
+left:140px;
+width:240px;
+font-size:8px;
+}
+
+/* THICK LINE */
+.thickLine{
+height:4px;
+background:#a94442;
+margin:10px 0 25px 0;
+}
+
+/* LOWER SECTION */
+.lowerSection{
+margin-top:30px;
+display:flex;
+gap:40px;
+}
+
+/* LEFT */
+.lowerLeft{
+width:35%;
+text-align:center;
+}
+
+#bigQR{
+width:230px;
+height:230px;
+margin-left:-60px;
+}
+
+.download{
+margin-top:10px;
+font-size:13px;
+  text-align:left;
+}
+
+/* RIGHT */
+.lowerRight{
+width:65%;
+font-size:14px;
+border-left:4px solid green;
+padding-left:20px;
+}
+
+/* TABLE STYLE */
+.rowLine{
+display:flex;
+margin-bottom:8px;
+}
+
+.label{
+width:55%;
+font-weight:bold;
+}
+
+.value{
+width:45%;
+}
+
+/* NOTE BOX */
+.noteBox{
+margin-top:20px;
+border:2px solid #b44;
+padding:15px;
+font-size:13px;
+background:#fff;
+}
+
+/* ================= PRINT FIX ================= */
+
+@page{
+size:A4;
+margin:5mm;
+}
+
+@media print{
+
+body{
+-webkit-print-color-adjust:exact;
+print-color-adjust:exact;
+margin:0;
+padding:0;
+}
+
+.form{
+display:none;
+}
+
+#printArea{
+position:absolute;
+top:0;
+left:0;
+width:210mm;
+min-height:297mm;
+}
+
+.card{
+background-size:100% 100% !important;
+box-shadow:none;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- FORM -->
+<div class="form">
+
+<input placeholder="নাম (বাংলা)" oninput="setVal('nameBn',this.value)">
+<input placeholder="Name (English)" oninput="setVal('nameEn',this.value)">
+
+<input value="পিতার নাম/ স্বামীর নাম" oninput="setVal('fatherBn0',this.value)">
+  <input placeholder="পিতার / স্বামীর নাম" oninput="setVal('fatherBn',this.value)">
+<input value="Father's Name / Husband's Name" oninput="setVal('fatherEn0',this.value)">
+  <input placeholder="Father's / Husband's Name" oninput="setVal('fatherEn',this.value)">
+
+<input placeholder="লিঙ্গ / Gender" oninput="setVal('gender',this.value)">
+<input placeholder="DOB" oninput="setVal('dob',this.value)">
+<input placeholder="Age" oninput="setVal('age',this.value)">
+
+<textarea placeholder="ঠিকানা / Address" oninput="setVal('address',this.value)"></textarea>
+<textarea placeholder="নির্বাচনী তথ্য" oninput="setVal('Elec-1',this.value)"></textarea>
+
+<input placeholder="EPIC No" oninput="setVal('epic',this.value)">
+
+<br><br>
+
+<input placeholder="ক্রমিক নং (বাংলা)" oninput="setVal('serialBn',this.value)">
+<input placeholder="Serial No (English)" oninput="setVal('serialEn',this.value)">
+
+<input placeholder="বিধানসভা (বাংলা)" oninput="setVal('assemblyBn',this.value)">
+<input placeholder="Assembly (English)" oninput="setVal('assemblyEn',this.value)">
+
+<input placeholder="পার্ট নং ও নাম (বাংলা)" oninput="setVal('partBn',this.value)">
+<input placeholder="Part No & Name (English)" oninput="setVal('partEn',this.value)">
+
+<input placeholder="ভোটকেন্দ্র (বাংলা)" oninput="setVal('pollingBn',this.value)">
+<input placeholder="Polling Station (English)" oninput="setVal('pollingEn',this.value)">
+
+<input placeholder="ডাউনলোড তারিখ" oninput="setVal('downDate',this.value)">
+
+<br><br>
+<input type="file" onchange="loadPhoto(event)">
+<button onclick="printPage()">Print</button>
+
+</div>
+
+<!-- PRINT AREA -->
+<div id="printArea">
+  
+  <div class="header">
+
+<div class="titleBn">ভারতের নির্বাচন কমিশন</div>
+<div class="titleEn">ELECTION COMMISSION OF INDIA</div>
+
+<div class="headerLine"></div>
+
+</div>
+  
+  <div class="topSection">
+
+<div class="row">
+
+<!-- FRONT -->
+<div class="card front">
+<div class="epic" id="epic"></div>
+
+<img id="photoFront" class="photoFront">
+<img id="photoSmall" class="photoSmall">
+
+<div class="info">
+নাম: <span id="nameBn"></span><br>
+Name: <span id="nameEn"></span><br>
+  <span id="fatherBn0">স্বামীর নাম</span>: <span id="fatherBn"></span><br>
+<span id="fatherEn0">Husband's Name</span>: <span id="fatherEn"></span><br>
+লিঙ্গ / Gender: <span id="gender"></span><br>
+জম্ম তারিখ / বয়স: <span id="age"></span><br>
+Date of Birth / Age: <span id="dob"></span>
+</div>
+
+<div class="footer">e-Electors Photo Identity Card</div>
+</div>
+
+<!-- BACK -->
+<div class="card back">
+<canvas id="qr" class="qr"></canvas>
+<div class="epic-2" id="epic-2"></div>
+<div class="address" id="address">ঠিকানা: এন0025, কালীরহাট, কালীরহাট, ধূপগুড়ি, জলপাইগুড়ি, পশ্চিমবঙ্গ - 735210
+Address: n0025, KALIRHAT, KALIRHAT, DHUPGURI, JALPAIGURI, WEST BENGAL - 735210 </div>
+<div class="Elec-1" id="Elec-1"> নির্বাচন নিবন্ধন আধিকারিক, 15 - ধূপগুড়ি <br>
+Electoral Registration Officer, 15 - Dhupguri<br><br>
+Dwonload Date-: 10-12-2024</div>
+</div>
+</div>
+</div>
+<div class="thickLine"></div>
+<!-- LOWER -->
+<div class="lowerSection">
+
+<!-- LEFT QR -->
+<div class="lowerLeft">
+<canvas id="bigQR"></canvas>
+
+<div class="download">
+<b style="margin-left:20px;">Download Date :</b> <span id="downDate">---</span><br>
+<b style="margin-left:20px;">ভাটগর্হেণর তািরখ / Poll Date :</b><br>
+<b style="margin-left:20px;">N.A</b><br>
+<b style="margin-left:20px;">Timings :</b>
+  <b style="margin-left:20px;"></b><br>
+  <b style="margin-left:20px;">N.A</b>
+</div>
+</div>
+
+<!-- RIGHT EXACT TABLE STYLE -->
+<div class="lowerRight">
+
+<div class="rowLine">
+<div class="label">এপিক নং / Epic no :</div>
+<div class="value" id="epic3"></div>
+</div>
+
+<div class="rowLine">
+<div class="label">ক্রমিক নং / Serial No :</div>
+<div class="value" id="serialEn"></div>
+</div>
+
+<div class="rowLine">
+<div class="label">বিধানসভা নির্বাচনী এলাকা :</div>
+<div class="value" id="assemblyBn"></div>
+</div>
+
+<div class="rowLine">
+<div class="label">Assembly Constituency No and Name :</div>
+<div class="value" id="assemblyEn"></div>
+</div>
+
+<div class="rowLine">
+<div class="label">পার্ট নং ও নাম :</div>
+<div class="value" id="partBn"></div>
+</div>
+
+<div class="rowLine">
+<div class="label">Part No. and Name :</div>
+<div class="value" id="partEn"></div>
+</div>
+
+<div class="rowLine">
+<div class="label">ভোট গ্রহণ কেন্দ্র :</div>
+<div class="value" id="pollingBn"></div>
+</div>
+
+<div class="rowLine">
+<div class="label">Polling Station Address :</div>
+<div class="value" id="pollingEn"></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="noteBox">
+<b style="margin-left:40%;">দয়া করে লক্ষ্য করুন / Kindly note that:</b>
+<ol>
+<li>e-एपिक चुनाव के लिए पहचान पत्र है।</li>
+<li>এটিকে থাকা ভোটার তালিকায় নাম থাকার নিশ্চয়তা নয়। প্রতি নির্বাচনের আগে অনুগ্রহ করে দেখে নিন বর্তমান ভোটার তালিকায় আপনার নাম আছে কিনা। অনুগ্রহ করে voters.eci.gov.in দেখুন </li>
+<li>এই কার্ডে উল্লিখিত জন্মতারিখকে ভোটার তালিকায় নিবন্ধন ব্যতীত অন্য কোন উদ্দেশ্যে বয়স বা জম্ম তারিখের প্রমাণপত্র হিসাবে গণ্য করা হবে না।</li>
+<li>eEPIC সারা দেশে বৈধ, যতক্ষণ আপনার নাম ভারতের যেকোনো নির্বাচনী এলাকার ভোটার তালিকায় আছে।</li>
+<li>eEPIC প্রকৃত এবং নিরাপদ QR কোড রিডার অ্যাপ্লিকেশন ব্যবহার করে যাচাই করা যেতে পারে।</li>
+<li>এটি বৈদ্যুতিকভাবে তৈরি নথি</li>
+</ol><br>
+<ol>
+<li>eEPIC is a proof of indentity for the purpose of an election.</li>
+<li>Mere possession of EPIC is no guarantee of name being present in electoral roll. Please check your name in the current electoral roll before every election. Kindly visit www.voters.eci.gov.in</li>
+<li>Date of birth mentioned in this card shall not be treated as proof of age or date of birth for any purpose other than registration in electoral roll.</li>
+<li>eEPIC is valid throughout the country, till you are enrolled in electoral roll for any constituency in India.</li>
+<li>eEPIC can be verified using authentic and secure QR code reader appication.</li>
+<li>This is electronically generated docuent.</li>
+</ol>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.0/qrcode.min.js"></script>
+
+<script>
+const PASSWORD="1234";
+let printCount=Number(localStorage.getItem("printCount")||0);
+
+function lockSystem(msg){
+document.body.innerHTML="<h1 style='text-align:center;color:red'>"+msg+"</h1>";
+}
+
+function askPassword(){
+if(sessionStorage.getItem("ok")) return;
+let p=prompt("Enter Password:");
+if(p===PASSWORD){
+sessionStorage.setItem("ok","yes");
+}else{
+lockSystem("Wrong Password");
+}
+}
+
+window.onload=function(){
+if(printCount>=105){
+lockSystem("Limit Exceeded");
+return;
+}
+askPassword();
+setTimeout(updateQR,300);
+}
+
+function setVal(id,val){
+if(id=="address"||id=="Elec-1"){
+document.getElementById(id).innerHTML=val.replace(/\n/g,"<br>");
+}else{
+document.getElementById(id).innerText=val;
+}
+
+if(id=="epic"){
+document.getElementById("epic-2").innerText=val;
+document.getElementById("epic3").innerText=val;
+}
+
+setTimeout(updateQR,100);
+}
+
+function updateQR(){
+
+let data = `
+EPIC No: ${document.getElementById("epic").innerText}
+Name: ${document.getElementById("nameEn").innerText}
+Father: ${document.getElementById("fatherEn").innerText}
+Gender: ${document.getElementById("gender").innerText}
+DOB: ${document.getElementById("dob").innerText}
+Address: ${document.getElementById("address").innerText}
+Assembly: ${document.getElementById("assemblyEn").innerText}
+Part: ${document.getElementById("partEn").innerText}
+Polling Station: ${document.getElementById("pollingEn").innerText}
+`;
+
+if(data.trim()=="") data="NO DATA";
+
+QRCode.toCanvas(document.getElementById("qr"), data, {width:100});
+QRCode.toCanvas(document.getElementById("bigQR"), data, {width:180});
+}
+
+function loadPhoto(e){
+let file=URL.createObjectURL(e.target.files[0]);
+photoFront.src=file;
+photoSmall.src=file;
+}
+
+function printPage(){
+if(printCount>=105){
+lockSystem("Limit Finished");
+return;
+}
+printCount++;
+localStorage.setItem("printCount",printCount);
+window.print();
+}
+</script>
+
+</body>
+</html>

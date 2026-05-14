@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aadhaar Form + Card</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+body{
+    margin:0;
+    background:#d9d9d9;
+    font-family:Arial,sans-serif;
+}
+
+/* LEFT FORM PANEL */
+.form-panel{
+    width:300px;
+    position:fixed;
+    left:0;
+    top:0;
+    height:100vh;
+    overflow:auto;
+    background:#fff;
+    border-right:3px solid #222;
+    padding:15px;
+    box-sizing:border-box;
+    z-index:999;
+}
+
+.form-panel h2{
+    margin:0 0 10px;
+    text-align:center;
+    color:#c62828;
+}
+
+.form-panel input,
+.form-panel textarea{
+    width:100%;
+    margin-bottom:10px;
+    padding:8px;
+    box-sizing:border-box;
+    border:1px solid #999;
+    border-radius:4px;
+    font-size:14px;
+}
+
+.form-panel textarea{
+    resize:none;
+    height:70px;
+}
+
+.form-panel label{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.printBtn{
+    width:100%;
+    padding:12px;
+    background:#111;
+    color:#fff;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+/* MAIN PAGE */
+.page{
+    width:920px;
+    height:1180px;
+    margin:20px auto;
+    margin-left:340px;
+    background:url('Full_Page_Aadhaar.png') center no-repeat;
+    background-size:100% 100%;
+    border:2px solid #444;
+    display:flex;
+    position:relative;
+}
+
+/*.page::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,0.88);
+    z-index:0;
+}*/
+
+.page::after{
+    content:"✂";
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:12px;
+    height:100%;
+    z-index:99;
+
+    border-left:2px dashed #555;
+    border-right:2px dashed #555;
+}
+
+.side{
+    width:50%;
+    position:relative;
+    box-sizing:border-box;
+    padding:0 18px;
+    z-index:1;
+}
+
+/* TOP */
+.top{
+    padding:18px;
+}
+
+.logoRow{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.govLogo{
+    width:52px;
+}
+
+.mainLogo{
+    width:110px;
+}
+
+/* BAND */
+.orangeBand{
+    background:#ef6c00;
+    color:#fff;
+    width:92%;
+    margin:auto;
+    text-align:center;
+    padding:10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.greenBand{
+    background:#18a83a;
+    color:#fff;
+    width:92%;
+    margin:auto;
+    text-align:center;
+    padding:10px;
+    font-size:17px;
+    font-weight:bold;
+}
+
+/* LEFT */
+.leftContent{
+    padding:20px;
+}
+
+.enroll{
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+	margin-top:290px;
+}
+
+.address{
+    font-size:15px;
+    line-height:24px;
+    margin-top:80px;
+}
+    
+ .numberBox{
+    width:100%;
+    text-align:center;
+    margin-top:55px;
+     line-height:0.5;
+}
+
+.topAadhaar{
+    font-size:26px;
+    font-weight:bold;
+    padding-bottom:8px;
+}
+
+.middleLine{
+    width:85%;
+    height:1px;
+    background:#000;
+    margin:0 auto;
+}
+
+.bottomVid{
+    font-size:22px;
+    font-weight:bold;
+    padding-top:8px;
+}
+
+.qr{
+    width:130px;
+    height:130px;
+    border:2px solid #999;
+    background:#fff;
+    margin-left:auto;
+    margin-top:67px;
+    overflow:hidden;
+}
+
+.number{
+    text-align:center;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.tagline{
+    text-align:center;
+    margin-top:10px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+/* MINI CARD */
+.miniCard{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:15px;
+    height:300px;
+    border-top:2px dashed #999;
+    padding-top:15px;
+    box-sizing:border-box;
+}
+
+.sideDate{
+    position:absolute;
+    left:-10px;
+    top:90px;
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    font-size:8px;
+    font-weight:bold;
+}
+
+.miniHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.smallLogo{
+    width:40px;
+}
+
+.flag{
+    width:140px;
+}
+
+.profile{
+    display:flex;
+    gap:12px;
+    margin-top:10px;
+}
+
+.photo{
+    width:90px;
+    height:110px;
+    object-fit:cover;
+    border:1px solid #888;
+    margin-left:5px;
+    margin-top:62px;
+}
+
+.profileInfo{
+    font-size:14px;
+    line-height:20px;
+    margin-top:60px;
+}
+
+.notice{
+    border:1px solid #c66;
+    padding:6px;
+    font-size:10px;
+    line-height:1.2;
+    margin-top:5px;
+}
+
+.bottomNumber{
+    text-align:center;
+    margin-top:55px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* RIGHT */
+.infoTitle{
+    text-align:center;
+    color:#b00030;
+    font-size:22px;
+    font-weight:bold;
+    border-top:4px solid #c11;
+    padding-top:10px;
+}
+
+
+.item{
+    display:flex;
+    margin-bottom:12px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.dot{
+    color:#c4002f;
+    margin-right:10px;
+}
+
+.red{
+    color:#c4002f;
+    font-weight:bold;
+}
+
+/* FOOTER */
+.footerCard{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:15px;
+    height:300px;
+    border-top:2px solid #c99;
+    padding-top:10px;
+    box-sizing:border-box;
+}
+
+.footerTop{
+    display:flex;
+    justify-content:space-between;
+}
+
+.footerAddress{
+    width:50%;
+    font-size:14px;
+    line-height:22px;
+    margin-top:80px;
+    margin-left:25px;
+}
+
+.footerQr{
+    width:130px;
+    height:130px;
+    border:2px solid #999;
+    background:#fff;
+    overflow:hidden;
+    margin-top:100px;
+}
+
+.footerBottom{
+    text-align:center;
+    margin-top:10px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+@media print{
+
+    /* FORM HIDE */
+    .form-panel{
+        display:none !important;
+    }
+
+    /* PAGE FULL */
+    .page{
+        margin:0 auto !important;
+        margin-left:auto !important;
+    }
+
+    body{
+        background:#fff;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LEFT FORM -->
+<div class="form-panel">
+
+<h2>Aadhaar Form</h2>
+
+<label>Name</label>
+<input type="text" value="Demo User" oninput="setText('name',this.value)">
+
+<label>Father Name</label>
+<input type="text" value="Example Name" oninput="setText('father',this.value)">
+
+<label>DOB</label>
+<input type="text" value="02/06/2002" oninput="setText('dob',this.value)">
+
+<label>Gender</label>
+<input type="text" value="FEMALE" oninput="setText('gender',this.value)">
+
+<label>Aadhaar Number</label>
+<input type="text" value="1234 5678 9012" oninput="setText('aadhaar',this.value)">
+
+<label>Enrollment Number</label>
+<input type="text" value="0515/35851/01025" oninput="setText('enroll',this.value)">
+
+<label>Address</label>
+<textarea oninput="setAddress(this.value)">Demo Village, Demo District, West Bengal - 735210</textarea>
+
+<label>Photo Upload</label>
+<input type="file" accept="image/*" onchange="uploadPhoto(event)">
+
+<button class="printBtn" onclick="window.print()">Print Card</button>
+
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+<!-- LEFT -->
+<div class="side">
+
+
+
+
+
+<div class="leftContent">
+
+<div class="enroll">
+Enrollment No:
+<span id="enroll">0515/35851/01025</span>
+</div>
+
+<div class="address">
+To<br>
+<span id="name">Demo User</span><br>
+C/O: <span id="father">Example Name</span><br>
+<span id="address">
+Demo Village,<br>
+Demo District,<br>
+West Bengal - 735210
+</span>
+</div>
+
+<div class="qr" id="leftQr"></div>
+
+<div class="numberBox">
+<div class="topAadhaar" id="aadhaar">
+1234 5678 9012
+</div>
+</div>
+
+
+
+</div>
+
+<div class="miniCard">
+
+<div class="sideDate">
+Download Date: 30/04/2026
+</div>
+
+
+
+<div class="profile">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="photo" id="profilePhoto">
+
+<div class="profileInfo">
+
+<b id="name2">Demo User</b><br>
+DOB:
+<span id="dob">02/06/2002</span><br>
+Gender:
+<span id="gender">FEMALE</span>
+
+</div>
+</div>
+<div class="bottomNumber" id="aadhaar2">
+1234 5678 9012
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="side">
+
+<div class="top">
+
+</div>
+
+
+
+
+<div class="footerCard">
+
+<div class="sideDate" style="left:2px;">
+Download Date: 30/04/2026
+</div>
+
+<div class="footerTop">
+
+<div class="footerAddress">
+<span id="name3">Demo User</span><br>
+<span id="address2">
+Demo Village,<br>
+Demo District,<br>
+West Bengal - 735210
+</span>
+</div>
+
+<div class="footerQr" id="rightQr"></div>
+
+</div>
+
+<div class="footerBottom" id="aadhaar3">
+1234 5678 9012
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function setText(id,value){
+
+document.getElementById(id).innerText=value;
+
+if(id==="name"){
+document.getElementById("name2").innerText=value;
+document.getElementById("name3").innerText=value;
+}
+
+if(id==="aadhaar"){
+document.getElementById("aadhaar2").innerText=value;
+document.getElementById("aadhaar3").innerText=value;
+}
+
+generateQR();
+}
+
+function setAddress(value){
+
+document.getElementById("address").innerHTML=value.replace(/\n/g,"<br>");
+document.getElementById("address2").innerHTML=value.replace(/\n/g,"<br>");
+
+generateQR();
+}
+
+function uploadPhoto(event){
+
+const file=event.target.files[0];
+
+if(file){
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById("profilePhoto").src=e.target.result;
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+}
+
+function generateQR(){
+
+document.getElementById("leftQr").innerHTML="";
+document.getElementById("rightQr").innerHTML="";
+
+const data=
+`Name: ${document.getElementById("name").innerText}
+Father: ${document.getElementById("father").innerText}
+DOB: ${document.getElementById("dob").innerText}
+Gender: ${document.getElementById("gender").innerText}
+Aadhaar: ${document.getElementById("aadhaar").innerText}`;
+
+new QRCode(document.getElementById("leftQr"),{
+text:data,
+width:170,
+height:170
+});
+
+new QRCode(document.getElementById("rightQr"),{
+text:data,
+width:180,
+height:180
+});
+
+}
+
+window.onload=generateQR;
+
+</script>
+
+</body>
+</html>

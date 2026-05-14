@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Disability Certificate</title>
+
+<style>
+body{
+  margin:0;
+  /*background:#e6e6e6;*/
+  background:none;
+  font-family:Arial;
+  padding:45px;
+}
+
+.page{
+  width:210mm;
+  min-height:297mm; /* height fixed না দিয়ে min-height */
+  margin:20px auto;
+  background:#fff;
+  border:2px solid #000;
+  padding:25px;
+  box-sizing:border-box;
+  position:relative;
+}
+
+input{
+  width:100%;
+  padding:2px;
+  margin-bottom:2px;
+  border:1px solid #ccc;
+}
+
+b{
+  font-size:14px;
+}
+  
+/* HEADER */
+.header{
+  text-align:center;
+  position:relative;
+}
+
+.header img{
+  width:50px;
+}
+
+.left-logo{
+  position:absolute;
+  left:0;
+  top:0;
+}
+
+.center-logo{
+  display:block;
+  margin:auto;
+}
+
+.right-logo{
+  position:absolute;
+  right:0;
+  top:0;
+  /* SVG কে সোনালী বানানোর trick */
+  filter: brightness(0) saturate(100%) invert(74%) sepia(65%) saturate(500%) hue-rotate(5deg);
+}
+
+.dept{
+  font-size:13px;
+  margin-top:10px;
+}
+
+.hr{
+  border-top:2px solid #000;
+  margin:10px 0;
+}
+
+/* TITLE */
+.title{
+  text-align:center;
+  margin-top:10px;
+}
+
+.title h1{
+  font-size:26px;
+  margin:0;
+}
+
+.title p{
+  margin:3px 0;
+  font-size:14px;
+}
+
+/* PHOTO */
+.photo{
+  position:absolute;
+  right:40px;
+  top:250px;
+  width:70px;
+  height:90px;
+  border:1px solid #000;
+  object-fit:cover;
+}
+  
+
+/* TEXT BLOCK */
+.content{
+  margin-top:100px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.top-row{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.bold{font-weight:bold;}
+
+/* SIGNATURE AREA */
+.thumb img{
+  width:100px;
+  height:40px;
+  object-fit:cover;
+ /* object-fit:contain;  পুরো image visible থাকবে */
+  display:block;
+}
+
+.sign-row{
+  display:flex;
+  gap:3px;
+  margin-top:10px;
+}
+
+.sign{
+  width:114px;
+  height:60px;
+  border:1px solid #ccc;
+}
+ .sign-r{
+   margin-top:-80px;
+   position:absolute;
+   right:40px;
+ }
+.right-block{
+  position:absolute;
+  right:45px;
+  margin-top:-8px;
+  width:270px;
+  font-size:12px;
+  text-align:right;
+}
+
+/* QR */
+.qr{
+  position:absolute;
+  bottom:80px;
+  left:40px;
+  width:110px;
+}
+
+/* FOOTER */
+.footer{
+  position:absolute;
+  bottom:30px;
+  left:25px;
+  right:25px;
+  text-align:center;
+  font-size:11px;
+  border-top:1px solid #000;
+  padding-top:5px;
+}
+
+/* PRINT */
+@page{
+  size: A4;
+  margin: 0;
+}
+
+@media print{
+
+  body{
+    margin:0;
+    padding-top:25px;
+    padding-bottom:45px;
+    padding-left:15px;
+    padding-right:25px;
+    background:#fff;
+  }
+
+  /* FORM hide */
+  div[style*="position:fixed"]{
+    display:none !important;
+  }
+
+  /* wrapper reset */
+  body > div{
+    display:block !important;
+  }
+
+  /* certificate container full width */
+  .page{
+    width:200mm;
+    min-height:267mm;
+    margin:0 auto;
+    
+  }
+
+  /* IMPORTANT: margin-left remove */
+  div[style*="margin-left"]{
+    margin-left:0 !important;
+    width:100% !importantplaceholder="Vide"
+  }
+
+}
+</style>
+
+</head>
+
+<body>
+  <div style="display:flex;">
+      <!-- FORM -->
+ <div style="width:300px;position:fixed;left:0;top:0;height:90vh;overflow:auto;background:#fff;border-right:2px solid #000;padding:10px;">
+    <!-- form inputs -->
+
+<!-- 🔝 PART 1 -->
+<div style="border:1px solid #000;padding:10px;margin-bottom:10px;">
+<b>Hospital Details (Top)</b><br><br>
+
+<input placeholder="Hospital Name" oninput="set('hospital_name',this.value)">
+<input placeholder="Hospital Address 1" oninput="set('hospital_1',this.value)">
+<input placeholder="Hospital Address 2" oninput="set('hospital_2',this.value)">
+</div>
+
+<!-- 📄 PART 2 -->
+<div style="border:1px solid #000;padding:10px;margin-bottom:10px;">
+<b>Main Certificate Data</b><br><br>
+
+<input placeholder="UDID No" oninput="set('udid',this.value)">
+<input placeholder="Date" oninput="set('issue_date',this.value)">
+
+<input placeholder="Name" oninput="set('name',this.value)">
+<input placeholder="DOB" oninput="set('dob',this.value)">
+<input placeholder="Gender" oninput="set('gender',this.value)">
+<input placeholder="Reg No" oninput="set('regno',this.value)">
+
+<input placeholder="Village" oninput="set('address',this.value)">
+<input placeholder="Post Office" oninput="set('post-office',this.value)">
+<input placeholder="Police Station" oninput="set('police-station',this.value)">
+<input placeholder="District" oninput="set('district',this.value)">
+<input placeholder="State" oninput="set('state',this.value)">
+<input placeholder="Pin Code" oninput="set('pin-code',this.value)">
+
+<input placeholder="Pronouns" oninput="set('pro-nouns',this.value)">
+<input placeholder="Disease" oninput="set('disease',this.value)">
+<input placeholder="Body Part" oninput="set('body',this.value)">
+<input placeholder="Diagnosis" oninput="set('diag',this.value)">
+<input placeholder="Pronouns (Again)" oninput="set('pro-nouns1',this.value)">
+<input placeholder="Percent" oninput="set('percent',this.value)">
+<input placeholder="Vide" oninput="set('vide',this.value)">
+<input placeholder="Dated" oninput="set('dated',this.value)">
+ image<input type="file" accept="image/*" onchange="uploadPhoto(event)">
+ signature<input type="file" accept="image/*" onchange="uploadThumb(event)">
+</div>
+
+<!-- 🔻 PART 3 -->
+<div style="border:1px solid #000;padding:10px;margin-bottom:10px;">
+<b>Hospital Details (Bottom)</b><br><br>
+
+<input placeholder="Hospital Name" oninput="set('hospital_nameS',this.value)">
+<input placeholder="Hospital Address 1" oninput="set('hospital_1S',this.value)">
+<input placeholder="Hospital Address 2" oninput="set('hospital_2S',this.value)">
+</div>
+
+<!-- PRINT BUTTON -->
+<button onclick="printCertificate()" style="width:100%;padding:10px;background:#000;color:#fff;border:none;">
+Print Certificate
+</button>
+
+ </div>
+  
+
+    
+  <!-- CERTIFICATE -->
+  <div style="margin-left:320px;width:100%;">
+    <!-- তোমার পুরো certificate page -->
+ <div class="page">
+<!-- HEADER -->
+<div class="header">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="left-logo">
+<img src="handicate.png" class="center-logo" style="width:80px;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="right-logo">
+
+<div class="dept">
+Department of Empowerment of Persons with Disabilities,<br>
+Ministry of Social Justice and Empowerment, Government of India
+</div>
+<div class="hr"></div>
+</div>
+
+<!-- TITLE -->
+<div class="title">
+<h1>Disability Certificate</h1>
+<p><span id="hospital_name">Jalpaiguri Government Medical College & Hospital</span></p>
+<p id="hospital_1">Hospital Road, P.O. Dinbazar, P.S. Kotwali</p>
+<p id="hospital_2">Jalpaiguri, West Bengal, 735101</p>
+</div>
+
+<!-- PHOTO -->
+<img id="photo_preview" class="photo">
+<!-- CONTENT -->
+<div class="content">
+
+<div class="top-row">
+<div>Certificate/UDID No. <span id="udid">WB3130219970010879</span></div>
+<div>Date of Issue: <span id="issue_date">29/01/2025</span></div>
+</div>
+
+This is to certify that I/we have carefully examined <b id="name">Rupali Roy</b> Date of Birth <b id="dob">03/05/1997</b>,
+Gender <b id="gender">Female</b>, Registration No. <b id="regno">1931/40000/0250/1006135</b>, Resident of <b>Vill - <span id="address">Uttarkathimari</span>,
+P.O - <span id="post-office">Dakshin Khutimari</span>, P.S - <span id="police-station"> Dhupguri</span>, <span id="district">Jalpaiguri</span>, 
+  <span id="state">West Bengal</span> - <span id="pin-code">735210</span> </b>whose photograph is affixed above,
+and I am/we are satisfied that:
+
+<br><br>
+
+(A) <b id="pro-nouns">She</b> is a case of: <b id="disease">Blindness</b><br>
+(B) Name of affected body part: <b id="body">Both Eye</b><br>
+(C) The diagnosis in her case is <b id="diag">visual impairment</b><br>
+(D) <b id="pro-nouns1">She</b> has <b id="percent">100%</b> (in figure) <b>one hundred</b> percent (in words) disability and the nature of certificate is
+<b>Permanent</b> as per the guidelines for the purpose of assessing the extent of specified disability in a person
+included under the Rights of Persons with Disabilities Act, 2016 notified by Government of India vide
+<b id="vide">S.O.1338(E)</b> dated <b id="dated">12/03/2024</b>.
+
+<!-- SIGNATURE -->
+<div class="thumb"><br>
+<img id="thumb_preview">
+Signature / Thumb impression of the Person with <br>Disability:
+</div>
+
+<div class="sign-row">
+<img src="handicate-1.jpg" class="sign">
+<img src="handicate-2.jpg" class="sign">
+</div>
+Signature of notified Medical Authority Members:
+</div>
+
+<!-- RIGHT BLOCK -->
+  <div class="sign-r">
+  <img src="handicate-2.jpg" class="sign">
+  </div>
+<div class="right-block">
+  <span id="hospital_nameS">Jalpaiguri Government Medical College & Hospital</span><br>
+  <span id="hospital_1S">Hospital Road, P.O. Dinbazar, P.S. Kotwali</span><br>
+  <span id="hospital_2S">Jalpaiguri, West Bengal, 735101</span>
+</div>
+
+<!-- QR -->
+<img id="qr_code" class="qr">
+<!-- FOOTER -->
+<div class="footer">
+This Card/Certificate is meant to certify the disability of the person and is not an instrument for ID/Address Proof for any purpose.
+</div>
+</div>
+    
+  </div>
+    
+  <script>
+
+function set(id,value){
+  document.getElementById(id).innerText = value;
+  updateQR(); // 🔥 update QR every time
+}
+
+    
+ function uploadThumb(event){
+  const file = event.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      document.getElementById("thumb_preview").src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+}
+    
+function uploadPhoto(event){
+  const file = event.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      document.getElementById("photo_preview").src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+}
+    
+function updateQR(){
+
+  let data =
+  "UDID: " + document.getElementById("udid").innerText + "\n" +
+  "Name: " + document.getElementById("name").innerText + "\n" +
+  "DOB: " + document.getElementById("dob").innerText + "\n" +
+  "Gender: " + document.getElementById("gender").innerText + "\n" +
+  "Reg No: " + document.getElementById("regno").innerText + "\n" +
+  "Address: " + document.getElementById("address").innerText + ", " +
+                document.getElementById("post-office").innerText + ", " +
+                document.getElementById("police-station").innerText + ", " +
+                document.getElementById("district").innerText + ", " +
+                document.getElementById("state").innerText + " - " +
+                document.getElementById("pin-code").innerText + "\n" +
+  "Disease: " + document.getElementById("disease").innerText + "\n" +
+  "Disability: " + document.getElementById("percent").innerText;
+
+  let qrURL = "https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=" + encodeURIComponent(data);
+
+  document.getElementById("qr_code").src = qrURL;
+}
+    
+window.onload = function(){
+  updateQR();
+}
+    
+ function printCertificate(){
+  window.print();
+}
+</script>
+
+</body>
+</html>

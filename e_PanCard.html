@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-PAN Layout</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#dcdcdc;
+padding:20px;
+}
+
+/* =========================
+MAIN PAGE
+========================= */
+
+.epan-page{
+width:650px;
+margin:auto;
+position:relative;
+  height:100%;
+overflow:hidden;
+border:2px solid #444;
+
+/* MAIN BACKGROUND */
+background-image:url("e_PanCard.png");
+background-repeat:no-repeat;
+background-position:center top;
+background-size:100% 100%;
+}
+
+.content{
+position:relative;
+z-index:2;
+}
+
+/* =========================
+HEADER
+========================= */
+
+.header{
+padding:18px 22px 8px;
+}
+
+.header-top{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.govt{
+width:40%;
+text-align:center;
+}
+
+.govt .hindi{
+font-size:38px;
+font-weight:bold;
+line-height:1;
+margin-top:12px;
+color:#681739;
+}
+
+.govt .eng{
+font-size:20px;
+font-weight:bold;
+margin-top:4px;
+color:#681739;
+}
+
+.logo{
+width:18%;
+text-align:center;
+}
+
+.logo img{
+width:65px;
+}
+
+.logo p{
+font-size:11px;
+margin-top:2px;
+}
+
+/* =========================
+TITLE
+========================= */
+
+.middle-title{
+text-align:center;
+margin-top:20px;
+}
+
+.middle-title .small{
+font-size:16px;
+font-weight:bold;
+}
+
+.middle-title .blue{
+font-size:21px;
+font-weight:bold;
+color:#005e99;
+margin-top:4px;
+}
+
+.pan-number{
+font-size:20px;
+letter-spacing:2px;
+margin-top:130px;
+font-weight:bold;
+}
+
+/* =========================
+TABLE
+========================= */
+
+.info-table{
+width:100%;
+border-collapse:collapse;
+margin-top:8px;
+}
+
+.info-table td{
+padding:10px 14px;
+font-size:18px;
+vertical-align:middle;
+}
+
+.left{
+width:29%;
+font-size:14px!important;
+font-weight:bold;
+
+}
+
+.big-row{
+height:220px;
+}
+
+/* =========================
+PHOTO
+========================= */
+
+.photo-box{
+width:90px;
+height:90px;
+margin:auto;
+margin-top:-35px;
+  margin-left:25px;
+background:#fff;
+border:1px solid #666;
+overflow:hidden;
+}
+
+.photo-box img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* =========================
+SIGN
+========================= */
+
+.sign-box{
+width:140px;
+height:55px;
+background:#fff;
+border:1px solid #ccc;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:34px;
+font-family:cursive;
+color:#4d5cb8;
+margin-top:-70px;
+margin-left:-70px;
+}
+
+.sign-text{
+font-size:14px;
+text-align:center;
+margin-top:5px;
+margin-left:-50px;
+}
+
+/* =========================
+QR
+========================= */
+
+.qr{
+width:90px;
+height:90px;
+margin-top:-70px;
+margin-left:-50px;
+background:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* =========================
+VERIFY
+========================= */
+
+.verify{
+font-size:17px;
+line-height:1.2;
+}
+
+.verify small{
+display:block;
+font-size:11px;
+margin-top:6px;
+line-height:1.3;
+}
+
+/* =========================
+NOTES
+========================= */
+
+.notes{
+padding:12px 20px 10px;
+font-size:12px;
+line-height:1.55;
+height:130px;
+}
+
+.notes ul{
+padding-left:18px;
+}
+
+.notes li{
+margin-bottom:5px;
+}
+
+/* =========================
+CUT LINE
+========================= */
+
+/*.cut-line{
+position:relative;
+border-top:2px dashed #666;
+margin-top:4px;
+}
+
+.cut-line span{
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%);
+background:#fff;
+padding:0 8px;
+font-size:12px;
+}*/
+
+/* =========================
+BOTTOM AREA
+========================= */
+
+.bottom{
+padding:10px 0 15px;
+}
+
+/* =========================
+MINI CARD WRAPPER
+========================= */
+
+.mini-pan-card{
+width:580px;
+height:185px;
+margin:auto;
+display:flex;
+gap:15px;
+overflow:hidden;
+}
+
+/* =========================
+FRONT CARD
+========================= */
+
+.mini-front{
+width:54%;
+height:168px;
+margin-top:27px;
+padding:10px;
+position:relative;
+/*border:1px solid #999;
+border-radius:10px 10px 10px 10px;
+overflow:hidden;
+/* BACKGROUND */
+background-image:url("pan_u1.jpg");
+background-repeat:no-repeat;
+background-position:center;
+background-size:100% 100%;
+}
+
+/* =========================
+BACK CARD
+========================= */
+
+.mini-back{
+width:50%;
+height:168px;
+margin-top:27px;
+padding:10px;
+position:relative;
+/*border:1px solid #999;
+border-radius:10px 10px 10px 10px;*/
+overflow:hidden;
+
+/* BACKGROUND */
+background-image:url("pan_u1.jpg");
+background-repeat:no-repeat;
+background-position:center;
+background-size:100% 100%;
+}
+
+/* =========================
+MINI HEADER
+========================= */
+
+.mini-header{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.mini-header .hindi{
+font-size:11px;
+font-weight:bold;
+color:#651737;
+line-height:1;
+}
+
+.mini-header .eng{
+font-size:8px;
+font-weight:bold;
+color:#651737;
+margin-top:2px;
+}
+
+.mini-logo img{
+width:26px;
+}
+
+/* =========================
+MINI BODY
+========================= */
+
+.mini-middle{
+display:flex;
+margin-top:8px;
+gap:8px;
+align-items:flex-start;
+}
+
+/* =========================
+MINI PHOTO
+========================= */
+
+.mini-photo{
+width:32px;
+height:32px;
+overflow:hidden;
+border:1px solid #555;
+background:#fff;
+margin-top:20px;
+}
+
+.mini-photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* =========================
+MINI DETAILS
+========================= */
+
+.mini-details{
+flex:1;
+font-size:11px;
+line-height:1.4;
+color:#111;
+position:relative;
+}
+
+.mini-small-text{
+font-size:9px;
+line-height:1.2;
+}
+
+/* PAN NUMBER */
+.mini-pan-number{
+font-size:10px;
+font-weight:bold;
+letter-spacing:1.5px;
+text-align:center;
+margin-top:50px;
+}
+
+/* NAME */
+
+.mini-name{
+font-size:10px;
+font-weight:bold;
+margin-top:1px;
+margin-left:-50px;
+}
+
+/* FATHER */
+.mini-father{
+font-size:10px;
+margin-top:10px;
+  font-weight:bold;
+margin-left:-50px;
+}
+
+/* DOB */
+.mini-dob{
+font-size:8px;
+font-weight:bold;
+margin-top:25px;
+margin-left:-50px;
+}
+
+/* =========================
+MINI SIGN
+========================= */
+.mini-sign{
+width:77px;
+height:21px;
+background:#fff;
+border:1px solid #bbb;
+margin-top:-30px;
+  margin-left:25px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:cursive;
+font-size:18px;
+color:#4f5db8;
+}
+
+/* =========================
+MINI QR
+========================= */
+.mini-qr{
+width:42px;
+height:42px;
+margin-top:45px;
+background:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* =========================
+HOLOGRAM
+========================= */
+.holo{
+position:absolute;
+right:8px;
+top:14px;
+font-size:48px;
+font-weight:bold;
+opacity:.10;
+transform:rotate(-90deg);
+color:#fff;
+}
+
+/* =========================
+BACK CONTENT
+========================= */
+.back-content{
+font-size:9px;
+line-height:1.45;
+width:75%;
+margin-top:10px;
+color:#222;
+}
+
+.warning{
+font-size:9px;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+.bottom-footer{
+text-align:center;
+font-size:9px;
+padding:5px 0 10px;
+}
+
+.form-box{
+width:320px;
+height:70vh;
+position:fixed;
+left:0;
+top:0;
+
+background:#ffffff;
+border-right:2px solid #333;
+
+padding:15px;
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+overflow-y:auto;
+
+z-index:999;
+}
+
+/* INPUT STYLE */
+.form-box input{
+width:100%;
+padding:10px;
+font-size:14px;
+border:1px solid #aaa;
+border-radius:4px;
+outline:none;
+transition:0.2s;
+}
+
+.form-box input:focus{
+border-color:#0b57d0;
+box-shadow:0 0 3px rgba(11,87,208,0.3);
+}
+
+/* FILE INPUT */
+.form-box input[type="file"]{
+padding:6px;
+background:#f5f5f5;
+border:1px dashed #999;
+}
+
+/* BUTTON */
+.print-btn{
+margin-top:10px;
+padding:12px;
+width:100%;
+font-size:16px;
+font-weight:bold;
+background:#0b57d0;
+color:#fff;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.print-btn:hover{
+opacity:0.9;
+}
+  .qr img,
+.mini-qr img{
+display:block;
+width:100%;
+height:100%;
+}
+  
+.print-btn{
+display:block;
+width:180px;
+margin:0 auto 20px;
+padding:12px;
+font-size:18px;
+font-weight:bold;
+background:#0b57d0;
+color:#fff;
+border:none;
+cursor:pointer;
+border-radius:6px;
+}
+
+.print-btn:hover{
+opacity:.9;
+}
+
+  @page{
+  size:A4;
+  margin-top:30px;
+}
+@media print{
+
+body{
+background:#fff;
+padding:0;
+}
+
+.form-box,
+.print-btn{
+display:none;
+}
+
+.epan-page{
+/*border:none;*/
+margin:0 auto;
+}
+
+}
+</style>
+</head>
+
+<body>
+  
+<div class="form-box">
+<input type="text" id="panInput" placeholder="PAN Number">
+<input type="text" id="nameInput" placeholder="Name">
+<input type="text" id="fatherInput" placeholder="Father Name">
+<input type="text" id="dobInput" placeholder="DOB">
+<input type="text" id="genderInput" placeholder="Gender (Male/Female)">
+<!-- PHOTO -->
+<input type="file" id="photoUpload" accept="image/*">
+<!-- SIGNATURE IMAGE -->
+<input type="file" id="signUpload" accept="image/*">
+  <button class="print-btn" onclick="printCard()">
+Print PAN Card
+</button>
+</div>
+
+<div class="epan-page">
+<div class="content">
+<!-- ===== HEADER ===== -->
+<div class="header">
+<div class="header-top">
+<div class="govt"></div>
+<div class="logo"></div>
+<div class="govt"></div>
+</div>
+<div class="middle-title">
+<div class="pan-number" id="panText">
+DFRPR6063D
+</div>
+</div>
+</div>
+<!-- ===== TABLE ===== -->
+<table class="info-table">
+<tr>
+<td class="left">नाम / Name</td>
+<td id="nameText">PROLOY KUMAR ROY</td>
+</tr>
+
+<tr>
+<td class="left">पिता का नाम / Father's name</td>
+<td id="fatherText">KALIPADA ROY</td>
+</tr>
+
+<tr>
+<td class="left" style="font-size:13px;">जन्म की तारीख / Date of Birth</td>
+<td id="dobText">06/11/1997</td>
+</tr>
+
+<tr>
+<td class="left">लिंग / Gender</td>
+<td id="genderText">Male</td>
+</tr>
+
+<tr class="big-row">
+<td>
+<div class="photo-box">
+<img src="30.png" id="mainPhoto">
+</div>
+</td>
+<td>
+<div style="display:flex;justify-content:space-around;align-items:center;">
+<div>
+<div class="sign-box">
+<img src="" id="signPreview" style="width:100%;height:100%;object-fit:contain;">
+</div>
+<div class="sign-text">
+</div>
+</div>
+<div class="qr" id="qrCode"></div>
+<div class="verify">
+</div>
+</div>
+</td>
+</tr>
+</table>
+<!-- ===== NOTES ===== -->
+<div class="notes">
+</div>
+
+<!-- ===== CUT ===== -->
+<div class="cut-line">
+</div>
+<!-- ===== MINI CARD ===== -->
+<div class="bottom">
+<div class="mini-pan-card">
+<!-- LEFT -->
+<div class="mini-front">
+<div class="mini-header">
+<div>
+</div>
+<div class="mini-logo">
+</div>
+<div>
+</div>
+</div>
+<div class="mini-middle">
+<div class="mini-photo">
+<img src="YOUR_PHOTO.jpg" id="miniPhotoImg">
+</div>
+<div class="mini-details">
+<div class="mini-pan-number" id="miniPan">
+DFRPR6063D
+</div>
+<div class="mini-name" id="miniName">
+PROLOY KUMAR ROY
+</div>
+
+<div class="mini-father" id="miniFather">
+KALIPADA ROY
+</div>
+
+<div class="mini-dob" id="miniDob">
+06/11/1997
+</div>
+
+<div class="mini-sign">
+<img src="" id="miniSignPreview" style="width:100%;height:100%;object-fit:contain;">
+</div>
+  
+</div>
+<div class="mini-qr" id="miniQr"></div>
+</div>
+</div>
+<!-- RIGHT -->
+<div class="mini-back">
+<div class="holo">
+HOLOGRAM
+</div>
+<div class="back-content">
+<div class="warning">
+</div>
+</div>
+</div>
+</div>
+<div class="bottom-footer">
+</div>
+</div>
+</div>
+</div>
+
+ <script>
+
+/* =========================
+GET ALL ELEMENTS
+========================= */
+
+const panInput = document.getElementById("panInput");
+const nameInput = document.getElementById("nameInput");
+const fatherInput = document.getElementById("fatherInput");
+const dobInput = document.getElementById("dobInput");
+
+const photoUpload = document.getElementById("photoUpload");
+const signUpload = document.getElementById("signUpload");
+
+const panText = document.getElementById("panText");
+const miniPan = document.getElementById("miniPan");
+
+const nameText = document.getElementById("nameText");
+const miniName = document.getElementById("miniName");
+
+const fatherText = document.getElementById("fatherText");
+const miniFather = document.getElementById("miniFather");
+
+const dobText = document.getElementById("dobText");
+const miniDob = document.getElementById("miniDob");
+
+const mainPhoto = document.getElementById("mainPhoto");
+const miniPhotoImg = document.getElementById("miniPhotoImg");
+
+const signPreview = document.getElementById("signPreview");
+const miniSignPreview = document.getElementById("miniSignPreview");
+
+const qrCode = document.getElementById("qrCode");
+const miniQr = document.getElementById("miniQr");
+const genderInput = document.getElementById("genderInput");
+const genderText = document.getElementById("genderText");
+
+/* =========================
+DEFAULT VALUES
+========================= */
+
+panInput.value = "DFRPR6023D";
+nameInput.value = "PROLOY KUMAR ROY";
+fatherInput.value = "KALIPADA ROY";
+dobInput.value = "06/11/1997";
+
+/* =========================
+UPDATE TEXT
+========================= */
+
+function updateTexts(){
+
+panText.innerText = panInput.value;
+miniPan.innerText = panInput.value;
+
+nameText.innerText = nameInput.value;
+miniName.innerText = nameInput.value;
+
+fatherText.innerText = fatherInput.value;
+miniFather.innerText = fatherInput.value;
+
+dobText.innerText = dobInput.value;
+miniDob.innerText = dobInput.value;
+  
+
+}
+
+/* =========================
+QR DATA
+========================= */
+
+function getQRData(){
+
+return `
+PAN Number: ${panInput.value}
+Name: ${nameInput.value}
+Father Name: ${fatherInput.value}
+DOB: ${dobInput.value}
+`;
+
+}
+
+/* =========================
+GENERATE QR
+========================= */
+
+function generateQR(){
+
+/* OLD QR REMOVE */
+
+qrCode.innerHTML = "";
+miniQr.innerHTML = "";
+
+const qrData = getQRData();
+
+/* MAIN QR */
+
+new QRCode(qrCode,{
+text: qrData,
+width: 90,
+height: 90,
+colorDark : "#000000",
+colorLight : "#ffffff",
+correctLevel : QRCode.CorrectLevel.M
+});
+
+/* MINI QR */
+
+new QRCode(miniQr,{
+text: qrData,
+width: 42,
+height: 42,
+colorDark : "#000000",
+colorLight : "#ffffff",
+correctLevel : QRCode.CorrectLevel.L
+});
+
+}
+
+/* =========================
+UPDATE ALL
+========================= */
+
+function updateAll(){
+
+updateTexts();
+generateQR();
+
+}
+
+/* =========================
+INPUT EVENTS
+========================= */
+
+panInput.addEventListener("input",updateAll);
+
+nameInput.addEventListener("input",updateAll);
+
+fatherInput.addEventListener("input",updateAll);
+
+dobInput.addEventListener("input",updateAll);
+  
+genderInput.addEventListener("input", function () {
+    genderText.innerText = genderInput.value;
+    updateAll();
+});
+
+/* =========================
+PHOTO UPLOAD
+========================= */
+
+photoUpload.addEventListener("change",function(e){
+
+const file = e.target.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+mainPhoto.src = event.target.result;
+miniPhotoImg.src = event.target.result;
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+/* =========================
+SIGN UPLOAD
+========================= */
+
+signUpload.addEventListener("change",function(e){
+
+const file = e.target.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+signPreview.src = event.target.result;
+miniSignPreview.src = event.target.result;
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+/* =========================
+FIRST LOAD
+========================= */
+
+window.onload = function(){
+
+updateAll();
+
+};
+function printCard(){
+
+window.print();
+
+}
+</script>
+</body>
+</html>

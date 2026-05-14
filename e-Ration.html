@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-Ration Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    background:#dcdcdc;
+    font-family:Arial, sans-serif;
+}
+
+.urdu{
+    direction: rtl;
+    font-family:'Noto Nastaliq Urdu', serif;
+    line-height:2.2;
+    text-align: justify;
+    text-align-last: right;
+}
+    
+ .formBox{
+    position:fixed;
+    left:10px;
+    top:10px;
+    width:250px;
+    background:#fff;
+    padding:10px;
+    border:2px solid #000;
+    z-index:9999;
+}
+
+.formBox input{
+    width:100%;
+    margin-bottom:10px;
+    padding:8px;
+    box-sizing:border-box;
+}   
+    
+.page{
+    width:210mm;
+    height:297mm;
+    background:#fff;
+    margin:0 auto;
+    padding:8mm;
+    box-sizing:border-box;
+    position:relative;
+   /* overflow:hidden;*/
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    width:50px;
+}
+
+.centerTitle{
+    text-align:center;
+    flex:1;
+}
+
+.centerTitle h1{
+    margin:0;
+    font-size:24px;
+    line-height:1.2;
+}
+
+.centerTitle h2{
+    margin:10px 0 0;
+    font-size:20px;
+}
+
+.centerTitle h3{
+    margin:8px 0;
+    font-size:17px;
+}
+.section-title{
+    text-align:center !important;
+    direction:rtl;
+    font-family:'Noto Nastaliq Urdu', serif;
+    font-weight:bold;
+    font-size:9px;
+}
+/* INFO BOX */
+.infoBox{
+    margin-top:15px;
+    border:3px solid #7da0c4;
+    border-radius:6px;
+    padding:8px;
+    position:relative;
+    overflow:hidden;
+    line-height:1.0;
+}
+
+.watermark{
+    position:absolute;
+    width:300px;
+    opacity:0.3;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+
+.infoBox ol{
+    margin:0;
+    padding-left:20px;
+    line-height:1.2;
+    font-size:9px;
+}
+
+.lang{
+    margin-top:15px;
+}
+
+/* MIDDLE SECTION */
+.middle{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-top:15px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.qrStatus{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin-top:10px;
+}
+
+.qr{
+    width:80px;
+    height:80px;
+    border:2px solid #000;
+}
+
+.statusBox{
+    display:flex;
+    gap:10px;
+}
+
+.statusItem{
+    font-size:12px;
+    line-height:1.5;
+}
+
+.statusColor{
+    width:18px;
+    height:18px;
+    display:inline-block;
+    margin-right:6px;
+}
+
+.green{background:green;}
+.yellow{background:gold;}
+.red{background:red;}
+
+.scanText{
+    margin-top:8px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.signatureBox{
+    text-align:right;
+    font-size:12px;
+    margin-top:10px;
+}
+
+/* CUT LINE */
+.cutSection{
+    position:relative;
+    margin-top:10px;
+    border-top:2px dashed #888;
+    border-bottom:2px dashed #888;
+    padding:8px 0;
+}
+
+.cutSection::before,
+.cutSection::after{
+    content:"✂";
+    position:absolute;
+    right:-8px;
+    font-size:34px;
+    color:#000;
+}
+
+.cutSection::before{
+    top:-24px;
+}
+
+.cutSection::after{
+    bottom:-24px;
+}
+
+.cards{
+    display:flex;
+}
+
+.card{
+    width:50%;
+    min-height:230px;
+    box-sizing:border-box;
+    padding:4px;
+    position:relative;
+}
+
+.card:first-child{
+    border-right:2px dashed #888;
+}
+
+.blueCard{
+    border-radius:12px;
+    height:235px;
+    padding:10px;
+    box-sizing:border-box;
+    position:relative;
+    overflow:hidden;
+    background-size:100% 100%;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+/* LEFT CARD BACKGROUND */
+.leftBg{
+    background:
+    url('ration-1.png') center center no-repeat,
+    linear-gradient(to bottom right,#d9f2ff,#8fd0ff);
+    background-size:100% 100%;
+}
+
+/* RIGHT CARD BACKGROUND */
+.rightBg{
+    background:
+    url('ration-2.jpg') center center no-repeat,
+    linear-gradient(to bottom right,#d9f2ff,#8fd0ff);
+    background-size:100% 100%;
+}
+
+.blueCard::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+   /* border:10px solid rgba(0,120,180,0.1);
+    border-radius:50%;*/
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+.cardHeader{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.smallLogo{
+    width:35px;
+}
+
+.cardTitle{
+    font-size:13px;
+    font-weight:bold;
+    line-height:1.3;
+    text-align:center;
+}
+
+.cardInfo{
+    margin-top:10px;
+    font-size:10px;
+    line-height:1.4;
+    width:250px;
+}
+
+.smallQr{
+    width:52px;
+    height:50px;
+   /* border:2px solid #000;*/
+    position:absolute;
+    right:6px;
+    bottom:12px;
+}
+
+.barcode{
+    width:180px;
+    height:35px;
+    margin:10px auto;
+    display:block;
+}
+
+.rightInfo{
+    font-size:12px;
+    line-height:1.0;
+    margin-top:10px;
+}
+
+.footerSign{
+    text-align:right;
+    margin-top:-35px;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.printBtn{
+    width:100%;
+    padding:10px;
+    background:#0b57d0;
+    color:#fff;
+    border:none;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+
+.printBtn:hover{
+    background:#084298;
+}
+    
+@page{
+    size:A4;
+    margin:0;
+}
+    
+@media print{
+
+    html,
+    body{
+        width:210mm;
+        height:297mm;
+        margin:0;
+        padding:0;
+        background:#fff;
+    }
+
+    body{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .formBox{
+        display:none;
+    }
+
+    .page{
+        width:210mm;
+        height:297mm;
+        margin:0;
+        padding:10mm;
+        box-shadow:none;
+       overflow:hidden;
+        page-break-after:avoid;
+    }
+
+}
+
+</style>
+</head>
+<body>
+<div class="formBox">
+
+<input placeholder="Ration Number"
+oninput="setData('ration_no',this.value)">
+
+<input placeholder="Card Holder Name"
+oninput="setData('card_name',this.value);
+setData('holder_name',this.value)">
+
+<input placeholder="Father/Husband Name"
+oninput="setData('father_name',this.value)">
+    
+<input placeholder="Dealer Name"
+oninput="setData('dealer_name',this.value)">
+
+<input placeholder="Dealer Address"
+oninput="setData('dealer_address',this.value)">
+    
+<input placeholder="Village"
+oninput="setData('village',this.value)">
+
+<input placeholder="Gram Panchayat"
+oninput="setData('gp',this.value)">
+
+<input placeholder="Block"
+oninput="setData('block',this.value)">
+
+<input placeholder="District"
+oninput="setData('district',this.value)">
+    
+<input placeholder="PinCode"
+oninput="setData('PinCode',this.value)">
+    
+<input placeholder="date"
+oninput="setData('date',this.value)">
+    
+<button onclick="printCard()" class="printBtn">
+    Print Card
+</button>
+
+</div>
+    
+    
+<div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+
+        <img src="ration-1.png" class="logo">
+
+        <div class="centerTitle">
+            <h1>Government of West Bengal<br>
+            Department of Food & Supplies</h1>
+
+            <h3>খাদ্য ও সরবরাহ দপ্তর, পশ্চিমবঙ্গ সরকার</h3>
+
+            <h2>e-Ration Card</h2>
+        </div>
+
+        <img src="ration-3.jpg" class="logo">
+
+    </div>
+
+    <!-- INFO -->
+    <div class="infoBox">
+
+        <img src="ration-0.png" class="watermark">
+
+        <div class="lang">
+
+<!-- ENGLISH -->
+
+<div class="section">
+    <div class="section-title">Information</div>
+    <ol>
+        <li> E-Ration Card has the same validity as that of a printed Digital Ration Card and can be used to draw food-grains and kerosene oil under Public Distribution System (PDS) from Fair Price Shops.</li>
+        <li>All e-Ration Cards with (I) before the card number indicate Inactive Ration Card. Example: (I) RKSY-I 0000000001.</li>
+        <li>All e-Ration Cards need to be activated through fingerprint/OTP based authentication. Fingerprint based authentication can be done from any Fair Price Shop, Food Inspector Office or Bangla Sahayata Kendra (BSK). OTP based authentication can be done from www.food.wb.gov.in using Aadhaar linked mobile number.</li>
+        <li>Any beneficiary presenting active e-Ration Card cannot be denied food-grains under PDS.</li>
+    </ol>
+</div>
+
+
+<!-- BENGALI -->
+
+<div class="section">
+    <div class="section-title">তথ্যাবলী</div>
+    <ol>
+        <li> ই-রেশন কার্ডের বৈধতা প্রিন্টেড ডিজিটাল রেশন কার্ডের সমান এবং এটি গণবণ্টন ব্যবস্থা (PDS)-এর অধীনে ন্যায্য মূল্যের দোকান থেকে খাদ্যশস্য ও কেরোসিন তেল গ্রহণের জন্য ব্যবহার করা যেতে পারে।</li>
+        <li> যেসব ই-রেশন কার্ড নম্বরের আগে (I) লেখা থাকে সেগুলি নিষ্ক্রিয় রেশন কার্ড নির্দেশ করে। উদাহরণ: (I) RKSY-I 0000000001।</li>
+        <li>সমস্ত ই-রেশন কার্ড ফিঙ্গারপ্রিন্ট/OTP ভিত্তিক প্রমাণীকরণের মাধ্যমে সক্রিয় করতে হবে। ফিঙ্গারপ্রিন্টের মাধ্যমে যেকোনো রেশন দোকান, খাদ্য পরিদর্শক দপ্তর বা বাংলা সহায়তা কেন্দ্র (BSK) থেকে সক্রিয় করা যাবে। OTP ভিত্তিক প্রমাণীকরণ www.food.wb.gov.in থেকে আধার সংযুক্ত মোবাইল নম্বরের মাধ্যমে করা যাবে।</li>
+        <li> সক্রিয় ই-রেশন কার্ড প্রদর্শনকারী কোনো উপভোক্তাকে PDS-এর অধীনে খাদ্যশস্য প্রদান থেকে বঞ্চিত করা যাবে না।</li>
+    </ol>
+</div>
+
+
+<!-- HINDI -->
+        <!-- ================= HINDI ================= -->
+
+ <div class="section hindi">
+            <div class="section-title">जानकारी</div>
+            <ol>
+                <li>ई-राशन कार्ड की वैधता मुद्रित डिजिटल राशन कार्ड की तरह ही होती है और इसका उपयोग सार्वजनिक वितरण प्रणाली (पीडीएस) के तहत उचित मूल्य की दुकानों से खाद्यान्न और मिट्टी के तेल को निकालने के लिए किया जा सकता है।</li>
+                <li> सभी ई-राशन कार्ड जिनके कार्ड नंबर से पहले (I) लिखा है (जैसे (I) RKSY-I 0000000001) निष्क्रिय राशन कार्ड दर्शाते हैं।</li>
+                <li> सभी ई-राशन कार्डों को फिंगरप्रिंट/ओटीपी आधारित प्रमाणीकरण के माध्यम से सक्रिय करने की आवश्यकता है। फिंगरप्रिंट आधारित प्रमाणीकरण किसी भी राशन की दुकान या खाद्य निरीक्षक कार्यालय या बंगला सहायता केंद्र से किया जा सकता है और आधार से पंजीकृत मोबाइल नंबर में ओटीपी के साथ www.food.wb.gov.in से ओटीपी आधारित प्रमाणीकरण किया जा सकता है।</li>
+                <li>सक्रिय ई-राशन कार्ड प्रस्तुत करने वाले किसी भी लाभार्थी को पीडीएस के तहत खाद्यान्न से वंचित नहीं किया जा सकता है।</li>
+            </ol>
+        </div>
+
+
+<div class="section">
+    <div class="section-title">जानकारी</div>
+    <ol>
+        <li>ई-राशन कार्ड की वैधता मुद्रित डिजिटल राशन कार्ड के समान है और इसका उपयोग सार्वजनिक वितरण प्रणाली (PDS) के अंतर्गत उचित मूल्य की दुकानों से खाद्यान्न एवं मिट्टी का तेल प्राप्त करने हेतु किया जा सकता है।</li>
+        <li>जिन ई-राशन कार्ड नंबरों के पहले (I) लिखा हो, वे निष्क्रिय राशन कार्ड को दर्शाते हैं। उदाहरण: (I) RKSY-I 0000000001।</li>
+        <li>सभी ई-राशन कार्ड को फिंगरप्रिंट/OTP आधारित प्रमाणीकरण द्वारा सक्रिय करना आवश्यक है। फिंगरप्रिंट आधारित प्रमाणीकरण किसी भी राशन दुकान, खाद्य निरीक्षक कार्यालय अथवा बंगला सहायता केंद्र (BSK) से किया जा सकता है। OTP आधारित प्रमाणीकरण www.food.wb.gov.in पर आधार से जुड़े मोबाइल नंबर के माध्यम से किया जा सकता है।</li>
+        <li> सक्रिय ई-राशन कार्ड प्रस्तुत करने वाले किसी भी लाभार्थी को PDS के अंतर्गत खाद्यान्न देने से वंचित नहीं किया जा सकता।</li>
+    </ol>
+</div>
+        
+            
+ <div class="section-title">معلومات</div>
+  <div class="section urdu">
+     <span style="font-size:8px;text-align:left;">
+            ای-راشن کارڈ کی وہی حیثیت ہے جو ایک پرنٹ شدہ ڈیجیٹل راشن کارڈ کی ہوتی ہے اور اسے پبلک ڈسٹری بیوشن سسٹم (PDS) کے تحت مناسب قیمت کی دکانوں سے اناج اور مٹی کا تیل حاصل کرنے کے لیے استعمال کیا جا سکتا ہے۔
+     </span><br>
+
+     <span style="font-size:8px;text-align:left;">
+  تمام ای-راشن کارڈ جن کے کارڈ نمبر سے پہلے (I) درج ہو (مثلاً (I) RKSY-I 0000000001) غیر فعال راشن کارڈ کی نشاندہی کرتے ہیں۔
+     </span><br>
+
+     <span style="font-size:8px;">
+ تمام ای-راشن کارڈز کو فنگر پرنٹ/OTP پر مبنی تصدیق کے ذریعے فعال کرنا ضروری ہے۔ فنگر پرنٹ پر مبنی تصدیق کسی بھی راشن کی دکان، فوڈ انسپکٹر دفتر یا بنگلہ سہایتا کیندر (BSK) سے کی جا سکتی ہے اور OTP پر مبنی تصدیق آدھار میں رجسٹرڈ موبائل نمبر پر OTP کے ذریعے
+            www.food.wb.gov.in
+            سے کی جا سکتی ہے۔
+     </span><br>
+     <span style="font-size:8px;">
+    فعال ای-راشن کارڈ پیش کرنے والے کسی بھی مستحق فرد کو PDS کے تحت غذائی اجناس دینے سے انکار نہیں کیا جا سکتا۔
+     </span>
+  </div>
+ </div>  
+</div>
+
+    <!-- MIDDLE -->
+    <div class="middle">
+
+        <div>
+            Digital Ration Card Number: <span class="ration_no" id="ration_no">SPHH 0545331878</span><br>
+
+Name:<span class="card_name" id="card_name">ANIMA MODAK</span>
+
+            <div class="qrStatus">
+
+                <img id="mainQr" class="qr">
+
+                <div>
+                    <div class="statusItem">
+                        <span class="statusColor green"></span>
+                        Denotes Active Card
+                    </div>
+
+                    <div class="statusItem">
+                        <span class="statusColor yellow"></span>
+                        Aadhaar not seeded
+                    </div>
+
+                    <div class="statusItem">
+                        <span class="statusColor red"></span>
+                        Deactivated Card
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="scanText">
+                Scan this QR Code to see Last 2 Transaction
+            </div>
+
+        </div>
+
+        <div>
+            Downloaded On: <span id="download_time"></span>
+
+            <div class="signatureBox">
+                Digitally signed by DS Department of Food & Supplies<br>
+                Government of West Bengal
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CUT SECTION -->
+    <div class="cutSection">
+
+        <div class="cards">
+
+            <!-- LEFT CARD -->
+            <div class="card">
+
+                <div class="blueCard leftBg">
+
+                    <div class="cardHeader">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="smallLogo">       
+
+                        <div class="cardTitle">
+                            পশ্চিমবঙ্গ সরকার<br>
+                            খাদ্য ও সরবরাহ দপ্তর<br>
+                            Digital Ration Card No : <span class="ration_no" id="ration_no">SPHH 0545331878</span>
+                            <span style="margin-right:50px;">For NFSA - Priority Household</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="cardInfo">
+                        Name of the Card Holder : <span class="card_name" id="holder_name">ANIMA MODAK</span><br>
+                        Name of Father/Husband : <span id="father_name">BIMAN MODAK</span><br>
+                        Date of Birth : 10/07/1990<br><br>
+
+                        Dealer Name : <span id="dealer_name">UTPAL KUMAR ROY</span><br><br>
+
+                        Dealer Address : <span id="dealer_address" style="width:10px;">PURBA MAGURMARI, DHUPGURI, JALPAIGURI</span><br><br>
+                        Not Transfarable
+                    </div>
+
+                    <img id="smallQr" class="smallQr">
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT CARD -->
+            <div class="card">
+
+                <div class="blueCard rightBg">
+
+                    <div style="text-align:center;font-weight:bold;">
+                        Help Desk: 1800 345 5505<br>
+                        Website: food.wb.gov.in
+                    </div>
+
+                   <img id="mainBarcode" class="barcode">
+
+                    <div class="rightInfo">
+                        <b>Address</b><br>
+
+                        Ward :<br>
+                        Village : <span id="village">Kalirhat</span><br>
+                        Gram Panchayat (For Rural Arias) : <span id="gp">MAGURMARI-I</span><br>
+                        Block : <span id="block">Dhupguri</span><br>
+                        District : <span id="district">JALPAIGURI</span><br>
+                        Pin Code : &nbsp;&nbsp;&nbsp;&nbsp;<span id="PinCode">735210</span><br><br>
+                        Date :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="date"> 26/12/2016</span><br>
+                        Sub Aria : __________
+                    </div>
+
+                    <div class="footerSign">
+                        SCFS-Jalpaiguri(Sadar)<br>
+                        Signature of Issuing Officer
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+function setData(name,value){
+
+    /* ID update */
+    const idItem = document.getElementById(name);
+
+    if(idItem){
+        idItem.innerText = value;
+    }
+
+    /* CLASS update */
+    const classItems = document.getElementsByClassName(name);
+
+    for(let i=0; i<classItems.length; i++){
+        classItems[i].innerText = value;
+    }
+for(let i=0; i<classItems.length; i++){
+    classItems[i].innerText = value;
+}
+    updateQR();
+}
+
+ function updateQR(){
+
+    const ration =
+    document.getElementById("ration_no").innerText;
+
+    const holder =
+    document.getElementById("holder_name").innerText;
+
+    const father =
+    document.getElementById("father_name").innerText;
+
+    const dealer =
+    document.getElementById("dealer_name").innerText;
+
+    const address =
+    document.getElementById("dealer_address").innerText;
+
+    const village =
+    document.getElementById("village").innerText;
+
+    const gp =
+    document.getElementById("gp").innerText;
+
+    const block =
+    document.getElementById("block").innerText;
+
+    const district =
+    document.getElementById("district").innerText;
+
+    const qrData =
+`Digital Ration Card
+
+Ration No: ${ration}
+
+Card Holder: ${holder}
+
+Father/Husband: ${father}
+
+Dealer: ${dealer}
+
+Dealer Address: ${address}
+
+Village: ${village}
+
+Gram Panchayat: ${gp}
+
+Block: ${block}
+
+District: ${district}`;
+
+    const qrURL =
+`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}`;
+
+    document.getElementById("mainQr").src = qrURL;
+
+    document.getElementById("smallQr").src = qrURL;
+     
+     const barcodeData =
+`${ration}-${holder}-${father}-${dealer}-${district}`;
+
+const barcodeURL =
+`https://barcodeapi.org/api/128/${encodeURIComponent(barcodeData)}`;
+
+document.getElementById("mainBarcode").src = barcodeURL;
+
+}
+    
+    
+ function updateDateTime(){
+
+    const now = new Date();
+
+    const day = String(now.getDate()).padStart(2,'0');
+    const month = String(now.getMonth()+1).padStart(2,'0');
+    const year = now.getFullYear();
+
+    const hours = String(now.getHours()).padStart(2,'0');
+    const minutes = String(now.getMinutes()).padStart(2,'0');
+    const seconds = String(now.getSeconds()).padStart(2,'0');
+
+    const dateTime =
+    `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+
+    document.getElementById("download_time").innerText = dateTime;
+
+}
+
+updateDateTime();
+
+setInterval(updateDateTime,1000);   
+    
+function printCard(){
+    window.print();
+}
+    
+</script>
+</body>
+</html>
