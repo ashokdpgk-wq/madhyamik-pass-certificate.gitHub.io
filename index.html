@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RK PRINT</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body, html{
+    font-family:'Poppins',sans-serif;
+    background:#fafafa;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #ddd;
+    background:#fff;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+
+/* MENU BUTTON */
+
+.menu-btn{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:32px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    top:90px;
+    left:-260px;
+    width:230px;
+    background:#fff;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    transition:.4s;
+    z-index:999;
+}
+
+.sidebar.active{
+    left:20px;
+}
+
+.sidebar a{
+    display:block;
+    text-decoration:none;
+    color:#333;
+    font-size:18px;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:8px;
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:#f2f2f2;
+    color:#21409a;
+}
+
+/* LOGO */
+
+.logo{
+    text-align:center;
+}
+
+.logo h1{
+    font-size:48px;
+    font-weight:700;
+    color:#21409a;
+}
+
+.logo span{
+    color:#ff7a00;
+}
+
+.logo p{
+    font-size:14px;
+    color:#444;
+}
+
+/* LOGIN BUTTON */
+
+.top-login{
+    background:#eaf7f4;
+    color:#2f8d7c;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:160px 8% 80px;
+    position:relative;
+    /*overflow:hidden;*/
+}
+
+/* WATERMARK */
+
+.watermark{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:100%;
+    opacity:0.3;
+    z-index:0;
+}
+.watermark2{
+    position:absolute;
+    top:150%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:100%;
+    opacity:0.3;
+    z-index:0;
+}
+
+/* LEFT */
+
+.hero-left{
+    width:50%;
+    position:relative;
+    z-index:2;
+}
+
+.hero-left h1{
+    font-size:72px;
+    line-height:1.2;
+    color:#1f2340;
+    margin-bottom:30px;
+}
+
+.hero-left p{
+    font-size:24px;
+    line-height:1.8;
+    color:#777;
+    margin-bottom:35px;
+}
+
+/* BUTTONS */
+
+.btn-group{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.create-btn{
+    background:linear-gradient(90deg,#cc63d8,#7d57ff);
+    color:#fff;
+    border:none;
+    padding:18px 34px;
+    border-radius:10px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.login-btn2{
+    background:#eaf7f4;
+    color:#2f8d7c;
+    border:none;
+    padding:18px 34px;
+    border-radius:10px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* RIGHT */
+
+.hero-right{
+    width:45%;
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+.pm-photo{
+    width:100%;
+    max-width:520px;
+    border-radius:20px;
+	margin-top:120%;
+	margin-left:18%;
+}
+
+/* FEATURES */
+
+.features{
+    width:100%;
+    padding:60px 8%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.feature-box{
+    background:#fff;
+    border-radius:22px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.feature-box:hover{
+    transform:translateY(-8px);
+}
+
+.feature-box img{
+    width:110px;
+    height:110px;
+    object-fit:contain;
+    margin-bottom:18px;
+}
+
+.feature-box h3{
+    font-size:24px;
+    font-weight:500;
+    color:#333;
+    line-height:1.5;
+}
+
+/* PERFECT */
+
+.perfect{
+    padding:80px 20px 40px;
+    text-align:center;
+}
+
+.perfect h2{
+    font-size:62px;
+    color:#1f2340;
+}
+
+.perfect p{
+    font-size:24px;
+    color:#888;
+    margin-top:10px;
+}
+
+/* BUSINESS */
+
+.business{
+    width:100%;
+    padding:80px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+}
+
+.business-left,
+.business-right{
+    width:50%;
+}
+
+.business-left img{
+    width:100%;
+    max-width:500px;
+}
+
+.business-right h2{
+    font-size:58px;
+    color:#1f2340;
+    margin-bottom:25px;
+}
+
+.business-right p{
+    font-size:24px;
+    color:#777;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+.join-btn{
+    background:#eef3ff;
+    color:#5570d6;
+    border:none;
+    padding:15px 30px;
+    border-radius:8px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* SERVICES */
+
+.services{
+    width:100%;
+    padding:80px 8%;
+   /* background:#f2f2f7;*/
+}
+
+.services h2{
+    font-size:60px;
+    color:#1f2340;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+.hero,
+.business{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-left,
+.hero-right,
+.business-left,
+.business-right{
+    width:100%;
+}
+
+.hero-left h1,
+.business-right h2,
+.perfect h2,
+.services h2{
+    font-size:42px;
+}
+
+.hero-left p,
+.business-right p,
+.perfect p{
+    font-size:18px;
+}
+
+.features{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.btn-group{
+    justify-content:center;
+}
+
+.watermark{
+    width:350px;
+}
+
+.logo h1{
+    font-size:30px;
+}
+
+}
+    
+/* LOGIN POPUP */
+
+.login-popup{
+    position:fixed;
+    top:90px;
+    right:7%;
+    width:320px;
+    background:#fff;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+    z-index:2000;
+    display:none;
+}
+
+.login-popup.active{
+    display:block;
+}
+
+.login-form h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#21409a;
+}
+
+.login-form input{
+    width:100%;
+    padding:14px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+.login-form button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#cc63d8,#7d57ff);
+    color:#fff;
+    font-size:17px;
+    cursor:pointer;
+}  
+    
+
+@media(max-width:650px){
+
+.features{
+    grid-template-columns:1fr;
+}
+
+.hero-left h1{
+    font-size:34px;
+}
+
+.top-login{
+    padding:10px 14px;
+    font-size:13px;
+}
+
+}
+button,
+input,
+textarea,
+select,
+a{
+    outline:none;
+    -webkit-tap-highlight-color:transparent;
+}
+
+*:focus{
+    outline:none;
+    box-shadow:none;
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar" id="sidebar">
+
+    <a href="#">🏠 Home</a>
+    <a href="#">👤 About Us</a>
+    <a href="#">🧾 Services</a>
+    <a href="#">💳 PAN Services</a>
+    <a href="#">₹ Pricing</a>
+    <a href="#">🤝 Partner</a>
+    <a href="#">🎧 Support</a>
+    <a href="#">📞 Contact Us</a>
+    <a class="Login" href="#">➡ Login</a>
+
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <!-- LOGIN POPUP -->
+
+<div class="login-popup" id="loginPopup">
+
+    <div class="login-form">
+
+        <h2>Member Login</h2>
+
+        <input type="email" id="email" placeholder="Enter Email">
+
+        <input type="password" id="password" placeholder="Enter Password">
+
+        <button onclick="loginUser()">
+            Login Now
+        </button>
+
+    </div>
+
+</div>
+    
+    
+
+    <div class="menu-btn" onclick="toggleMenu()">
+        ⋮
+    </div>
+
+    <div class="logo">
+        <h1>Online<span>Sho</span></h1>
+        <p>Digital India Services</p>
+    </div>
+
+    <button class="top-login">
+        Member Login
+    </button>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <!-- WATERMARK -->
+
+    <img class="watermark"
+    src="index-15.png">
+	
+    <img class="watermark2"
+    src="index-15.png">
+
+    <!-- LEFT -->
+
+    <div class="hero-left">
+
+        <h1>
+            Get Paperless<br>
+            PAN Card within<br>
+            2 Hours.
+        </h1>
+
+        <p>
+            Aadhaar based instant PAN is a new facility.
+            Aadhaar e-KYC OTP or Biometric Authentication.
+        </p>
+
+        <div class="btn-group">
+
+            <button class="create-btn">
+                Create Account →
+            </button>
+
+            <button class="login-btn2">
+                Member Login
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="hero-right">
+
+        <img class="pm-photo"
+        src="index-12.png">
+
+    </div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="feature-box">
+        <img src="index-17.png">
+        <h3>UTI E-KYC PAN Center</h3>
+    </div>
+
+    <div class="feature-box">
+        <img src="index-16.png">
+        <h3>NSDL Paperless PAN</h3>
+    </div>
+
+    <div class="feature-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920329.png">
+        <h3>NSDL & UTI PAN Find</h3>
+    </div>
+
+    <div class="feature-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/1041/1041884.png">
+        <h3>Mobile & DTH Recharge</h3>
+    </div>
+
+</section>
+
+<!-- PERFECT -->
+
+<section class="perfect">
+
+    <h2>Perfect solution</h2>
+    <p>for your small business</p>
+
+</section>
+
+<!-- BUSINESS -->
+
+<section class="business">
+
+    <div class="business-left">
+
+        <img src="index-14.png">
+
+    </div>
+
+    <div class="business-right">
+
+        <h2>Business to Business</h2>
+
+        <p>
+            RK Print has been authorized to apply PAN CARD across India through our Super Distributor, Distributor & Retailer network. Retailer will able to make online application of New PAN Card and Correction / Duplicate. A great opportunity for Super Distributor & Distributor to authorized Retailers become agent for PAN Card.
+        </p>
+
+        <button class="join-btn">
+            Join Now
+        </button>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section class="services">
+
+    <h2>Our Services</h2>
+
+</section>
+
+    
+    
+    
+    
+<script>
+ document.addEventListener('mousedown', function(e){
+
+    // INPUT / TEXTAREA / BUTTON এ block হবে না
+    if(
+        e.target.tagName === "INPUT" ||
+        e.target.tagName === "TEXTAREA" ||
+        e.target.tagName === "BUTTON"
+    ){
+        return;
+    }
+
+});
+
+function toggleMenu(){
+
+    document.getElementById("sidebar")
+    .classList.toggle("active");
+}
+
+// LOGIN POPUP OPEN
+
+const loginPopup =
+document.getElementById("loginPopup");
+
+document.querySelectorAll('.top-login, .login-btn2, .Login')
+.forEach(button => {
+
+    button.addEventListener('click', (e) => {
+
+        e.stopPropagation();
+
+        loginPopup.classList.toggle("active");
+
+    });
+
+});
+
+// CLICK OUTSIDE HIDE
+
+document.addEventListener('click', function(e){
+
+    if(
+        !loginPopup.contains(e.target) &&
+        !e.target.classList.contains('top-login') &&
+        !e.target.classList.contains('login-btn2')
+    ){
+
+        loginPopup.classList.remove("active");
+
+    }
+
+});
+
+// LOGIN FUNCTION
+
+function loginUser(){
+
+    let email =
+    document.getElementById("email").value;
+
+    let password =
+    document.getElementById("password").value;
+
+    if(
+        email === "admin@gmail.com" &&
+        password === "1234"
+    ){
+
+        localStorage.setItem(
+            "rkprint_login",
+            "true"
+        );
+
+        alert("Login Successful");
+        window.location.href = "index-a.html";
+
+        loginPopup.classList.remove("active");
+
+    }
+    else{
+
+        alert("Invalid Email or Password");
+
+    }
+
+}
+
+// LOGOUT
+
+function logoutUser(){
+
+    localStorage.removeItem("rkprint_login");
+
+    alert("Logout Successful");
+
+}
+
+</script>
+
+</body>
+</html>
