@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ID Card XML QR Final</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+}
+
+/* FORM */
+.form{
+background:#fff;
+padding:10px;
+margin:10px auto;
+width:95%;
+border:2px solid black;
+}
+
+input{
+margin:5px;
+padding:6px;
+font-weight:bold;
+}
+
+/* CARD AREA */
+#printArea{
+display:flex;
+gap:5px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+/* CARD */
+.card{
+  width:100mm;
+  height:65mm;
+  border-radius:3mm;
+  overflow:hidden;
+  box-shadow:none; /* print clean */
+  position:relative;
+}
+
+/* BACKGROUND */
+.front{background:url('k.png') no-repeat center/cover;}
+.back{background:url('k1.jpg') no-repeat center/cover;}
+
+/* overlay */
+.front::before,
+.back::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.15);
+}
+
+.front *,.back *{position:relative;}
+
+/* HEADER */
+.header{
+display:flex;
+justify-content:space-between;
+padding:5px;
+font-size:10px;
+font-weight:bold;
+}
+
+/* PHOTOS */
+.photo{
+position:absolute;
+left:10px;
+top:54px;
+width:70px;
+height:90px;
+object-fit:cover;
+}
+
+.photo2{
+position:absolute;
+top:58px;
+right:15px;
+width:39px;
+height:49px;
+border:1px solid #000;
+object-fit:cover;
+filter:grayscale(100%);
+}
+
+/* INFO */
+.info{
+position:absolute;
+left:95px;
+top:60px;
+font-size:11px;
+line-height:1.5;
+text-align:left;
+}
+
+/* NUMBER */
+.number{
+position:absolute;
+bottom:42px;
+width:100%;
+text-align:center;
+font-weight:bold;
+letter-spacing:2px;
+}
+.number2{
+position:absolute;
+bottom:36px;
+width:100%;
+text-align:center;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+/* TAG */
+.tag{
+position:absolute;
+bottom:15px;
+width:100%;
+text-align:center;
+font-size:12px;
+}
+
+/* BACK */
+.address0{
+position:absolute;
+left:25px;
+top:52px;
+width:180px;
+font-size:14px;
+  text-align:left;
+word-break:break-word;
+}
+
+.address{
+position:absolute;
+left:25px;
+top:80px;
+width:180px;
+font-size:11px;
+  text-align:left;
+word-break:break-word;
+}
+
+/* QR RIGHT CENTER */
+.qr{
+position:absolute;
+right:20px;
+top:24%;
+transform:translateY(-50%);
+width:90px;
+height:90px;
+background:#fff;
+padding:3px;
+border-radius:3px;
+border:2px solid #000;
+}
+
+/* 🔥 BLACK 3D TEXT (PRINT FRIENDLY) */
+.header span,
+.info,
+.info b,
+.number,
+.tag,
+.address0 {
+
+    font-weight:900;
+    color:#000; /* pure black */
+
+    /* 🔥 REAL 3D EMBOSS */
+    text-shadow:
+        0px 1px 0 #fff,   /* top light */
+        0px 2px 0 #e6e6e6,
+        0px 3px 0 #ccc,
+        0px 4px 0 #b3b3b3,
+        0px 5px 0 #999,
+        0px 6px 0 #808080,
+
+        0px 7px 2px rgba(0,0,0,0.25),
+        0px 10px 5px rgba(0,0,0,0.25),
+        0px 14px 10px rgba(0,0,0,0.3),
+        0px 20px 18px rgba(0,0,0,0.35);
+
+    letter-spacing:0.6px;
+}
+
+.header span,
+.info,
+.info b,
+.number,
+.tag,
+.address {
+
+    font-weight:900;
+    color:#000; /* pure black */
+
+    /* 🔥 REAL 3D EMBOSS */
+    text-shadow:
+        0px 1px 0 #fff,   /* top light */
+        0px 2px 0 #e6e6e6,
+        0px 3px 0 #ccc,
+        0px 4px 0 #b3b3b3,
+        0px 5px 0 #999,
+        0px 6px 0 #808080,
+
+        0px 7px 2px rgba(0,0,0,0.25),
+        0px 10px 5px rgba(0,0,0,0.25),
+        0px 14px 10px rgba(0,0,0,0.3),
+        0px 20px 18px rgba(0,0,0,0.35);
+
+    letter-spacing:0.6px;
+}
+
+/* 🔥 NAME extra raised */
+#name
+
+    font-weight:900;
+    color:#111;
+
+    /* GOLDISH + EMBOSS EFFECT */
+    background:linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f5f5f5 20%,
+        #d6d6d6 40%,
+        #ffffff 60%,
+        #bfbfbf 80%,
+        #ffffff 100%
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    /* 🔥 DEEP 3D SHADOW STACK */
+    text-shadow:
+        0px 1px 0 #fff,
+        0px 2px 0 #ddd,
+        0px 3px 0 #ccc,
+        0px 4px 0 #bbb,
+        0px 5px 0 #aaa,
+        0px 6px 0 #999,
+
+        0px 7px 2px rgba(0,0,0,0.25),
+        0px 10px 5px rgba(0,0,0,0.25),
+        0px 15px 10px rgba(0,0,0,0.3),
+        0px 20px 20px rgba(0,0,0,0.35);
+
+    letter-spacing:0.6px;
+}
+
+/* 🔥 NUMBER strongest pop-out */
+.number{
+    font-size:18px;
+    letter-spacing:3px;
+
+    text-shadow:
+        0px 2px 0 #fff,
+        0px 4px 0 #ccc,
+        0px 6px 0 #999,
+        0px 8px 0 #666,
+        0px 12px 6px rgba(0,0,0,0.4),
+        0px 18px 15px rgba(0,0,0,0.5);
+}
+.number2{
+    font-size:18px;
+    letter-spacing:3px;
+
+    text-shadow:
+        0px 2px 0 #fff,
+        0px 4px 0 #ccc,
+        0px 6px 0 #999,
+        0px 8px 0 #666,
+        0px 12px 6px rgba(0,0,0,0.4),
+        0px 18px 15px rgba(0,0,0,0.5);
+}
+  
+/* 🔥 PHOTO 3D */
+.photo{
+    border:0.5px solid #000;
+    border-radius:6px;
+
+    box-shadow:
+        -2px -2px 4px rgba(255,255,255,0.8), /* highlight */
+        2px 2px 4px rgba(0,0,0,1.3),
+        5px 5px 10px rgba(0,0,0,1.3);        /* deep shadow */
+
+    transform: translateY(-2px); /* slight lift */
+}
+
+/* 🔥 SMALL PHOTO (ghost) */
+.photo2{
+    border:1px solid #000;
+    border-radius:4px;
+
+    box-shadow:
+        -1px -1px 2px rgba(255,255,255,0.7),
+        2px 2px 4px rgba(0,0,0,1.3),
+        4px 4px 6px rgba(0,0,0,1.25);
+
+    transform: translateY(-1px);
+}
+
+/* 🔥 QR (Scanner) 3D */
+.qr{
+    background:#fff;
+    border-radius:8px;
+
+    box-shadow:
+        -2px -2px 4px rgba(255,255,255,1.9), /* light */
+        2px 2px 5px rgba(0,0,0,0.3),
+        6px 6px 2px rgba(0,0,0,0.55);       /* deep */
+
+    transform: translateY(-3px); /* floating */
+}
+  
+
+/* =========================
+   PRINT SETUP
+========================= */
+@page{
+  size:A4;
+  margin:0;
+}
+
+@media print{
+
+  body{
+    margin:0;
+  }
+
+  /* FORM HIDE */
+  .form{
+    display:none !important;
+  }
+
+  /* ONLY PRINT AREA */
+  body *{
+    visibility:hidden;
+  }
+
+  #printArea, #printArea *{
+    visibility:visible;
+  }
+
+  /* GRID LAYOUT (NO GAP ISSUE) */
+  #printArea{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(1, auto);
+    gap:14mm; /* 🔥 gap control */
+    justify-content:center;
+    padding-top:5mm;
+  }
+/* CARD */
+.card{
+  width:89.6mm;
+  height:60mm;
+  border-radius:3mm;
+  overflow:hidden;
+  box-shadow:none; /* print clean */
+  position:relative;
+}
+  /* REMOVE SHADOW */
+  .card{
+    box-shadow:none;
+  }
+
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- FORM -->
+<div class="form">
+<input value="ANKIT SARKAR" placeholder="Name" oninput="setVal('name',this.value)">
+<input value="Male / MALE"placeholder="Gender (M/F)" oninput="setVal('gender',this.value)">
+<input value="10/01/2025" placeholder="DOB (DD/MM/YYYY)" oninput="setVal('dob',this.value)">
+<input value="975023267402"placeholder="UID Number" oninput="setNumber(this.value)">
+<input value="KRISHNA SARKAR" placeholder="Father Name" oninput="setVal('father',this.value)">
+<input value="C/O: Krishna Sarkar, Kalirhat, Dhupguri, Jalpaiguri, West Bengal - 735210"placeholder="Address" oninput="setVal('address',this.value)">
+<br>
+📷 Photo: <input type="file" onchange="loadPhoto(event)">
+<br>
+<button onclick="printCard()">🖨 Print</button>
+</div>
+
+<!-- CARD -->
+<div id="printArea">
+
+<!-- FRONT -->
+<div class="card front">
+
+
+
+<img id="photo" class="photo">
+<img id="photo2" class="photo2">
+
+<div class="info">
+<b id="name">ANKIT SARKAR</b><br>
+Father : <b id="father">KRISHNA SARKAR</b><br>
+জন্মতারিখ/DOB: <b id="dob">01/01/2000</b><br>
+ <b id="gender">Male / MALE</b>
+</div>
+
+<div class="number" id="number">0000 0000 0000</div>
+
+
+</div>
+
+<!-- BACK -->
+<div class="card back">
+
+
+<b class="address0">Address:</b><br>
+<div class="address" id="address">C/O: Krishna Sarkar, Kalirhat, Dhupguri, Jalpaiguri, West Bengal - 735210</div>
+
+<canvas id="qr" class="qr"></canvas>
+
+<div class="number2" id="number2">0000 0000 0000</div>
+
+</div>
+
+</div>
+
+<!-- QR LIB -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.0/qrcode.min.js"></script>
+
+<script>
+
+// SET VALUE
+function setVal(id,val){
+document.getElementById(id).innerText = val;
+generateQR();
+}
+
+// NUMBER FORMAT
+function setNumber(val){
+
+val = val.replace(/\D/g,'').substring(0,12);
+val = val.replace(/(\d{4})(?=\d)/g,'$1 ');
+
+document.getElementById("number").innerText = val;
+document.getElementById("number2").innerText = val;
+
+generateQR();
+}
+
+// 🔥 XML DATA
+function getXML(){
+
+let uid = document.getElementById("number").innerText.replace(/\s/g,'');
+let name = document.getElementById("name").innerText;
+let gender = document.getElementById("gender").innerText;
+let dob = document.getElementById("dob").innerText;
+let father = document.getElementById("father") ? document.getElementById("father").innerText : "";
+let address = document.getElementById("address").innerText;
+
+return `<?xml version="1.0" encoding="UTF-8"?>
+<PrintLetterBarcodeData 
+uid="${uid}"
+name="${name}"
+gender="${gender}"
+dob="${dob}"
+co="S/O: ${father}"
+loc="${address}"
+dist="Jalpaiguri"
+state="West Bengal"
+pc="735210"
+/>`;
+}
+
+// 🔥 QR GENERATE
+function generateQR(){
+
+let canvas = document.getElementById("qr");
+
+canvas.width = 100;
+canvas.height = 100;
+
+let ctx = canvas.getContext("2d");
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+QRCode.toCanvas(canvas, getXML(), {
+width:100,
+margin:1
+});
+}
+
+// PHOTO
+function loadPhoto(e){
+let file = URL.createObjectURL(e.target.files[0]);
+photo.src = file;
+photo2.src = file;
+}
+
+// LOAD
+window.onload = function(){
+generateQR();
+}
+
+// PRINT
+function printCard(){
+window.print();
+}
+
+</script>
+
+</body>
+</html>
