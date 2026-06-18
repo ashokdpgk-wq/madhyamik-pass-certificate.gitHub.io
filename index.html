@@ -60,18 +60,53 @@ header{
     top:90px;
     left:-260px;
     width:230px;
+    height:calc(100vh - 110px); /* Screen height অনুযায়ী */
     background:#fff;
     border-radius:18px;
     padding:20px;
     box-shadow:0 10px 25px rgba(0,0,0,.15);
     transition:.4s;
     z-index:999;
+
+    overflow-y:auto;     /* Vertical scrolling */
+    overflow-x:hidden;   /* Horizontal scrolling বন্ধ */
+}
+    
+/* Chrome, Edge */
+.sidebar::-webkit-scrollbar{
+    width:6px;
 }
 
+.sidebar::-webkit-scrollbar-track{
+    background:#f1f1f1;
+    border-radius:10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:#999;
+    border-radius:10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+    background:#21409a;
+}
+    
 .sidebar.active{
     left:20px;
 }
+/* Submenu */
+.sub-menu{
+    display:none;
+    margin-left:15px;
+    padding-left:10px;
+    border-left:2px solid #ddd;
+}
 
+/* Click করলে খুলবে */
+.sub-menu.active{
+    display:block;
+}
+    
 .sidebar a{
     display:block;
     text-decoration:none;
@@ -87,7 +122,44 @@ header{
     background:#f2f2f2;
     color:#21409a;
 }
+/* SIDEBAR MENU */
 
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    position:relative;
+}
+
+.sidebar li a{
+    display:block;
+    text-decoration:none;
+    color:#333;
+    font-size:18px;
+    padding:14px;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.sidebar li a:hover{
+    background:#f2f2f2;
+    color:#21409a;
+}
+
+/* SUB MENU */
+
+.sub-menu{
+    display:none;
+    margin-left:15px;
+    padding-left:10px;
+    border-left:2px solid #ddd;
+}
+
+.sub-menu a{
+    font-size:16px;
+    padding:10px;
+}
 /* LOGO */
 
 .logo{
@@ -466,15 +538,82 @@ a{
 
 <div class="sidebar" id="sidebar">
 
-    <a href="#">🏠 Home</a>
-    <a href="#">👤 About Us</a>
-    <a href="#">🧾 Services</a>
-    <a href="#">💳 PAN Services</a>
-    <a href="#">₹ Pricing</a>
-    <a href="#">🤝 Partner</a>
-    <a href="#">🎧 Support</a>
-    <a href="#">📞 Contact Us</a>
-    <a class="Login" href="#">➡ Login</a>
+<ul>
+
+<li>
+<a href="#">🏠 Home</a>
+</li>
+
+<li>
+<a href="#">👤 About Us</a>
+</li>
+
+<li>
+<a href="#" class="menu-toggle">🧾 Services ▾</a>
+
+<ul class="sub-menu">
+
+<li><a href="#">PAN Card</a></li>
+
+<li><a href="#">Aadhaar Card</a></li>
+
+<li><a href="#">Voter Card</a></li>
+
+<li><a href="#">Birth Certificate</a></li>
+
+</ul>
+
+</li>
+
+<li>
+<a href="#" class="menu-toggle">💳 PAN Services ▾</a>
+
+<ul class="sub-menu">
+
+<li><a href="#">New PAN Apply</a></li>
+
+<li><a href="#">Correction PAN</a></li>
+
+<li><a href="#">Duplicate PAN</a></li>
+
+<li><a href="#">PAN Find</a></li>
+
+</ul>
+
+</li>
+
+<li>
+<a href="#">₹ Pricing</a>
+</li>
+
+<li>
+<a href="#" class="menu-toggle">🤝 Partner ▾</a>
+
+<ul class="sub-menu">
+
+<li><a href="#">Super Distributor</a></li>
+
+<li><a href="#">Distributor</a></li>
+
+<li><a href="#">Retailer</a></li>
+
+</ul>
+
+</li>
+
+<li>
+<a href="#">🎧 Support</a>
+</li>
+
+<li>
+<a href="#">📞 Contact Us</a>
+</li>
+
+<li>
+<a class="Login" href="#">➡ Login</a>
+</li>
+
+</ul>
 
 </div>
 
@@ -741,7 +880,23 @@ function logoutUser(){
 
 }
 
+document.querySelectorAll(".menu-toggle").forEach(menu => {
+
+    menu.addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        let subMenu = this.nextElementSibling;
+
+        if(subMenu){
+            subMenu.classList.toggle("active");
+        }
+
+    });
+
+});
 </script>
 
 </body>
 </html>
+
