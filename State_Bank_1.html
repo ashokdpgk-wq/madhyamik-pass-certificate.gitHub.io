@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SBI Passbook</title>
+
+<style>
+body{
+margin:0;
+background:#eee;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-family:Arial;
+}
+
+/* FORM */
+.form{
+background:#fff;
+padding:10px;
+margin:10px;
+border:2px solid black;
+width:90%;
+}
+.form input{margin:5px;padding:5px;width:180px;}
+
+/* PAGE */
+.page{
+width:900px;
+background:#fff;
+padding:15px;
+position:relative;
+}
+
+/* TOP TABLE */
+.top{
+border:2px solid #2c4c7c;
+font-size:14px;
+  height:405px;
+  padding;5px;
+}
+
+.row{
+display:flex;
+}
+
+.cell{
+width:33.33%;
+padding:5px;
+border-bottom:1px solid #ccc;
+}
+
+.alt{background:#dfeaf5;}
+
+/* PHOTO */
+.photo{
+position:absolute;
+top:80px;
+left:50%;
+transform:translateX(-50%);
+width:110px;
+height:130px;
+/*border:2px solid #999;*/
+object-fit:cover;
+background:#fff;
+}
+
+/* 🔥 STAMP */
+.photoStamp{
+position:absolute;
+top:170px;   /* photo-এর নিচে বসবে */
+left:50%;
+transform:translateX(-50%) rotate(-10deg);
+width:120px;
+opacity:1.7;   /* realistic look */
+pointer-events:none;
+}
+
+/* HEADER */
+.header{
+margin-top:60px;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo{
+width:45px;height:45px;
+//background:#00a0df;
+border-radius:50%;
+}
+
+.bank{font-size:22px;font-weight:bold;}
+.sub{font-size:13px;color:#555;}
+
+/* MAIN CONTENT */
+.main{
+display:flex;
+margin-top:15px;
+}
+
+/* LEFT */
+.left{
+width:40%;
+font-size:14px;
+line-height:1.7;
+}
+
+/* CENTER */
+.center{
+width:30%;
+  height:20px;
+  margin-top:-80px;
+text-align:left;
+line-height:1.6;
+font-size:14px;
+}
+
+/* RIGHT */
+.right{
+width:40%;
+line-height:1.6;
+position:relative;
+  margin-top:-80px;
+  font-size:14px;
+}
+
+.stamp1{
+position:absolute;
+top:220px;      /* adjust */
+left:30px;     /* adjust */
+width:220px;
+height:160px;
+opacity:2.5;  /* 🔥 stamp feel */
+transform:rotate(-2deg);
+pointer-events:none;
+}
+
+
+/* PRINT */
+@media print{
+body *{visibility:hidden;}
+#printArea, #printArea *{visibility:visible;}
+#printArea{position:absolute;left:0;top:0;width:100%;}
+}
+  
+
+</style>
+</head>
+
+<body>
+
+<!-- FORM -->
+<div class="form">
+<input placeholder="Name" oninput="set('name',this.value)">
+<input placeholder="Father" oninput="set('father',this.value)">
+<input placeholder="Account" oninput="set('acc',this.value)">
+<input placeholder="CIF" oninput="set('cif',this.value)">
+<input placeholder="Phone" oninput="set('phone',this.value)">
+<input placeholder="Email" oninput="set('email',this.value)">
+<input placeholder="Date" oninput="set('date',this.value)">
+  <input placeholder="Address Line 1 (P.O)" oninput="set('addr1',this.value)">
+<input placeholder="Address Line 2 (Village)" oninput="set('addr2',this.value)">
+<input placeholder="Address Line 3 (District)" oninput="set('addr3',this.value)">
+  <input placeholder="A/c Opening Date" oninput="set('openDate',this.value)">
+<input placeholder="Date of Issue" oninput="set('issueDate',this.value)">
+<input placeholder="Post Code" oninput="set('postcode',this.value)">
+<input placeholder="MICR" oninput="set('micr',this.value)">
+<br>
+📷 <input type="file" onchange="loadPhoto(event)">
+<button onclick="printPage()">Print</button>
+</div>
+
+<!-- PAGE -->
+<div class="page" id="printArea">
+
+<!-- TOP TABLE -->
+<div class="top">
+<div class="row alt">
+<div class="cell">a/c = Account</div>
+<div class="cell">Csh = Cash</div>
+<div class="cell">Pos = Point of Sale</div>
+</div>
+<div class="row">
+<div class="cell">adj = Adjustment</div>
+<div class="cell">dep = Deposit</div>
+<div class="cell">Pr = Principal</div>
+</div>
+<div class="row alt">
+<div class="cell">Amt = Amount</div>
+<div class="cell">Dft = Draft</div>
+<div class="cell">proc = Processing</div>
+</div>
+<div class="row">
+<div class="cell">bal = Balance</div>
+<div class="cell">DR = Debit</div>
+<div class="cell">rd = Recurring</div>
+</div>
+<div class="row alt">
+<div class="cell">Capn = Capitalisation</div>
+<div class="cell">Dft = Draft</div>
+<div class="cell">proc = Processing</div>
+</div>
+<div class="row">
+<div class="cell">bal = Balance</div>
+<div class="cell">DR = Debit</div>
+<div class="cell">rd = Recurring</div>
+</div>
+<div class="row alt">
+<div class="cell">Capn = Capitalisation</div>
+<div class="cell">Dft = Draft</div>
+<div class="cell">proc = Processing</div>
+</div>
+<div class="row">
+<div class="cell">bal = Balance</div>
+<div class="cell">DR = Debit</div>
+<div class="cell">rd = Recurring</div>
+</div>
+<div class="row alt">
+<div class="cell">Capn = Capitalisation</div>
+<div class="cell">Dft = Draft</div>
+<div class="cell">proc = Processing</div>
+</div>
+<div class="row">
+<div class="cell">bal = Balance</div>
+<div class="cell">DR = Debit</div>
+<div class="cell">rd = Recurring</div>
+</div>
+<div class="row alt">
+<div class="cell">Capn = Capitalisation</div>
+<div class="cell">Dft = Draft</div>
+<div class="cell">proc = Processing</div>
+</div>
+<div class="row">
+<div class="cell">bal = Balance</div>
+<div class="cell">DR = Debit</div>
+<div class="cell">rd = Recurring</div>
+</div>
+<div class="row alt">
+<div class="cell">Capn = Capitalisation</div>
+<div class="cell">Dft = Draft</div>
+<div class="cell">proc = Processing</div>
+</div>
+<div class="row">
+<div class="cell">bal = Balance</div>
+<div class="cell">DR = Debit</div>
+<div class="cell">rd = Recurring</div>
+</div>
+<div class="row alt">
+<div class="cell">Capn = Capitalisation</div>
+<div class="cell">Dft = Draft</div>
+<div class="cell">proc = Processing</div>
+</div>
+
+</div>
+
+<!-- PHOTO -->
+<img id="photo" class="photo">
+
+<img src="state_1.png" class="photoStamp">
+
+<!-- HEADER -->
+<div class="header">
+<div class=""><img src="state_2.png" class="logo"></div>
+<div>
+<div class="bank">SBI</div>
+<div class="sub">STATE BANK OF INDIA</div>
+</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<!-- LEFT -->
+<div class="left">
+Name : Mr. <b id="name">ASHOK SARKAR</b><br>
+S/D/H/o &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; <span id="father">BIBHUTI SARKAR</span><br>
+CIF Number : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span id="cif">89599723107</span><br>
+Account No : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span id="acc">36502545427</span><br>
+A/c Type &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; SB TINY SPL OD GEN PUB IND<br>
+
+Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; <span id="addr1">P.O - KALIRHAT</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span id="addr2">KALIRHAT</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span id="addr3">DIST - JALPAIGURI</span><br>
+
+Phone No &nbsp;&nbsp; : <span id="phone"></span><br>
+Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ : <span id="email"></span>
+</div>
+
+<!-- CENTER -->
+<div class="center">
+Branch : MAYNATALI<br>
+PASCHIM MALLICKPARA<br><br>
+
+Email : sbi.09702@sbi.co.in jjjjkk<br>
+Phone No : 284734<br>
+IFSC : SBIN0009702<br>
+</div>
+
+  
+<!-- RIGHT -->
+<div class="right">
+  Code : 09702<br><br><br><br>
+Buss. Hrs : 10:00–16:00<br>
+MICR : <span id="micr">735002516</span><br><br>
+
+<img src="state_3.png" class="stamp1">
+
+MOP : SINGLE<br>
+A/c Opening Dt : <span id="openDate">31/01/2017</span><br>
+Nom Reg No :<br>
+Customer PAN :<br>
+Date of Issue : <span id="issueDate">01/05/2023</span><br>
+FIRST<br>
+Post Code : <span id="postcode">735210</span><br>
+Sr. Cit :
+
+</div>
+
+</div>
+
+<!-- DATE -->
+<div style="margin-top:20px;">
+Date : <span id="date">6th June, 2024</span>
+</div>
+
+</div>
+
+<script>
+function set(id,val){document.getElementById(id).innerText=val;}
+function loadPhoto(e){
+photo.src=URL.createObjectURL(e.target.files[0]);
+}
+function printPage(){window.print();}
+</script>
+
+</body>
+</html>
