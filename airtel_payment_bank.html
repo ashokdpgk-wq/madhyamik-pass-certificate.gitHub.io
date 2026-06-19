@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Passbook System</title>
+
+<link rel="stylesheet" href="style.css">
+    <style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f1f5f9;
+    font-family:sans-serif;
+}
+
+/* ================= MAIN LAYOUT ================= */
+
+.main-container{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    padding:15px;
+}
+
+/* ================= LEFT PANEL ================= */
+
+.left-panel{
+    width:320px;
+    background:#fff;
+    border:1px solid #bbb;
+    border-radius:10px;
+    padding:15px;
+    position:sticky;
+	line-height:12px;
+    top:10px;
+}
+
+.left-panel h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.left-panel label{
+    display:block;
+    margin-top:5px;
+	font-size:16px;
+    font-weight:bold;
+}
+
+.left-panel input{
+    width:100%;
+    height:30px;
+    padding:5px;
+    margin-top:5px;
+    border:1px solid #999;
+    border-radius:5px;
+}
+
+#photoInput{
+    padding:6px;
+}
+
+#saveBtn,
+#printBtn{
+    width:100%;
+    height:35px;
+    border:none;
+    margin-top:15px;
+    font-size:16px;
+    cursor:pointer;
+    border-radius:8px;
+}
+
+#saveBtn{
+    background:#1d4ed8;
+    color:#fff;
+}
+
+#printBtn{
+    background:green;
+    color:#fff;
+}
+
+/* ================= RIGHT PANEL ================= */
+
+.right-panel{
+    flex:1;
+}
+
+.container{
+    width:190mm;
+    min-height:277mm;
+    background:#fff;
+    border:1px solid #444;
+    padding:8px;
+    margin:auto;
+}
+
+/* ================= TOP SECTION ================= */
+
+.top-section{
+    width:100%;
+    height:380px;
+    border:1px solid #000;
+    background-image:url('/AS.jpeg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    text-align:center;
+    color:#000;
+    padding:10px;
+}
+
+.logo{
+    height:55px;
+}
+
+.top-section h2{
+    margin-top:10px;
+    font-size:24px;
+}
+
+/* TOP PHOTO */
+
+.top-photo{
+    width:90px;
+    height:90px;
+    margin:15px auto;
+    position:relative;
+}
+
+#userLogoTop{
+    width:50px;
+    height:60px;
+    object-fit:cover;
+    border:1px solid #000;
+	display:none;
+}
+
+.overlayTop{
+    position:absolute;
+
+    /* Top overlay control */
+
+    width:155px;
+    height:153px;
+    bottom:-138px;
+    right:-128px;
+}
+
+/* SERVICES */
+
+.service{
+    display:flex;
+    justify-content:space-around;
+    margin-top:-115px;
+}
+
+.services1,
+.services2{
+    text-align:left;
+    font-size:15px;
+    line-height:28px;
+}
+
+.footer{
+    width:65%;
+    margin:30px auto 0;
+    background:lightblue;
+    border-radius:15px;
+    padding:10px;
+    font-size:24px;
+}
+
+/* ================= BOTTOM SECTION ================= */
+
+.bottom-section{
+    width:100%;
+    height:380px;
+    border:1px solid #000;
+    background-image:url('/A5.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin-top:8px;
+    padding:10px;
+}
+
+.title-bar{
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.bottom-content{
+    display:flex;
+    justify-content:space-between;
+}
+
+/* LEFT BOX */
+
+.left-box{
+    width:72%;
+    background:rgba(255,255,255,.95);
+}
+
+.logos{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-left:20px;
+    margin-bottom:10px;
+}
+
+.logo1{
+    height:40px;
+}
+
+.logo2{
+    width:400px;
+    height:50px;
+}
+
+.info-and-photo{
+    display:flex;
+    justify-content:space-between;
+}
+
+.info-text{
+    width:115%;
+    margin-left:5px;
+    font-size:14px;
+    line-height:22px;
+}
+
+.row{
+    margin-bottom:8px;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    white-space:normal;
+}
+
+.photo-area{
+    width:150px;
+}
+
+/* USER PHOTO */
+
+#userLogo{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border:1px solid #000;
+    margin-top:35px;
+    margin-left:85px;
+}
+
+/* OVERLAY CONTROL */
+
+.overlay-logo{
+
+    width:105px;
+    height:103px;
+    margin-top:-30px;
+    margin-left:55px;
+}
+
+/* SEAL */
+
+.seal{
+    width:210px;
+    height:90px;
+    margin-top:170px;
+    margin-left:-95px;
+}
+
+/* RIGHT BOX */
+
+.right-box{
+    width:23%;
+    background:rgba(255,255,255,.95);
+    border:1px solid #333;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.bank-logo{
+    width:160px;
+    height:120px;
+}
+
+/* ================= PRINT ================= */
+
+@page{
+    size:A4;
+    margin:5mm;
+}
+
+@media print{
+
+    body{
+        background:#fff;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .left-panel{
+        display:none;
+    }
+
+    .right-panel{
+        width:100%;
+    }
+
+    .container{
+        border:none;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .main-container{
+        flex-direction:column;
+    }
+
+    .left-panel{
+        width:100%;
+        position:static;
+    }
+
+    .container{
+        width:100%;
+    }
+
+}
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+        <label>Name</label>
+        <input type="text" id="name">
+
+        <label>Account No</label>
+        <input type="text" id="account">
+
+        <label>IFSC Code</label>
+        <input type="text" id="ifsc">
+
+        <label>Father/Husband Name</label>
+        <input type="text" id="father">
+
+        <label>Mobile Number</label>
+        <input type="text" id="mobile">
+
+        <label>Aadhaar Number</label>
+        <input type="text" id="aadhaar">
+
+        <label>Address Line 1</label>
+        <input type="text" id="addr1">
+
+        <label>Address Line 2</label>
+        <input type="text" id="addr2">
+
+        <label>Address Line 3</label>
+        <input type="text" id="addr3">
+
+        <label>Photo Upload</label>
+        <input type="file" id="photoInput">
+
+        <button id="saveBtn">Save</button>
+
+        <button id="printBtn"
+                onclick="window.print()">
+            Print Passbook
+        </button>
+
+    </div>
+
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        <div class="container">
+
+            <!-- ================= TOP SECTION ================= -->
+
+            <div class="top-section">
+
+                <img src="airtei_1.jpg" class="logo">
+
+                <h2>আমাদের পরিষেবা</h2>
+
+                <p>
+                    x---------------------------------------------x
+                </p>
+
+                <div class="top-photo">
+
+                    <img id="userLogoTop">
+
+                    <img class="overlayTop"
+                         src="airtei_3.png">
+
+                </div>
+
+
+                <div class="service">
+
+                    <div class="services1">
+
+                        <div>* ব্যাঙ্ক অ্যাকাউন্ট খোলা</div>
+                        <div>* মানি ট্রান্সফার</div>
+                        <div>* ক্যাশ তোলা</div>
+                        <div>* ক্যাশ জমা করা</div>
+                        <div>* স্বাস্থ্য বিমা</div>
+
+                    </div>
+
+                    <div class="services2">
+
+                        <div>* দুচাকার বিমা</div>
+                        <div>* AEPS</div>
+                        <div>* Mini Statement</div>
+                        <div>* Balance Check</div>
+                        <div>* Pension</div>
+
+                    </div>
+
+                </div>
+
+                <div class="footer">
+                    আপনার সকল ব্যাঙ্ক পরিষেবা এক ছাদের তলায়
+                </div>
+
+            </div>
+
+
+            <!-- ================= BOTTOM SECTION ================= -->
+
+            <div class="bottom-section">
+
+                <div class="bottom-content">
+
+                    <div class="left-box">
+
+                        <div class="logos">
+
+                            <img src="airtei_2.jpg"
+                                 class="logo1">
+
+                            <img src="airtei_1.jpg"
+                                 class="logo2">
+
+                        </div>
+
+
+                        <div class="info-and-photo">
+
+                            <div class="info-text"
+                                 id="userInfo">
+
+                            </div>
+
+
+                            <div class="photo-area">
+
+                                <img id="userLogo">
+
+                                <img class="overlay-logo"
+                                     src="airtei_3.png">
+
+                            </div>
+
+
+                            <img class="seal"
+                                 src="airtei_4.png">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="right-box">
+
+                        <img src="airtei_2.jpg"
+                             class="bank-logo">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // ================= INPUT ID =================
+
+const nameInput = document.getElementById("name");
+const accountInput = document.getElementById("account");
+const ifscInput = document.getElementById("ifsc");
+const fatherInput = document.getElementById("father");
+const mobileInput = document.getElementById("mobile");
+const aadhaarInput = document.getElementById("aadhaar");
+
+const addr1Input = document.getElementById("addr1");
+const addr2Input = document.getElementById("addr2");
+const addr3Input = document.getElementById("addr3");
+
+const photoInput = document.getElementById("photoInput");
+
+const userInfo = document.getElementById("userInfo");
+
+const userLogo = document.getElementById("userLogo");
+const userLogoTop = document.getElementById("userLogoTop");
+
+
+// ================= USER INFO UPDATE =================
+
+function updatePreview() {
+
+ userInfo.innerHTML = `
+<table class="infoTable">
+
+<tr>
+<td><b>Name</b></td>
+<td>:</td>
+<td>${nameInput.value}</td>
+</tr>
+
+<tr>
+<td><b>Account No</b></td>
+<td>:</td>
+<td>${accountInput.value}</td>
+</tr>
+
+<tr>
+<td><b>IFSC Code</b></td>
+<td>:</td>
+<td>${ifscInput.value}</td>
+</tr>
+
+<tr>
+<td><b>Father/Husband Name</b></td>
+<td>:</td>
+<td>${fatherInput.value}</td>
+</tr>
+
+<tr>
+<td><b>Mobile No</b></td>
+<td>:</td>
+<td>${mobileInput.value}</td>
+</tr>
+
+<tr>
+<td><b>Aadhaar No</b></td>
+<td>:</td>
+<td>${aadhaarInput.value}</td>
+</tr>
+
+<tr>
+<td><b>Address</b></td>
+<td>:</td>
+<td>
+${addr1Input.value}<br>
+${addr2Input.value}<br>
+${addr3Input.value}
+</td>
+</tr>
+
+</table>
+`;
+
+}
+
+
+// ================= SAVE DATA =================
+
+function saveData() {
+
+    const passbookData = {
+
+        name: nameInput.value,
+        account: accountInput.value,
+        ifsc: ifscInput.value,
+        father: fatherInput.value,
+        mobile: mobileInput.value,
+        aadhaar: aadhaarInput.value,
+
+        addr1: addr1Input.value,
+        addr2: addr2Input.value,
+        addr3: addr3Input.value,
+
+        logo: userLogo.src
+
+    };
+
+    localStorage.setItem(
+        "passbookData",
+        JSON.stringify(passbookData)
+    );
+
+}
+
+
+// ================= INPUT AUTO UPDATE =================
+
+const allInputs = [
+
+    nameInput,
+    accountInput,
+    ifscInput,
+    fatherInput,
+    mobileInput,
+    aadhaarInput,
+
+    addr1Input,
+    addr2Input,
+    addr3Input
+
+];
+
+allInputs.forEach(input => {
+
+    input.addEventListener("input", () => {
+
+        updatePreview();
+        saveData();
+
+    });
+
+});
+
+
+// ================= PHOTO UPLOAD =================
+
+photoInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        userLogo.src = e.target.result;
+        userLogoTop.src = e.target.result;
+
+        saveData();
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+// ================= LOAD OLD DATA =================
+
+const oldData = JSON.parse(
+    localStorage.getItem("passbookData")
+);
+
+if (oldData) {
+
+    nameInput.value = oldData.name || "";
+    accountInput.value = oldData.account || "";
+    ifscInput.value = oldData.ifsc || "";
+    fatherInput.value = oldData.father || "";
+    mobileInput.value = oldData.mobile || "";
+    aadhaarInput.value = oldData.aadhaar || "";
+
+    addr1Input.value = oldData.addr1 || "";
+    addr2Input.value = oldData.addr2 || "";
+    addr3Input.value = oldData.addr3 || "";
+
+    if (oldData.logo) {
+
+        userLogo.src = oldData.logo;
+        userLogoTop.src = oldData.logo;
+
+    }
+
+    updatePreview();
+
+}
+
+
+// ================= SAVE BUTTON =================
+
+document
+.getElementById("saveBtn")
+.addEventListener("click", () => {
+
+    saveData();
+
+    alert("Data Saved Successfully");
+
+});
+
+
+// ================= PRINT BUTTON =================
+
+document
+.getElementById("printBtn")
+.addEventListener("click", () => {
+
+});
+    </script>
+
+</body>
+</html>
