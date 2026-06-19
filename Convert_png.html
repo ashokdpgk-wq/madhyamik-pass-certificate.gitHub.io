@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image to 150KB PNG Converter</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f3f5f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:400px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+h2{
+    color:#333;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    margin-bottom:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#0066ff;
+    color:white;
+    font-size:17px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0048c7;
+}
+
+#downloadLink{
+    display:none;
+    margin-top:20px;
+    text-decoration:none;
+    background:green;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>Image → 150KB PNG Converter</h2>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<button onclick="convertImage()">
+Convert to PNG
+</button>
+
+<br>
+
+<a id="downloadLink">
+Download PNG
+</a>
+
+</div>
+
+<script>
+function convertImage() {
+
+    const file = document.getElementById("imageInput").files[0];
+
+    if (!file) {
+        alert("প্রথমে একটি ছবি নির্বাচন করুন");
+        return;
+    }
+
+    const img = new Image();
+
+    img.onload = function () {
+
+        let width = img.width;
+        let height = img.height;
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        function compress() {
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx.clearRect(0, 0, width, height);
+            ctx.drawImage(img, 0, 0, width, height);
+
+            let dataURL = canvas.toDataURL("image/png");
+
+            let sizeKB =
+                Math.round((dataURL.length * 3 / 4) / 1024);
+
+            if (sizeKB > 150 && width > 50 && height > 50) {
+
+                width *= 0.9;
+                height *= 0.9;
+
+                compress();
+
+            } else {
+
+                document.getElementById("downloadLink").href = dataURL;
+                document.getElementById("downloadLink").download = "image.png";
+                document.getElementById("downloadLink").style.display = "inline-block";
+
+                alert("Final Size : " + sizeKB + " KB");
+            }
+        }
+
+        compress();
+    };
+
+    img.src = URL.createObjectURL(file);
+}
+</script>
+
+</body>
+</html>
