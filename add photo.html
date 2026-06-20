@@ -1,1 +1,132 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Add System</title>
+
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    background:#f5f5f5;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    max-width:500px;
+    margin:auto;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+button{
+    padding:12px 20px;
+    font-size:16px;
+    background:green;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+canvas{
+    max-width:100%;
+    border:1px solid #ccc;
+    margin-top:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>Photo Add System</h2>
+
+<input type="file" id="images" multiple accept="image/*">
+<br><br>
+
+<button onclick="createImage()">Create PNG</button>
+
+<br>
+<canvas id="canvas"></canvas>
+
+<br><br>
+
+<a id="downloadLink" style="display:none;">
+<button>Download PNG</button>
+</a>
+
+</div>
+
+<script>
+
+function createImage(){
+
+let files=document.getElementById("images").files;
+
+if(files.length<2 || files.length>3){
+alert("২ বা ৩টি ছবি নির্বাচন করুন");
+return;
+}
+
+let loadedImages=[];
+let count=0;
+
+for(let file of files){
+
+let img=new Image();
+
+img.onload=function(){
+
+loadedImages.push(img);
+count++;
+
+if(count===files.length){
+
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+let width=300;
+let height=300;
+
+canvas.width=width*loadedImages.length;
+canvas.height=height;
+
+loadedImages.forEach((image,index)=>{
+ctx.drawImage(image,index*width,0,width,height);
+});
+
+downloadPNG();
+
+}
+
+};
+
+img.src=URL.createObjectURL(file);
+
+}
+
+}
+
+function downloadPNG(){
+
+let canvas=document.getElementById("canvas");
+
+let dataURL=canvas.toDataURL("image/png");
+
+let link=document.getElementById("downloadLink");
+
+link.href=dataURL;
+link.download="combined_photo.png";
+link.style.display="inline";
+
+}
+
+</script>
+
+</body>
+</html>
