@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Marriage Certificate</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#ccc;
+    font-family: Arial;
+}
+
+/* PAGE */
+.page{
+    width:210mm;
+    height:297mm;
+    margin:auto;
+        /* ✅ BACKGROUND IMAGE ADD */
+    background: url('marage.png') no-repeat center;
+    background-size:100% 100%;
+    
+   /* border:15px solid #c8d6a3; */
+    padding:68px;
+    box-sizing:border-box;
+    position:relative;
+}
+/* INNER BORDER */
+.page:before{
+    content:"";
+    position:absolute;
+    display:none; 
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    border:3px solid #6aa84f;
+    pointer-events:none;
+    background:rgba(255,255,255,0.6);
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    margin-top:88px;
+    
+}
+.header img{
+    width:48px;
+    margin-top:0;
+}
+.header h2{
+    margin:2px;
+    font-size:14px;
+    color:#2c5aa0;
+}
+.header h1{
+    font-size:22px;
+    margin:6px 0;
+    color:#2c5aa0;
+}
+
+/* TOP */
+.top{
+    display:flex;
+    justify-content:space-between;
+    margin-top:6px;
+    font-size:14px;
+}
+
+/* TEXT */
+p{
+    font-size:13px;
+    margin:4px 0;
+}
+
+/* SECTION LINE */
+.line{
+    border-top:2px solid black;
+    margin:10px 0;
+}
+ input{width:250px;}
+/* FLEX */
+.flex{
+    display:flex;
+}
+.box{
+    width:50%;
+    padding:10px;
+    line-height:1.37;
+}
+.box:first-child{
+   /* border-right:2px solid black; */
+    border-right:none;
+}
+
+/* PHOTO */
+.photo{
+    width:65px;
+    height:85px;
+    margin-top:-51px;
+    //border:1px solid black;
+    float:right;
+}
+
+/* SIGN */
+.sign{
+    margin-top:20px;
+}
+
+/* OFFICER BOX */
+.officer{
+    border:2px solid black;
+    padding:8px;
+    margin-top:10px;
+    font-size:13px;
+}
+
+/* AUTH */
+.auth{
+    text-align:center;
+    margin-top:20px;
+}
+
+ @page{
+    size: A4;
+    margin:0;
+}
+
+@media print{
+
+    body{
+        margin:0 !important;
+        padding:0 !important;
+        background:#fff;
+    }
+
+    /* FORM hide */
+    .form-panel{
+        display:none !important;
+    }
+
+    /* Remove any left space */
+    body > div{
+        display:block !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    /* MAIN PAGE FULL WIDTH */
+    .page{
+        width:210mm !important;
+        height:285mm !important;
+        margin:0 auto !important;
+        margin-top:5mm !important;
+        padding:68px !important;
+        box-sizing:border-box;
+        left:0 !important;
+    }
+
+}
+
+
+</style>
+</head>
+
+<body>
+    <div class="form-panel" style="width:300px;position:fixed;left:0;top:0;height:90vh;overflow:auto;background:#fff;border-right:2px solid #000;padding:10px;">
+        <br><b>Certificate Details</b><br>
+    <input placeholder="Certificate_No" oninput="set('Certificate_No',this.value)">
+    <input placeholder="issue_date" oninput="set('issue_date',this.value)"><br><br>
+        
+<b>Groom Details</b><br>
+   <input placeholder="Groom Name" oninput="set('groom_name',this.value)">
+   <input placeholder="Father Name" oninput="set('groom_father',this.value)">
+   <input placeholder="Mother Name" oninput="set('groom_mother',this.value)">
+   <input placeholder="DOB" oninput="set('groom_dob',this.value)">
+   <input placeholder="Aadhaar" oninput="set('groom_aadhaar',this.value)">
+   <input placeholder="groom-present-address" oninput="set('groom-present-address',this.value)">
+   <input placeholder="groom-permanent-address" oninput="set('groom-permanent-address',this.value)"><br>    
+        Groom Photo
+   <input type="file" accept="image/*" onchange="uploadImage(event,'groom_photo')" style="width:100px;"><br>
+        Groom Signature
+   <input type="file" accept="image/*" onchange="uploadImage(event,'groom_sign')"style="width:100px;"><br><br>
+    
+<b>Bride Details</b><br>
+   <input placeholder="Bride Name" oninput="set('bride_name',this.value)">
+   <input placeholder="Father Name" oninput="set('bride_father',this.value)">
+   <input placeholder="Mother Name" oninput="set('bride_mother',this.value)">
+   <input placeholder="DOB" oninput="set('bride_dob',this.value)">
+   <input placeholder="Aadhaar" oninput="set('bride_aadhaar',this.value)">
+   <input placeholder="bride-present-address" oninput="set('bride-present-address',this.value)">
+   <input placeholder="bride-permanent-address" oninput="set('bride-permanent-address',this.value)"><br> 
+      Bride Photo
+   <input type="file" accept="image/*" onchange="uploadImage(event,'bride_photo')"style="width:100px;"><br>
+      Bride Signature
+   <input type="file" accept="image/*" onchange="uploadImage(event,'bride_sign')"style="width:100px;"><br><br>
+        
+<b>Office Details</b><br>    
+   <input placeholder="id_no" oninput="set('id_no',this.value)"><br>
+   <input placeholder="officer_name" oninput="set('officer_name',this.value)"><br>
+   <input placeholder="office_address" oninput="set('office_address',this.value)"><br>
+   <input placeholder="Solemnisation_Date" oninput="set('Solemnisation_Date',this.value)"><br>
+   <input placeholder="Actual_Place" oninput="set('Actual_Place',this.value)"><br>
+   <input placeholder="Serial_No" oninput="set('Serial_No',this.value)"><br>
+   <input placeholder="Corresponding_Date" oninput="set('Corresponding_Date',this.value)"><br>
+   <input placeholder="Issued_remark" oninput="set('Issued_remark',this.value)"><br>
+   <input placeholder="bottom_no" oninput="set('bottom_no',this.value)"><br><br>
+ <button onclick="window.print()" style="width:100%;padding:10px;background:#000;color:#fff;border:none;">Print</button>
+</div>
+
+<div class="page" style="margin-left:280px;">
+<!-- HEADER -->
+<div class="header">
+<h2>GOVERNMENT OF WEST BENGAL</h2>
+<h2>LAW DEPARTMENT</h2>
+<h2>OFFICE OF THE REGISTRAR GENERAL OF MARRIAGES</h2>
+<h1>CERTIFICATE OF MARRIAGE</h1>
+<p><b>UNDER SECTION 13 of ACT XLIII of 1954</b></p>
+</div>
+
+<!-- TOP -->
+<div class="top">
+<div><b>Certificate No:</b><span id="Certificate_No">WB32800104020800402725-2022-136502</span></div>
+<div><b>Date:</b><span id="issue_date"> 08-11-2022</span></div>
+</div>
+
+<p>
+The following is the extract of SOLEMNISATION OF MARRIAGE between the parties who made declaration u/s 11 of the Act.
+</p>
+
+<div class="line"></div>
+
+<!-- MAIN -->
+<div class="flex">
+
+<!-- GROOM -->
+<div class="box">
+<h3 style="margin-top:-2px;">Details of Groom</h3>
+<img class="photo" id="groom_photo">
+<p><b>Name:</b> <span id="groom_name">KHOKAN ROY</span></p><br>
+<p><b>Father's Name:</b> <span id="groom_father">HIRALAL ROY</span></p>
+<p><b>Mother's Name:</b> <span id="groom_mother">JAYANTI ROY</span></p>
+<p><b>Date of Birth:</b> <span id="groom_dob">16-08-1997</span></p>
+<p><b>Aadhaar No:</b> <span id="groom_aadhaar">445945788448</span></p>
+<p><b>Present Address:</b><br>
+<span id="groom-present-address">VILLAGE PURBA MALLICKPARA...</span></p>
+<p><b>Permanent Address:</b><br>
+<span id="groom-permanent-address">Same as above</span></p>
+<p class="sign"><b>Signature:</b><br><img id="groom_sign" style="width:50px;height:15px;margin-left:90px;"></p>
+</div>
+
+<!-- BRIDE -->
+<div class="box">
+<h3 style="margin-top:-2px;">Details of Bride</h3>
+<img class="photo" id="bride_photo">
+<p><b>Name:</b> <span id="bride_name">MUNTI ROY</span></p><br>
+<p><b>Father's Name:</b> <span id="bride_father">BISWANATH ROY</span></p>
+<p><b>Mother's Name:</b> <span id="bride_mother">NIBHA ROY</span></p>
+<p><b>Date of Birth:</b> <span id="bride_dob">20-06-2000</span></p>
+<p><b>Aadhaar No:</b> <span id="bride_aadhaar">759717827060</span></p>
+<p><b>Present Address:</b><br>
+    <span id ="bride-present-address">VILLAGE PURBA MAGURMARI...</span></p>
+<p><b>Permanent Address:</b><br>
+<span id ="bride-permanent-address">Same as above</span></p>
+<p class="sign"><b>Signature:</b><br><img id="bride_sign" style="width:50px;height:15px;margin-left:90px;"></p>
+</div>
+</div><br>
+
+<!-- OFFICER -->
+<!-- OFFICER BOX -->
+<div style="border:2px solid #000; padding:8px; margin-top:-10px; font-size:13px;">
+
+<div style="display:flex; justify-content:space-between;">
+<div><b>ID:</b> <span id="id_no">WB32800104020800402725</span></div>
+<div><b>NAME:</b> <span id="officer_name">MUKUNDA ROY</span></div>
+</div>
+
+<div style="margin-top:5px;">
+<b>OFFICE ADDRESS:</b><span id="office_address"> VILL - MADHYA BARAGARI, JALPAIGURI SADAR, JALPAIGURI, WEST BENGAL, INDIA, PIN-735210</spnn>
+</div>
+
+</div>
+
+<!-- SOLEMNISATION -->
+<div style="margin-top:10px; font-size:12px;">
+<b>Solemnisation Details:</b><br>
+
+<div style="display:flex; justify-content:space-between;">
+<div style="width:120px;"><span id="Solemnisation_Date">Date:08-11-2022</span></div>
+<div><b>Actual Place:</b> <span id="Actual_Place">VILL - MADHYA BARAGARI, PO-VIDYASHRAM, PIN-735210, DIST-JALPAIGURI, WEST BENGAL</span></div>
+</div>
+
+</div>
+
+<!-- NOTICE -->
+<div style="margin-top:8px; font-size:13px;">
+<b>Corresponding Notice (U/S-5) Serial No.:</b><span id="Serial_No"> 2022-136502</span>
+&nbsp;&nbsp; <b>Dated:</b><span id="Corresponding_Date"> 22-08-2022</span>
+</div>
+
+<!-- SIGNATURE -->
+<div style="margin-top:10px; font-size:13px;">
+<b>Full signature of Marriage Officer</b>
+</div>
+
+<div style="margin-top:5px; height:40px;">
+<!-- optional signature image -->
+</div>
+
+<!-- ISSUE LINE -->
+<div style="margin-top:-15px; font-size:13px;">
+Issued to the newly wed at Kolkata, West Bengal, India under Seal of Authority on this <span id="Issued_remark">30 day of, November (month), 2022 (year)</span>.
+</div>
+
+<!-- AUTH -->
+<div style="margin-top:20px; margin-left:40%; font-size:13px;">
+
+<div style="color:green; font-weight:bold;text-align:center;">
+✔ <br>e-Authenticated
+</div>
+
+<div style="margin-top:5px; font-weight:bold;">
+<span id="bottom_no">WB32800104020800402725 by OTP 90*52*13</span>
+</div>
+
+</div>
+    
+<script>
+function set(id,value){
+  document.getElementById(id).innerText = value;
+}
+    
+function uploadImage(event,id){
+  const file = event.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      document.getElementById(id).src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+}
+</script>
+</body>
+</html>
