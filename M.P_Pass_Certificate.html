@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Certificate System</title>
+
+<style>
+
+@page{size:A4 landscape;margin:0;}
+
+body{
+margin:10px;
+  display:flex;
+justify-content:center;
+flex-direction:column;
+background:#eee;
+font-family:Arial;
+  overflow-x:hidden; /* 🔥 পুরো page overflow আটকাবে */
+}
+
+/* FORM */
+.form{
+background:#fff;
+padding:10px;
+margin:10px;
+border:2px solid black;
+width:90%;
+}
+
+.form input{
+margin:5px;
+padding:5px;
+width:180px;
+}
+
+input{
+  font-weight:800;
+}
+  
+button{padding:6px 10px;margin:5px;cursor:pointer;}
+
+.certificate{
+width:267mm;
+height:200mm;
+position:relative;
+box-sizing:border-box; /* এটা খুব জরুরি */
+padding:5mm;
+overflow:hidden; /* 🔥 right overflow আটকাবে */
+
+background:url('mp_bg.jpg') no-repeat center;
+background-size:100% 100%;
+}
+
+.certificate:after{display:block;}
+
+.leftNo{position:absolute;top:12mm;left:18mm;}
+.rightNo{position:absolute;top:12mm;right:18mm;}
+
+.arc{position:absolute;top:18mm;width:100%;height:35mm;}
+
+.logo{
+position:absolute;top:35mm;left:50%;
+transform:translateX(-50%);
+width:70px;border:1px solid black;border-radius:50%;
+}
+
+.committee{
+  position:absolute;
+  top:60mm;width:100%;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.photo{
+position:absolute;left:30mm;top:90mm;
+width:30mm;height:35mm;border:2px solid black;
+object-fit:cover;
+}
+
+.text{
+position:absolute;left:70mm;top:85mm;
+font-size:15px;line-height:0.8;
+width:495px;
+ /* white-space: pre;    🔥 space ঠিক রাখবে */
+}
+
+.rightText{
+position:absolute;
+right:1mm;   /* 🔥 right side ঠিক রাখবে */
+top:110mm;
+width:115mm;   /* 🔥 width fix (না হলে shift হয়) */
+text-align:left;
+font-size:15px;
+line-height:0.9;
+ /* white-space: pre;    🔥 space ঠিক রাখবে */
+word-wrap:break-word; /* 🔥 text বাইরে যাবে না */
+}
+
+.seal{
+position:absolute;left:15mm;bottom:20mm;
+width:178px;
+ // border:3px solid black;
+  border-radius:50%;
+}
+
+.bottom{
+position:absolute;left:55mm;bottom:32mm;
+font-size:16px;
+}
+
+.sign{
+position:absolute;right:15mm;bottom:32mm;
+display:flex;gap:20mm;
+}
+
+@media print{
+
+/* সব কিছু hide */
+body *{
+  -webkit-print-color-adjust:exact;
+print-color-adjust:exact;
+visibility:hidden;
+}
+
+/* শুধু certificate show */
+#printArea, #printArea *{
+visibility:visible;
+}
+
+/* position fix */
+#printArea{
+position:absolute;
+left:0;
+top:0;
+width:100%;
+height:100%;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- ✅ FORM -->
+<div class="form">
+<input value="MADHYMIK PARIKSHA (SECONDARY EXAMINATION),2024" placeholder="Comunitee" oninput="set('Line0',this.value)">
+<input placeholder="Left No" oninput="set('leftNo',this.value)">
+<input placeholder="Right No" oninput="set('rightNo',this.value)">
+<input placeholder="Name" oninput="set('Name',this.value)">
+  <input placeholder="Son" oninput="set('Son',this.value)">
+  <input placeholder="Doughter" oninput="set('doughter',this.value)">
+<input placeholder="Father Name" oninput="set('father',this.value)">
+<input placeholder="Name of the School" oninput="set('school_name',this.value)">
+<input placeholder="day" oninput="set('day',this.value)">
+<input placeholder="months" oninput="set('months',this.value)">
+<input placeholder="year-first" oninput="set('year-first',this.value)">
+<input placeholder="year-last" oninput="set('year-last',this.value)">
+ <input value="March 2024" placeholder="exam-date" oninput="set('exam-date-over',this.value)">
+<input value="XXXXX"placeholder="Held Month" oninput="set('exam-date-under',this.value)">
+<input placeholder="Grade" oninput="set('Grade',this.value)">
+
+<input placeholder="Bottom-Date" oninput="set('date',this.value)">
+<input placeholder="Place (Kalirhat – 735210)" oninput="set('place',this.value)">
+  <br>
+
+📷 Photo: <input type="file" onchange="loadPhoto(event)">
+
+<br>
+
+<button onclick="printPage()">🖨 Print</button>
+
+</div>
+
+<!-- CERTIFICATE -->
+<div class="certificate" id="printArea">
+
+<div class="leftNo" id="leftNo">N1-012</div>
+<div class="rightNo" id="rightNo">12032N-063</div>
+
+<div class="arc" >
+<svg viewBox="0 0 1000 250" width="100%" height="140%" style="overflow:visible;">
+<path id="curve" d="M0 130 Q500 -10 1000 130" fill="transparent"/>
+<text text-anchor="middle" style="font-size:90px; letter-spacing:10px;font-size:90px; font-family:'UnifrakturMaguntia', cursive; fill:#333; font-weight:800">
+<textPath 
+href="#curve" 
+startOffset="50%"
+lengthAdjust="spacingAndGlyphs"
+textLength="1000">
+  West Bengal Board of Secondary Education
+</textPath>
+</text>
+</svg>
+</div>
+
+<img src="mp_1.png" class="logo">
+
+<div class="committee" id="Line0">
+MADHYMIK PARIKSHA (SECONDARY EXAMINATION),2024
+</div>
+
+<img id="photo" class="photo">
+
+<!-- 🔥 FULL DYNAMIC TEXT -->
+<div class="text">
+
+<div>Certificate that &nbsp;&nbsp;&nbsp;&nbsp; <b id="Name">ASHOK SARKAR</b></div><br>
+<div><span id="Son">Son</span> / <span id="doughter">XXXXXXX</span> / XXX of <b id="father"style="margin-left:20px;">BIBHUTI SARKAR</b></div><br>
+<div style="font-size:16px;">appearing from /<b id="school_name" style="font-size:14px;"> XX KALIRHAT DEWAN CHANDRA HIGH SCHOOL</b></div><br><br><br>
+<div>whose date of Birth is &nbsp;&nbsp;&nbsp;&nbsp;<b id="day" style="font-size:14px;">SIXTEENTH</b></div><br>
+<div id="year-first">Two Thousand &nbsp;&nbsp;<b id="year-last" style="font-size:14px;">ONE</b></div><br>
+<div id="exam-date-over" style="margin-left:110px;">March 2024</div>
+<div>Held in the month of <span id="exam-date-under">XXXXX</span></div>
+<div style="float:right;margin-top:-12px;margin-right:160px;">with overall Grade <span id="Grade">B</span></div>
+
+</div>
+
+<div class="rightText" id="rtext1">
+day of &nbsp;&nbsp;<b id="months" style="font-size:14px;">NOVEMBER</b>
+</div>
+<div class="rightText" id="rtext" style="margin-right:80px;">
+<br><br>
+duly passed the Madhyamik Pariksha (Secondary Examination)
+</div>
+
+<img src="mp_2.png" class="seal">
+
+<div class="bottom">
+<span id="place">Kalirhat – 735210</span><br>
+Dated <span id="date">6th June, 2024</span>
+</div>
+
+<div class="sign">
+<div style="margin-right:110px;">Deputy Signature</div>
+<div>Deputy Signature</div>
+</div>
+
+</div>
+
+<script>
+
+// print count
+let printCount = localStorage.getItem("printCount") || 0;
+
+// 🔒 LOCK FUNCTION
+function lockSystem(){
+document.body.innerHTML = "<h1 style='text-align:center;margin-top:200px;color:red;'>🔒 SYSTEM LOCKED</h1>";
+}
+
+// page load এ check
+window.onload = function(){
+if(printCount >= 15){
+lockSystem();
+}
+}
+
+// BASIC SET
+function set(id,val){
+if(printCount >= 15) return;
+document.getElementById(id).innerHTML = val;
+}
+
+// TEXT UPDATE
+function updateName(val){
+if(printCount >= 15) return;
+line1.innerHTML = "Certificate that &nbsp;&nbsp;&nbsp;<b>" + val+"</b>";
+}
+
+function updateFather(val){
+if(printCount >= 15) return;
+line2.innerHTML = "Son / XXXXXXX / XXX of &nbsp;&nbsp;&nbsp;<b>" + val+"</b>";
+}
+
+function updatePlace(val){
+if(printCount >= 15) return;
+line3.innerHTML = "Appearing from / XX <b>" + val+"</b>";
+}
+
+function updateDOB(val){
+if(printCount >= 15) return;
+line4.innerHTML = "whose date of Birth is &nbsp;&nbsp;&nbsp; <b>" + val+"</b>";
+}
+
+function updatertext(val){
+if(printCount >= 15) return;
+document.getElementById("rtext1").innerHTML =
+"day of &nbsp;&nbsp;<b>" + val + "</b>";
+}
+  
+function updateYear(val){
+if(printCount >= 15) return;
+line5.innerHTML = "Two Thousand &nbsp;&nbsp;&nbsp; <b>" + val+"</b>";
+}
+ 
+
+function updateMonth(val){
+if(printCount >= 15) return;
+line6.innerHTML ="" + val;
+}
+
+function updateHeld(val){
+if(printCount >= 15) return;
+line7.innerHTML = "Held in the month of <b>" + val+"</b>";
+}
+
+function updateGrade(val){
+if(printCount >= 15) return;
+line8.innerHTML = "with overall Grade <b>" + val + "</b>";
+}
+  
+function updatePlaceBottom(val){
+if(printCount >= 15) return;
+document.getElementById("place").innerHTML = val || "---";
+}
+
+// PHOTO
+function loadPhoto(e){
+if(printCount >= 15) return;
+photo.src = URL.createObjectURL(e.target.files[0]);
+}
+
+// PRINT
+function printPage(){
+
+printCount = Number(printCount);
+
+// 🔒 check
+if(printCount >= 15){
+lockSystem();
+return;
+}
+
+// count increase
+printCount++;
+localStorage.setItem("printCount", printCount);
+
+// print
+let body = document.body.innerHTML;
+let print = document.getElementById("printArea").outerHTML;
+
+document.body.innerHTML = print;
+window.print();
+document.body.innerHTML = body;
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
