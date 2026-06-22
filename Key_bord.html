@@ -1,0 +1,180 @@
+
+﻿
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>বাংলা পাওয়ার কিবোর্ড (Back, Space, Enter)</title>
+<style>
+  body{
+   font-family:Arial,Helvetica,sans-serif;
+   text-align:center}
+  
+  textarea#inputBox{
+    width:600px;
+	height:120px;
+	padding:10px;
+	font-size:18px;
+	box-sizing:border-box}
+	
+  .keyboard{
+    display:grid;
+	grid-template-columns:repeat(14,1fr);
+	gap:6px;
+	background-color:lightblue;
+	max-width:950px;
+	border-radius:5px;
+	padding:5px;
+	margin-left:30px;
+	margin:12px auto
+	}
+	
+  .key{
+    padding:10px;
+	font-size:16px;
+	color:white;
+	background:black;
+	box-shadow: 0 0 10px rgba(0,0,0,5);
+	border:1px solid #ccc;
+	border-radius:6px;
+	cursor:pointer;
+	user-select:none}
+	
+  .key:active{background:#e6f2ff}
+  .controls{display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+  .controls input[type="number"]{width:70px;padding:6px;font-size:16px}
+  button.big{padding:10px 16px;font-size:16px}
+</style>
+</head>
+<body>
+
+<h2>বাংলা কিবোর্ড (Space • Enter সমেত)</h2>
+
+<textarea id="inputBox" placeholder="এখানে টাইপ হবে..."></textarea>
+
+<div class="keyboard" id="keyboard"></div>
+
+<div class="controls">
+  <button class="key big" onclick="addPower('²')">x²</button>
+  <button class="key big" onclick="addPower('³')">x³</button>
+
+  <button class="key big" onclick="addCustomPower()">xⁿ</button>
+
+  <button class="key big" onclick="insertAtCursor(' ')">Space</button>
+  <button class="key big" onclick="backspace()">⌫ Back</button>
+  <button class="key big" onclick="insertAtCursor('\\n')">Enter</button>
+  <button class="key big" onclick="clearAll()">Clear</button>
+</div>
+
+<script>
+  const inputBox = document.getElementById('inputBox');
+  const keyboard = document.getElementById('keyboard');
+
+  // কীবোর্ড বাটনগুলো (আপনি ইচ্ছা করলে আরও যোগ/বদল করতে পারেন)
+  const keys = [
+    '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯', '০',
+	
+	
+	'অ','আ','ই','ঈ','উ','ঊ','এ','ঐ','ও','ঔ',"ঋ",
+	"া","ি","ী","ু","ূ","ে","ৈ","ো","ৌ","ৃ", "্য", "্", "!", ",", "|", "?", 
+	
+	"ক", "খ", "গ", "ঘ", "ঙ", "চ", "ছ", "জ", "ঝ", "ঞ",
+    "ট", "ঠ", "ড", "ঢ", "ণ", "ত", "থ", "দ", "ধ", "ন",
+    "প", "ফ", "ব", "ভ", "ম", "য", "র", "ল",
+    "শ", "ষ", "স", "হ", "ড়", "ঢ়", "য়", "ৎ", "ক্ষ", "ং", "ঃ", "ঁ","্",
+	  
+
+  ];
+
+  // কীবোর্ড তৈরী
+  keys.forEach(key => {
+    const btn = document.createElement('button');
+    btn.className = 'key';
+    btn.textContent = key;
+    btn.onclick = () => {
+      // কিছুমান চিহ্নের জন্য বিশেষ হ্যান্ডলিং (প্রয়োজনে বাড়ান)
+      if (key === '^') {
+        insertAtCursor('^');
+      } else if (key === '×') {
+        insertAtCursor(' \\times ');
+      } else if (key === '÷') {
+        insertAtCursor(' \\div ');
+      } else {
+        insertAtCursor(key);
+      }
+    };
+    keyboard.appendChild(btn);
+  });
+
+  // কেয়ারেট/selection অনুযায়ী টেক্সট বসানোর ফাংশন
+  function insertAtCursor(text) {
+    const el = inputBox;
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    // if text contains literal "\n" from button, convert to newline char
+    const outText = (text === '\\n') ? '\n' : text;
+    el.value = el.value.slice(0, start) + outText + el.value.slice(end);
+    const newPos = start + outText.length;
+    el.selectionStart = el.selectionEnd = newPos;
+    el.focus();
+  }
+
+  // Backspace (selection থাকলে সিলেকশন কেটে ফেলে, নয়লে কারেটের আগে এক অক্ষর মুছে দেয়)
+  function backspace() {
+    const el = inputBox;
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    if (start === end) {
+      if (start === 0) return; // কিছু নেই মুছতে
+      el.value = el.value.slice(0, start-1) + el.value.slice(end);
+      el.selectionStart = el.selectionEnd = start-1;
+    } else {
+      // selection আছে
+      el.value = el.value.slice(0, start) + el.value.slice(end);
+      el.selectionStart = el.selectionEnd = start;
+    }
+    el.focus();
+  }
+
+  // Clear all
+  function clearAll() {
+    inputBox.value = '';
+    inputBox.focus();
+  }
+
+  // Power functions
+  function addPower(sym) {
+    // সাধারণত x² বা ² বসাতে হবে; আপনি চাইলে "x" পূর্বে যোগ করে দিন
+    insertAtCursor(sym);
+  }
+
+  function addCustomPower() {
+    const n = document.getElementById('customPower').value;
+    if (!n) return;
+    const sup = toSuperscript(n);
+    insertAtCursor(sup);
+    document.getElementById('customPower').value = '';
+  }
+
+  function toSuperscript(num) {
+    const superMap = { '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻' };
+    return num.toString().split('').map(d => superMap[d] || d).join('');
+  }
+
+  // (বিকল্প) ফোন/কম্পিউটারের রিয়েল কীবোর্ডে Enter চাপলে যদি আপনি কাস্টম আচরণ চান:
+  // এখানে textarea-র নিজস্ব Enter ব্যাবহার করলে সাধারণত নতুন লাইন হয়ে যাবে; নিম্নলিখিতটা প্রয়োজন হলে আনকমেন্ট করুন
+  /*
+  inputBox.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      // কাস্টম আচরণ: উদাহরণ হিসেবে একটি নতুন লাইন বসানো ও সাবমিট না করা
+      e.preventDefault();
+      insertAtCursor('\n');
+    }
+  });
+  */
+
+</script>
+
+</body>
+</html>
