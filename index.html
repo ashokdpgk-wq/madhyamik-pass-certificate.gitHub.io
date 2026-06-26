@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online_Shop</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================
+   PART - 1
+   RESET + BODY + HEADER + SIDEBAR
+====================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#fafafa;
+    color:#333;
+    overflow-x:hidden;
+}
+
+/* ===== HEADER ===== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:85px;
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 7%;
+    border-bottom:1px solid #e5e5e5;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+    z-index:1000;
+}
+
+/* ===== MENU BUTTON ===== */
+
+.menu-btn{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+    cursor:pointer;
+    user-select:none;
+    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.menu-btn:hover{
+    background:#21409a;
+    color:#fff;
+    transform:scale(1.05);
+}
+
+/* ===== LOGO ===== */
+
+.logo{
+    text-align:center;
+}
+
+.logo h1{
+    font-size:42px;
+    font-weight:700;
+    color:#21409a;
+    line-height:1;
+}
+
+.logo span{
+    color:#ff7a00;
+}
+
+.logo p{
+    margin-top:6px;
+    font-size:14px;
+    color:#666;
+}
+
+/* ===== TOP LOGIN BUTTON ===== */
+
+.top-login{
+    border:none;
+    background:#eaf7f4;
+    color:#2f8d7c;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.top-login:hover{
+    background:#2f8d7c;
+    color:#fff;
+}
+
+/* ===== SIDEBAR ===== */
+
+.sidebar{
+    position:fixed;
+    top:90px;
+    left:-290px;
+    width:270px;
+    height:calc(100vh - 100px);
+    background:#fff;
+    border-radius:18px;
+    padding:18px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+    transition:left .35s ease;
+    z-index:9999;
+}
+
+.sidebar.active{
+    left:15px;
+}
+
+/* ===== SCROLLBAR ===== */
+
+.sidebar::-webkit-scrollbar{
+    width:6px;
+}
+
+.sidebar::-webkit-scrollbar-track{
+    background:#eee;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:#999;
+    border-radius:20px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+    background:#21409a;
+}
+
+/* ===== SIDEBAR MENU ===== */
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin-bottom:8px;
+}
+
+.sidebar li a{
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+    color:#333;
+    padding:13px 15px;
+    border-radius:10px;
+    font-size:17px;
+    transition:.3s;
+}
+
+.sidebar li a:hover{
+    background:#21409a;
+    color:#fff;
+}
+
+/* ===== SUB MENU ===== */
+
+.sub-menu{
+    display:none;
+    margin-left:18px;
+    margin-top:6px;
+    padding-left:12px;
+    border-left:2px solid #ddd;
+}
+
+.sub-menu.active{
+    display:block;
+}
+
+.sub-menu li{
+    margin-bottom:5px;
+}
+
+.sub-menu a{
+    font-size:15px;
+    padding:10px;
+}
+
+/* ===== REMOVE TAP HIGHLIGHT ===== */
+
+button,
+input,
+textarea,
+select,
+a{
+    outline:none;
+    -webkit-tap-highlight-color:transparent;
+}
+
+*:focus{
+    outline:none;
+    box-shadow:none;
+}
+ /* =====================================
+   PART - 2
+   HERO SECTION
+====================================== */
+
+/* ===== HERO ===== */
+
+.hero{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    padding:140px 8% 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+    overflow:hidden;
+}
+
+/* ===== WATERMARK ===== */
+
+.watermark{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:90%;
+    max-width:900px;
+    opacity:.05;
+    pointer-events:none;
+    user-select:none;
+    z-index:0;
+}
+
+.watermark2{
+    position:absolute;
+    top:150%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:90%;
+    max-width:900px;
+    opacity:.05;
+    pointer-events:none;
+    user-select:none;
+    z-index:0;
+}
+
+/* ===== HERO LEFT ===== */
+
+.hero-left{
+    flex:1;
+    position:relative;
+    z-index:2;
+}
+
+.hero-left h1{
+    font-size:68px;
+    font-weight:700;
+    line-height:1.15;
+    color:#1f2340;
+    margin-bottom:25px;
+}
+
+.hero-left p{
+    font-size:22px;
+    color:#666;
+    line-height:1.8;
+    margin-bottom:35px;
+    max-width:600px;
+}
+
+/* ===== BUTTON GROUP ===== */
+
+.btn-group{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* ===== CREATE BUTTON ===== */
+
+.create-btn{
+    border:none;
+    border-radius:10px;
+    padding:18px 35px;
+    font-size:18px;
+    font-weight:600;
+    color:#fff;
+    cursor:pointer;
+    background:linear-gradient(90deg,#cc63d8,#7d57ff);
+    transition:.3s;
+}
+
+.create-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(125,87,255,.35);
+}
+
+/* ===== LOGIN BUTTON ===== */
+
+.login-btn2{
+    border:none;
+    border-radius:10px;
+    padding:18px 35px;
+    font-size:18px;
+    font-weight:600;
+    color:#2f8d7c;
+    background:#eaf7f4;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn2:hover{
+    background:#2f8d7c;
+    color:#fff;
+}
+
+/* ===== HERO RIGHT ===== */
+
+.hero-right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    z-index:2;
+}
+
+/* ===== PM IMAGE ===== */
+
+.pm-photo{
+    width:100%;
+    max-width:520px;
+    height:auto;
+    display:block;
+    border-radius:20px;
+    object-fit:contain;
+    margin:0;
+    transition:.4s;
+}
+
+.pm-photo:hover{
+    transform:scale(1.03);
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:1000px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+    padding:130px 20px 60px;
+}
+
+.hero-left,
+.hero-right{
+    width:100%;
+}
+
+.hero-left h1{
+    font-size:42px;
+}
+
+.hero-left p{
+    font-size:18px;
+    max-width:100%;
+}
+
+.btn-group{
+    justify-content:center;
+}
+
+.pm-photo{
+    max-width:360px;
+}
+
+.watermark,
+.watermark2{
+    width:320px;
+}
+
+}
+/* =====================================
+   PART - 3
+   FEATURES + PERFECT + BUSINESS
+======================================*/
+
+/* ===== FEATURES ===== */
+
+.features{
+    width:100%;
+    padding:70px 8%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.feature-box{
+    background:#fff;
+    border-radius:20px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.35s;
+    cursor:pointer;
+}
+
+.feature-box:hover{
+    transform:translateY(-10px);
+    box-shadow:0 18px 35px rgba(0,0,0,.15);
+}
+
+.feature-box img{
+    width:100px;
+    height:100px;
+    object-fit:contain;
+    margin-bottom:18px;
+    transition:.3s;
+}
+
+.feature-box:hover img{
+    transform:scale(1.08);
+}
+
+.feature-box h3{
+    font-size:22px;
+    font-weight:600;
+    color:#333;
+    line-height:1.5;
+}
+
+/* ===== PERFECT ===== */
+
+.perfect{
+    width:100%;
+    padding:90px 20px 60px;
+    text-align:center;
+}
+
+.perfect h2{
+    font-size:60px;
+    color:#1f2340;
+    font-weight:700;
+}
+
+.perfect p{
+    margin-top:12px;
+    font-size:24px;
+    color:#777;
+}
+
+/* ===== BUSINESS ===== */
+
+.business{
+    width:100%;
+    padding:80px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:60px;
+}
+
+/* LEFT */
+
+.business-left{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.business-left img{
+    width:100%;
+    max-width:520px;
+    height:auto;
+    transition:.4s;
+}
+
+.business-left img:hover{
+    transform:scale(1.03);
+}
+
+/* RIGHT */
+
+.business-right{
+    flex:1;
+}
+
+.business-right h2{
+    font-size:56px;
+    color:#1f2340;
+    margin-bottom:25px;
+    line-height:1.2;
+}
+
+.business-right p{
+    font-size:22px;
+    color:#666;
+    line-height:1.9;
+    margin-bottom:35px;
+}
+
+/* JOIN BUTTON */
+
+.join-btn{
+    border:none;
+    padding:16px 34px;
+    border-radius:10px;
+    background:#21409a;
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.join-btn:hover{
+    background:#162d70;
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(33,64,154,.25);
+}
+
+/* ===== TABLET ===== */
+
+@media(max-width:1100px){
+
+.features{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.business{
+    flex-direction:column;
+    text-align:center;
+}
+
+.business-left,
+.business-right{
+    width:100%;
+}
+
+.business-right h2{
+    font-size:42px;
+}
+
+.business-right p{
+    font-size:18px;
+}
+
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:650px){
+
+.features{
+    grid-template-columns:1fr;
+    gap:20px;
+}
+
+.feature-box{
+    padding:25px 18px;
+}
+
+.feature-box img{
+    width:80px;
+    height:80px;
+}
+
+.feature-box h3{
+    font-size:20px;
+}
+
+.perfect{
+    padding:70px 20px 40px;
+}
+
+.perfect h2{
+    font-size:38px;
+}
+
+.perfect p{
+    font-size:18px;
+}
+
+.business{
+    padding:60px 20px;
+}
+
+.business-right h2{
+    font-size:34px;
+}
+
+.business-right p{
+    font-size:17px;
+}
+
+.join-btn{
+    width:100%;
+    max-width:250px;
+}
+
+}
+/* =====================================
+   PART - 4
+   SERVICES + LOGIN POPUP + FOOTER
+======================================*/
+
+/* ===== SERVICES ===== */
+
+.services{
+    width:100%;
+    padding:80px 8%;
+    background:#fafafa;
+}
+
+.services h2{
+    text-align:center;
+    font-size:58px;
+    color:#1f2340;
+    margin-bottom:50px;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.service-card{
+    background:#fff;
+    padding:30px 25px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.15);
+}
+
+.service-card img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:18px;
+}
+
+.service-card h3{
+    font-size:22px;
+    color:#21409a;
+    margin-bottom:10px;
+}
+
+.service-card p{
+    font-size:16px;
+    color:#666;
+    line-height:1.7;
+}
+
+/* ===== LOGIN POPUP ===== */
+
+.login-popup{
+    position:fixed;
+    top:90px;
+    right:20px;
+    width:340px;
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    display:none;
+    z-index:10000;
+    animation:popup .25s ease;
+}
+
+.login-popup.active{
+    display:block;
+}
+
+@keyframes popup{
+
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.login-form h2{
+    text-align:center;
+    color:#21409a;
+    margin-bottom:20px;
+}
+
+.login-form input{
+    width:100%;
+    height:50px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:0 15px;
+    margin-bottom:15px;
+    font-size:16px;
+    transition:.3s;
+}
+
+.login-form input:focus{
+    border-color:#21409a;
+}
+
+.login-form button{
+    width:100%;
+    height:50px;
+    border:none;
+    border-radius:10px;
+    background:#21409a;
+    color:#fff;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-form button:hover{
+    background:#162d70;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    width:100%;
+    background:#1f2340;
+    color:#fff;
+    text-align:center;
+    padding:35px 20px;
+    margin-top:70px;
+}
+
+footer h3{
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+footer p{
+    font-size:16px;
+    color:#ddd;
+}
+
+/* ===== TABLET ===== */
+
+@media(max-width:1000px){
+
+.service-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.services h2{
+    font-size:42px;
+}
+
+.login-popup{
+    width:320px;
+}
+
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:650px){
+
+.services{
+    padding:60px 20px;
+}
+
+.services h2{
+    font-size:34px;
+}
+
+.service-grid{
+    grid-template-columns:1fr;
+}
+
+.login-popup{
+    width:95%;
+    right:2.5%;
+    left:2.5%;
+}
+
+footer h3{
+    font-size:22px;
+}
+
+footer p{
+    font-size:15px;
+}
+
+}
+/* =====================================
+   PART - 5
+   PROFESSIONAL EFFECTS
+======================================*/
+
+/* ===== ROOT ===== */
+
+:root{
+
+    --primary:#21409a;
+    --secondary:#ff7a00;
+    --success:#2f8d7c;
+    --light:#ffffff;
+    --dark:#1f2340;
+
+    --shadow:0 10px 30px rgba(0,0,0,.12);
+    --shadow-hover:0 18px 40px rgba(0,0,0,.18);
+
+    --radius:18px;
+
+}
+
+/* ===== SMOOTH SCROLL ===== */
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* ===== GLOBAL TRANSITION ===== */
+
+*{
+    transition:
+    background-color .30s ease,
+    color .30s ease,
+    transform .30s ease,
+    box-shadow .30s ease,
+    border-color .30s ease;
+}
+
+/* ===== GLASS EFFECT ===== */
+
+.glass{
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:0 8px 32px rgba(0,0,0,.12);
+
+}
+
+/* ===== HOVER SCALE ===== */
+
+.hover-scale:hover{
+
+    transform:translateY(-6px) scale(1.02);
+
+}
+
+/* ===== CARD EFFECT ===== */
+
+.card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.card:hover{
+
+    box-shadow:var(--shadow-hover);
+
+    transform:translateY(-8px);
+
+}
+
+/* ===== IMAGE ANIMATION ===== */
+
+img{
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+.zoom-img{
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+}
+
+.zoom-img img{
+
+    transition:transform .45s ease;
+
+}
+
+.zoom-img:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ===== BUTTON EFFECT ===== */
+
+button{
+
+    cursor:pointer;
+
+    user-select:none;
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+/* ===== LINK EFFECT ===== */
+
+a{
+
+    transition:.3s;
+
+}
+
+a:hover{
+
+    opacity:.9;
+
+}
+
+/* ===== FADE UP ===== */
+
+.fade-up{
+
+    animation:fadeUp .8s ease forwards;
+
+}
+
+@keyframes fadeUp{
+
+0%{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===== FADE LEFT ===== */
+
+.fade-left{
+
+animation:fadeLeft .8s ease forwards;
+
+}
+
+@keyframes fadeLeft{
+
+0%{
+
+opacity:0;
+
+transform:translateX(-40px);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+}
+
+/* ===== FADE RIGHT ===== */
+
+.fade-right{
+
+animation:fadeRight .8s ease forwards;
+
+}
+
+@keyframes fadeRight{
+
+0%{
+
+opacity:0;
+
+transform:translateX(40px);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+}
+
+/* ===== FLOAT ===== */
+
+.float{
+
+animation:float 4s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+}
+
+/* ===== PULSE ===== */
+
+.pulse{
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+box-shadow:0 0 0 0 rgba(33,64,154,.4);
+
+}
+
+70%{
+
+box-shadow:0 0 0 15px rgba(33,64,154,0);
+
+}
+
+100%{
+
+box-shadow:0 0 0 0 rgba(33,64,154,0);
+
+}
+
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+height:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#f1f1f1;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#21409a;
+
+border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#162d70;
+
+}
+
+/* ===== SELECTION ===== */
+
+::selection{
+
+background:#21409a;
+
+color:#fff;
+
+}
+
+/* ===== INPUT EFFECT ===== */
+
+input,
+textarea,
+select{
+
+transition:.3s;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+border-color:#21409a;
+
+box-shadow:0 0 0 3px rgba(33,64,154,.15);
+
+}
+
+/* ===== LOADING SPINNER ===== */
+
+.loader{
+
+width:45px;
+
+height:45px;
+
+border:5px solid #eee;
+
+border-top:5px solid #21409a;
+
+border-radius:50%;
+
+animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+.glass{
+
+backdrop-filter:blur(8px);
+
+}
+
+.fade-left,
+.fade-right{
+
+animation:fadeUp .6s ease forwards;
+
+}
+
+}
+    </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar" id="sidebar">
+<ul>
+<li>
+<a href="#">🏠 Home</a>
+</li>
+<li>
+<a href="#">👤 About Us</a>
+</li>
+
+<li>
+<a href="#" class="menu-toggle">🧾 State Services ▾</a>
+<ul class="sub-menu" target="1" style="line-height: 0.2;">
+<li><a  target="1"href="https://edistrict.wb.gov.in/portal/home">
+    E_District</a></li>
+<li><a  target="1"href="https://banglarbhumi.gov.in/BanglarBhumi/Home.action#">
+    Banglar_Bhumi</a></li>
+<li><a  target="1"href="https://sbm.gov.in/sbm_dbt/secure/login.aspx">
+    Swachh_Bharat</a></li>
+<li><a  target="1"href="https://swasthyasathi.gov.in/KeyFunctionality">
+    Swasthya Sathi</a></li>
+<li><a  target="1"href="https://samarth.wb.gov.in/track-applicant-public">
+    Samarth</a></li>
+<li><a target="1" href="https://wbpms.in/citizen/">
+    Panchhait <br><br><br><br>Managment</a></li>
+<li><a target="1" href="Convert_png.html">
+   Convert to <br><br><br><br> PNG</a></li>
+<li><a target="1" href="add-photo.html">
+   Convert to <br><br><br><br> PNG</a></li>
+</ul>
+</li>
+
+<li>
+<a href="#" class="menu-toggle">🧾 Center Services ▾</a>
+<ul class="sub-menu" target="1" style="line-height: 0.2;">
+<li><a target="1" href="https://pmkisan.gov.in/RegistrationFormupdated.aspx">
+    PM-KISHAN</a></li>
+<li><a  target="1"href="https://nha.gov.in/">
+    Ayushman_Bharat</a></li>
+<li><a target="1" href="https://register.eshram.gov.in/#/user/self">
+    E_Shrom Card </a></li>
+<li><a target="1" href="https://abha.abdm.gov.in/abha/v3/register">
+    Abha_Card </a></li>
+<li><a target="1" href="https://nfdp.dof.gov.in/nfdp/#/registration/individual">
+    মস্যজীবী কার্ড </a></li>
+</ul>
+</li>
+
+<li>
+<a href="#" class="menu-toggle">💳 PAN Services ▾</a>
+
+<ul class="sub-menu">
+
+<li><a href="#">New PAN Apply</a></li>
+
+<li><a href="#">Correction PAN</a></li>
+
+<li><a href="#">Duplicate PAN</a></li>
+
+<li><a href="#">PAN Find</a></li>
+
+</ul>
+
+</li>
+
+<li>
+<a href="#">₹ Pricing</a>
+</li>
+
+<li>
+<a href="#" class="menu-toggle">🤝 Partner ▾</a>
+
+<ul class="sub-menu">
+
+<li><a href="#">Super Distributor</a></li>
+
+<li><a href="#">Distributor</a></li>
+
+<li><a href="#">Retailer</a></li>
+
+</ul>
+
+</li>
+
+<li>
+<a href="#">🎧 Support</a>
+</li>
+
+<li>
+<a href="#">📞 Contact Us</a>
+</li>
+
+<li>
+<a class="Login" href="#">➡ Login</a>
+</li>
+
+</ul>
+
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <!-- LOGIN POPUP -->
+
+<div class="login-popup" id="loginPopup">
+
+    <div class="login-form">
+
+        <h2>Member Login</h2>
+
+        <input type="email" id="email" placeholder="Enter Email">
+
+        <input type="password" id="password" placeholder="Enter Password">
+
+        <button onclick="loginUser()">
+            Login Now
+        </button>
+
+    </div>
+
+</div>
+    
+    
+
+    <div class="menu-btn" onclick="openMenuLogin()">
+    ⋮
+   </div>
+
+    <div class="logo">
+        <h1>Online<span>Shop</span></h1>
+        <p>Digital India Services</p>
+    </div>
+
+    <button class="top-login">
+        Member Login
+    </button>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <!-- WATERMARK -->
+
+    <img class="watermark"
+    src="index-15.png">
+	
+    <img class="watermark2"
+    src="index-15.png">
+
+    <!-- LEFT -->
+
+    <div class="hero-left">
+
+        <h1>
+            Get Paperless<br>
+            PAN Card within<br>
+            2 Hours.
+        </h1>
+
+        <p>
+            Aadhaar based instant PAN is a new facility.
+            Aadhaar e-KYC OTP or Biometric Authentication.
+        </p>
+
+        <div class="btn-group">
+
+            <button class="create-btn">
+                Create Account →
+            </button>
+
+            <button class="login-btn2">
+                Member Login
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="hero-right">
+
+        <img class="pm-photo"
+        src="index-12.png">
+
+    </div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="feature-box">
+        <img src="index-17.png">
+        <h3>UTI E-KYC PAN Center</h3>
+    </div>
+
+    <div class="feature-box">
+        <img src="index-16.png">
+        <h3>NSDL Paperless PAN</h3>
+    </div>
+
+    <div class="feature-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920329.png">
+        <h3>NSDL & UTI PAN Find</h3>
+    </div>
+
+    <div class="feature-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/1041/1041884.png">
+        <h3>Mobile & DTH Recharge</h3>
+    </div>
+
+</section>
+
+<!-- PERFECT -->
+
+<section class="perfect">
+
+    <h2>Perfect solution</h2>
+    <p>for your small business</p>
+
+</section>
+
+<!-- BUSINESS -->
+
+<section class="business">
+
+    <div class="business-left">
+
+        <img src="index-14.png">
+
+    </div>
+
+    <div class="business-right">
+
+        <h2>Business to Business</h2>
+
+        <p>
+            RK Print has been authorized to apply PAN CARD across India through our Super Distributor, Distributor & Retailer network. Retailer will able to make online application of New PAN Card and Correction / Duplicate. A great opportunity for Super Distributor & Distributor to authorized Retailers become agent for PAN Card.
+        </p>
+
+        <button class="join-btn">
+            Join Now
+        </button>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section class="services">
+
+    <h2>Our Services</h2>
+
+</section>
+
+    
+    
+    
+    
+<script>
+ /*=====================================================
+  PART-1
+  VARIABLES + DOM + INITIAL SETUP
+=====================================================*/
+//==============================
+// Main Elements
+//==============================
+const sidebar = document.getElementById("sidebar");
+const loginPopup = document.getElementById("loginPopup");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const loginTitle = document.querySelector(".login-form h2");
+const menuButton = document.querySelector(".menu-btn");
+const memberButtons = document.querySelectorAll(
+    ".top-login, .login-btn2, .Login"
+);
+const submenuButtons = document.querySelectorAll(".menu-toggle");
+//==============================
+// System Variables
+//==============================
+let sidebarMode = false;
+let memberMode = false;
+let sidebarOpened = false;
+let popupOpened = false;
+let sidebarUnlocked = false;
+//==============================
+// Login Information
+//==============================
+const SIDEBAR_PASSWORD = "5678";
+const MEMBER_EMAIL = "admin@gmail.com";
+const MEMBER_PASSWORD = "1234";
+//==============================
+// Initial Setup
+//==============================
+window.addEventListener("DOMContentLoaded", () => {
+    // Sidebar Close
+    sidebar.classList.remove("active");
+    // Popup Close
+    loginPopup.classList.remove("active");
+    // Reset Fields
+    email.value = "";
+    password.value = "";
+    // Show Email Box
+    email.style.display = "block";
+    // Default Title
+    loginTitle.innerText = "Member Login";
+});
+
+//==============================
+// Utility Functions
+//==============================
+// Reset Input
+function clearInputs(){
+    email.value = "";
+    password.value = "";
+}
+
+// Open Popup
+function showPopup(){
+    loginPopup.classList.add("active");
+    popupOpened = true;
+}
+// Close Popup
+function hidePopup(){
+    loginPopup.classList.remove("active");
+    popupOpened = false;
+}
+// Open Sidebar
+function showSidebar(){
+    sidebar.classList.add("active");
+    sidebarOpened = true;
+}
+// Close Sidebar
+function hideSidebar(){
+    sidebar.classList.remove("active");
+    sidebarOpened = false;
+}
+ /*=====================================================
+  PART-2
+  SIDEBAR FUNCTIONS + OPEN/CLOSE + SIDEBAR PASSWORD
+=====================================================*/
+
+//==============================
+// Open Sidebar Login Popup
+//==============================
+function openMenuLogin(){
+    if(sidebarUnlocked){
+        showSidebar();
+        return;
+    }
+    sidebarMode = true;
+    memberMode = false;
+    clearInputs();
+    loginTitle.innerText = "Sidebar Password";
+    email.style.display = "none";
+    showPopup();
+    password.focus();
+}
+//==============================
+// Close Sidebar
+//==============================
+function closeSidebar(){
+    hideSidebar();
+}
+//==============================
+// Toggle Sidebar
+//==============================
+function toggleSidebar(){
+    if(sidebarOpened){
+        hideSidebar();
+    }else{
+        showSidebar();
+    }
+}
+//==============================
+// Check Sidebar Password
+//==============================
+function checkSidebarPassword(){
+    const pass = password.value.trim();
+    if(pass === SIDEBAR_PASSWORD){
+        sidebarUnlocked = true;
+        hidePopup();
+        clearInputs();
+        email.style.display = "block";
+        loginTitle.innerText = "Member Login";
+        sidebarMode = false;
+        showSidebar();
+        return true;
+    }
+    alert("Wrong Sidebar Password");
+    password.select();
+    return false;
+}
+//==============================
+// Menu Button Event
+//==============================
+menuButton.addEventListener("click", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    openMenuLogin();
+});
+//==============================
+// Sidebar Click Prevent Close
+//==============================
+sidebar.addEventListener("click", function(e){
+    e.stopPropagation();
+});
+//==============================
+// Popup Click Prevent Close
+//==============================
+loginPopup.addEventListener("click", function(e){
+    e.stopPropagation();
+});
+    
+ /*=====================================================
+  PART-3
+  MEMBER LOGIN + LOGIN VALIDATION + REDIRECT
+=====================================================*/
+//==============================
+// Open Member Login
+//==============================
+function openMemberLogin(){
+    sidebarMode = false;
+    memberMode = true;
+    clearInputs();
+    loginTitle.innerText = "Member Login";
+    // Show Email
+    email.style.display = "block";
+    showPopup();
+    email.focus();
+}
+
+//==============================
+// Member Login Buttons
+//==============================
+memberButtons.forEach(button=>{
+    button.addEventListener("click",function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        openMemberLogin();
+    });
+});
+
+//==============================
+// Member Login Check
+//==============================
+function checkMemberLogin(){
+    const userEmail = email.value.trim();
+    const userPassword = password.value.trim();
+    if(
+        userEmail === MEMBER_EMAIL &&
+        userPassword === MEMBER_PASSWORD
+    ){
+        hidePopup();
+        clearInputs();
+        alert("Login Successful");
+        window.location.href = "index-a.html";
+        return true;
+    }
+    alert("Invalid Email or Password");
+    password.value = "";
+    password.focus();
+    return false;
+}
+
+//==============================
+// Main Login Function
+//==============================
+function loginUser(){
+    // Sidebar Login
+    if(sidebarMode){
+        checkSidebarPassword();
+        return;
+    }
+    // Member Login
+    if(memberMode){
+        checkMemberLogin();
+        return;
+    }
+}
+
+
+//==============================
+// Enter Key Support
+//==============================
+password.addEventListener("keydown",function(e){
+    if(e.key==="Enter"){
+        loginUser();
+    }
+});
+
+email.addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+
+        loginUser();
+
+    }
+
+});
+  
+ /*=====================================================
+  PART-4
+  SIDEBAR MENU + OUTSIDE CLICK + SMART CONTROL
+=====================================================*/
+
+
+//==============================
+// Sidebar Sub Menu
+//==============================
+submenuButtons.forEach(menu => {
+
+    menu.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+        const subMenu = this.nextElementSibling;
+
+        // অন্য সব Sub Menu বন্ধ হবে
+        document.querySelectorAll(".sub-menu").forEach(item=>{
+
+            if(item !== subMenu){
+
+                item.classList.remove("active");
+
+            }
+
+        });
+
+        // বর্তমানটি Toggle হবে
+        subMenu.classList.toggle("active");
+
+    });
+
+});
+
+
+//==============================
+// Click Outside
+//==============================
+document.addEventListener("click",function(e){
+
+    // Popup Close
+    if(
+        popupOpened &&
+        !loginPopup.contains(e.target) &&
+        !e.target.closest(".top-login") &&
+        !e.target.closest(".login-btn2") &&
+        !e.target.closest(".Login") &&
+        !e.target.closest(".menu-btn")
+    ){
+
+        hidePopup();
+
+    }
+
+    // Sidebar Close
+    if(
+        sidebarOpened &&
+        !sidebar.contains(e.target) &&
+        !e.target.closest(".menu-btn")
+    ){
+
+        hideSidebar();
+
+    }
+
+});
+
+
+//==============================
+// ESC Key
+//==============================
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+
+        hidePopup();
+
+        hideSidebar();
+
+    }
+
+});
+
+
+//==============================
+// Prevent Sidebar Close
+//==============================
+sidebar.addEventListener("click",function(e){
+
+    e.stopPropagation();
+
+});
+
+
+//==============================
+// Prevent Popup Close
+//==============================
+loginPopup.addEventListener("click",function(e){
+
+    e.stopPropagation();
+
+});
+
+
+//==============================
+// Sidebar Links
+//==============================
+sidebar.querySelectorAll("a").forEach(link=>{
+
+    link.addEventListener("click",function(e){
+
+        // যদি Submenu Button হয়
+        if(this.classList.contains("menu-toggle")){
+
+            return;
+
+        }
+
+        // External Link হলে Sidebar বন্ধ
+        if(this.getAttribute("href")!=="#"){
+
+            hideSidebar();
+
+        }
+
+    });
+
+});
+    
+ /*=====================================================
+  PART-5
+  PROFESSIONAL ANIMATION + FINAL OPTIMIZATION
+=====================================================*/
+
+
+//==============================
+// Smooth Sidebar Animation
+//==============================
+sidebar.style.transition = "left .35s ease";
+
+
+//==============================
+// Smooth Popup Animation
+//==============================
+loginPopup.style.transition = "all .30s ease";
+
+
+//==============================
+// Auto Close Popup after Login
+//==============================
+function closePopupAfterLogin(){
+
+    hidePopup();
+
+    clearInputs();
+
+    email.style.display = "block";
+
+    loginTitle.innerText = "Member Login";
+
+    sidebarMode = false;
+    memberMode = false;
+
+}
+
+
+//==============================
+// Close All Submenus
+//==============================
+function closeAllSubMenus(){
+
+    document.querySelectorAll(".sub-menu").forEach(menu=>{
+
+        menu.classList.remove("active");
+
+    });
+
+}
+
+
+//==============================
+// Reset Complete System
+//==============================
+function resetSystem(){
+
+    closePopupAfterLogin();
+
+    hideSidebar();
+
+    closeAllSubMenus();
+
+}
+
+
+//==============================
+// Prevent Multiple Click
+//==============================
+let loginProcessing = false;
+
+function safeLogin(callback){
+
+    if(loginProcessing) return;
+
+    loginProcessing = true;
+
+    callback();
+
+    setTimeout(function(){
+
+        loginProcessing = false;
+
+    },500);
+
+}
+
+
+//==============================
+// Login Button Protection
+//==============================
+document.querySelector(".login-form button")
+.addEventListener("click",function(e){
+
+    e.preventDefault();
+
+    e.stopPropagation();
+
+    safeLogin(loginUser);
+
+});
+
+
+//==============================
+// Disable Right Click (Optional)
+//==============================
+document.addEventListener("contextmenu",function(e){
+
+    e.preventDefault();
+
+});
+
+
+//==============================
+// Disable Text Selection (Optional)
+//==============================
+document.addEventListener("selectstart",function(e){
+
+    if(
+        e.target.tagName!="INPUT" &&
+        e.target.tagName!="TEXTAREA"
+    ){
+
+        e.preventDefault();
+
+    }
+
+});
+
+
+//==============================
+// Console Message
+//==============================
+console.log(
+"%c Online Shop System Loaded Successfully",
+"color:green;font-size:16px;font-weight:bold;"
+);
+</script>
+
+</body>
+</html>
