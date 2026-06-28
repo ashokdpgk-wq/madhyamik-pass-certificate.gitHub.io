@@ -1,1 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Offline PDF Compressor</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:#edf4ff;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
+padding:20px;
+
+}
+
+.container{
+
+width:100%;
+
+max-width:900px;
+
+background:#ffffff;
+
+border-radius:20px;
+
+overflow:hidden;
+
+box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+}
+
+.header{
+
+background:linear-gradient(135deg,#1565c0,#0d47a1);
+
+padding:30px;
+
+text-align:center;
+
+color:#fff;
+
+}
+
+.header h1{
+
+font-size:32px;
+
+font-weight:700;
+
+}
+
+.header p{
+
+margin-top:8px;
+
+font-size:15px;
+
+opacity:.95;
+
+}
+
+.content{
+
+padding:25px;
+
+}
+
+.uploadBox{
+
+border:3px dashed #1565c0;
+
+border-radius:18px;
+
+padding:45px 20px;
+
+text-align:center;
+
+background:#f8fbff;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.uploadBox:hover{
+
+background:#eef5ff;
+
+}
+
+.uploadIcon{
+
+font-size:75px;
+
+margin-bottom:15px;
+
+}
+
+.uploadBox h2{
+
+font-size:24px;
+
+color:#1565c0;
+
+margin-bottom:10px;
+
+}
+
+.uploadBox p{
+
+font-size:14px;
+
+color:#666;
+
+margin-bottom:22px;
+
+}
+
+#pdfFile{
+
+display:none;
+
+}
+
+.selectBtn{
+
+display:inline-block;
+
+padding:13px 32px;
+
+background:#1565c0;
+
+color:#fff;
+
+border-radius:10px;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+text-decoration:none;
+
+}
+
+.selectBtn:hover{
+
+background:#0d47a1;
+
+}
+  
+.previewArea{
+
+margin-top:25px;
+
+display:none;
+
+}
+
+.previewCard{
+
+background:#ffffff;
+
+border:1px solid #d9e5ff;
+
+border-radius:15px;
+
+padding:18px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:15px;
+
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+.leftInfo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.pdfIcon{
+
+width:65px;
+
+height:65px;
+
+border-radius:12px;
+
+background:#e53935;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:34px;
+
+color:#fff;
+
+}
+
+.fileDetails h3{
+
+font-size:16px;
+
+color:#222;
+
+word-break:break-word;
+
+}
+
+.fileDetails p{
+
+margin-top:5px;
+
+font-size:13px;
+
+color:#666;
+
+}
+
+.settings{
+
+margin-top:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+.settingCard{
+
+background:#f8fbff;
+
+border:1px solid #d9e5ff;
+
+border-radius:14px;
+
+padding:18px;
+
+}
+
+.settingCard label{
+
+display:block;
+
+margin-bottom:10px;
+
+font-weight:600;
+
+color:#1565c0;
+
+}
+
+#quality{
+
+width:100%;
+
+cursor:pointer;
+
+}
+
+#qualityValue{
+
+margin-top:8px;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#444;
+
+}
+
+.progressArea{
+
+display:none;
+
+margin-top:25px;
+
+}
+
+.progressBar{
+
+width:100%;
+
+height:18px;
+
+background:#e0e0e0;
+
+border-radius:50px;
+
+overflow:hidden;
+
+}
+
+.progress{
+
+width:0%;
+
+height:100%;
+
+background:linear-gradient(90deg,#00c853,#64dd17);
+
+transition:.3s;
+
+}
+
+.progressText{
+
+margin-top:10px;
+
+text-align:center;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#333;
+
+}
+
+.actionButtons{
+
+margin-top:30px;
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.actionButtons button{
+
+flex:1;
+
+padding:14px;
+
+border:none;
+
+border-radius:10px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+#compressBtn{
+
+background:#1565c0;
+
+color:#fff;
+
+}
+
+#compressBtn:hover{
+
+background:#0d47a1;
+
+}
+
+#downloadBtn{
+
+display:none;
+
+background:#00c853;
+
+color:#fff;
+
+}
+
+#downloadBtn:hover{
+
+background:#009624;
+
+}
+  
+.footer{
+margin-top:30px;
+padding:18px;
+text-align:center;
+font-size:13px;
+color:#666;
+border-top:1px solid #eee;
+}
+
+@media(max-width:768px){
+
+.header h1{
+font-size:26px;
+}
+
+.uploadBox{
+padding:30px 15px;
+}
+
+.previewCard{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.actionButtons{
+flex-direction:column;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>Offline PDF Compressor</h1>
+<p>Compress PDF (Max Upload: 15 MB)</p>
+</div>
+
+<div class="content">
+
+<div class="uploadBox" id="dropArea">
+
+<div class="uploadIcon">📄</div>
+
+<h2>Select PDF</h2>
+
+<p>Drag & Drop or Browse PDF File</p>
+
+<label for="pdfFile" class="selectBtn">
+Browse PDF
+</label>
+
+<input
+type="file"
+id="pdfFile"
+accept="application/pdf">
+
+</div>
+
+<div
+class="previewArea"
+id="previewArea">
+
+<div class="previewCard">
+
+<div class="leftInfo">
+
+<div class="pdfIcon">📕</div>
+
+<div class="fileDetails">
+
+<h3 id="fileName">
+No File Selected
+</h3>
+
+<p id="fileSize">
+0 MB
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="settings">
+
+<div class="settingCard">
+
+<label>
+Compression Quality
+</label>
+
+<input
+type="range"
+id="quality"
+min="20"
+max="100"
+value="60">
+
+<div id="qualityValue">
+60%
+</div>
+
+</div>
+
+</div>
+
+<div
+class="progressArea"
+id="progressArea">
+
+<div class="progressBar">
+
+<div
+class="progress"
+id="progress">
+
+</div>
+
+</div>
+
+<div
+class="progressText"
+id="progressText">
+
+Waiting...
+
+</div>
+
+</div>
+
+<div class="actionButtons">
+
+<button id="compressBtn">
+Compress PDF
+</button>
+
+<button id="downloadBtn">
+Download PDF
+</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+Offline PDF Compressor<br>
+
+HTML + CSS + JavaScript
+
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+/* Part-2A এখান থেকে শুরু হবে */
+const pdfInput = document.getElementById("pdfFile");
+const dropArea = document.getElementById("dropArea");
+
+const previewArea = document.getElementById("previewArea");
+const fileName = document.getElementById("fileName");
+const fileSize = document.getElementById("fileSize");
+
+const quality = document.getElementById("quality");
+const qualityValue = document.getElementById("qualityValue");
+
+const compressBtn = document.getElementById("compressBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+
+const progressArea = document.getElementById("progressArea");
+const progress = document.getElementById("progress");
+const progressText = document.getElementById("progressText");
+
+let selectedFile = null;
+let finalBlob = null;
+
+/* Quality slider */
+quality.addEventListener("input", () => {
+    qualityValue.innerText = quality.value + "%";
+});
+
+/* File select */
+pdfInput.addEventListener("change", (e) => {
+    handleFile(e.target.files[0]);
+});
+
+/* Drop */
+["dragover", "dragenter"].forEach(evt => {
+    dropArea.addEventListener(evt, (e) => {
+        e.preventDefault();
+        dropArea.style.background = "#e8f1ff";
+    });
+});
+
+["dragleave", "drop"].forEach(evt => {
+    dropArea.addEventListener(evt, (e) => {
+        e.preventDefault();
+        dropArea.style.background = "#f8fbff";
+    });
+});
+
+dropArea.addEventListener("drop", (e) => {
+    handleFile(e.dataTransfer.files[0]);
+});
+
+/* Validate file */
+function handleFile(file){
+
+    if(!file){
+        return;
+    }
+
+    if(file.type !== "application/pdf"){
+        alert("Only PDF allowed");
+        return;
+    }
+
+    if(file.size > 15 * 1024 * 1024){
+        alert("Max 15MB allowed");
+        return;
+    }
+
+    selectedFile = file;
+
+    previewArea.style.display = "block";
+
+    fileName.innerText = file.name;
+    fileSize.innerText = (file.size / 1024 / 1024).toFixed(2) + " MB";
+
+    downloadBtn.style.display = "none";
+    finalBlob = null;
+}
+  
+compressBtn.addEventListener("click", async () => {
+
+    if(!selectedFile){
+        alert("Please select a PDF first");
+        return;
+    }
+
+    progressArea.style.display = "block";
+    progress.style.width = "0%";
+    progressText.innerText = "Loading PDF...";
+
+    const arrayBuffer = await selectedFile.arrayBuffer();
+
+    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+    const pdfDoc = await loadingTask.promise;
+
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF({
+        unit: "mm",
+        format: "a4",
+        compress: true
+    });
+
+    const pageWidth = 210;
+    const pageHeight = 297;
+
+    let firstPage = true;
+
+    for(let i = 1; i <= pdfDoc.numPages; i++){
+
+        progressText.innerText = `Processing page ${i}/${pdfDoc.numPages}`;
+        progress.style.width = ((i - 1) / pdfDoc.numPages) * 100 + "%";
+
+        const page = await pdfDoc.getPage(i);
+
+        const viewport = page.getViewport({ scale: 2 });
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({
+            canvasContext: ctx,
+            viewport: viewport
+        }).promise;
+
+        const imgData = canvas.toDataURL(
+            "image/jpeg",
+            Number(quality.value) / 100
+        );
+
+        let imgW = pageWidth;
+        let imgH = (canvas.height * imgW) / canvas.width;
+
+        if(imgH > pageHeight){
+            imgH = pageHeight;
+            imgW = (canvas.width * imgH) / canvas.height;
+        }
+
+        const x = (pageWidth - imgW) / 2;
+        const y = (pageHeight - imgH) / 2;
+
+        if(!firstPage){
+            pdf.addPage();
+        }
+
+        pdf.addImage(imgData, "JPEG", x, y, imgW, imgH, undefined, "FAST");
+
+        firstPage = false;
+    }
+
+    progress.style.width = "100%";
+    progressText.innerText = "Finalizing...";
+
+    const blob = pdf.output("blob");
+    finalBlob = blob;
+
+    downloadBtn.style.display = "block";
+});
+  
+ downloadBtn.addEventListener("click", () => {
+
+    if(!finalBlob){
+        return;
+    }
+
+    const url = URL.createObjectURL(finalBlob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "compressed.pdf";
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    URL.revokeObjectURL(url);
+});
+
+/* Optional: Better compression hint loop */
+async function simpleOptimize(blob){
+
+    // NOTE: Browser cannot guarantee exact size reduction
+    // This is just a placeholder optimizer
+
+    return blob;
+}
+</script>
+
+</body>
+</html>
