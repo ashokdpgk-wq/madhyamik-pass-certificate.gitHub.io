@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>School Management UI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;font-family:Arial}
+body{margin:0;background:#f1f5f9}
+
+/* ---------- LOGIN ---------- */
+#loginPage{
+ height:100vh;display:flex;
+ justify-content:center;align-items:center
+}
+.login-box{
+ background:#fff;padding:25px;
+ width:300px;border-radius:8px;
+ box-shadow:0 0 10px rgba(0,0,0,.1)
+}
+.login-box h3{text-align:center}
+.login-box input,button{
+ width:100%;padding:10px;margin:8px 0
+}
+button{background:#4f46e5;color:#fff;border:none;border-radius:4px;cursor:pointer}
+
+/* ---------- NAVBAR ---------- */
+#navbar{
+ background:#4f46e5;color:#fff;
+ padding:12px;display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+#navbar span{cursor:pointer}
+
+/* ---------- SIDEBAR ---------- */
+#sidebar{
+ position:fixed;
+ top:50px;
+ left:-260px;
+ width:260px;
+ height:calc(100vh - 50px);
+ background:#1e293b;
+ color:#fff;
+ padding:10px;
+ transition:.3s;
+ overflow-y:auto; /* scrollable sidebar */
+ scrollbar-width: thin;
+ scrollbar-color: #4f46e5 #1e293b;
+}
+#sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+#sidebar::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: #4f46e5;
+  border-radius: 3px;
+}
+
+/* ---------- MENU ---------- */
+.menu{
+ padding:10px;cursor:pointer;
+ background:#334155;margin-top:6px;
+ border-radius:4px
+}
+.menu:hover{background:#475569}
+
+/* ---------- SUBMENU ---------- */
+.submenu{
+ display:none;
+ padding-left:15px;
+ max-height:300px; /* scrollable height */
+ overflow-y:auto;
+ scrollbar-width: thin;
+ scrollbar-color: #4f46e5 #1e293b;
+}
+.submenu::-webkit-scrollbar {
+  width: 5px;
+}
+.submenu::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+.submenu::-webkit-scrollbar-thumb {
+  background-color: #4f46e5;
+  border-radius: 3px;
+}
+
+.submenu a{
+ display:block;color:#cbd5f5;
+ text-decoration:none;padding:6px 0
+}
+.submenu a:hover{color:#fff}
+
+/* ---------- MAIN ---------- */
+#main{
+ margin-top:50px;padding:20px
+}
+.card{
+ background:#fff;padding:20px;
+ border-radius:8px
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage">
+ <div class="login-box">
+  <h3>Admin Login</h3>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+ </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none">
+
+<div id="navbar">
+ <span onclick="toggleSidebar()">☰ Menu</span>
+ <span onclick="logout()">Logout</span>
+</div>
+
+<div id="sidebar">
+
+ <div class="menu" onclick="toggleSub(this)">Dashboard</div>
+
+ <div class="menu" onclick="toggleSub(this)">Student</div>
+ <div class="submenu">
+  
+  <a href="#" onclick="showAddStudentForm()">Add Student</a>
+  
+  <!-- ADD STUDENT FORM -->
+
+<div id="addStudentFormBox" style="display:none;margin-top:20px">
+
+  <h2>Add Student</h2>
+
+  <div style="
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:10px">
+
+    <input type="text" id="sName" placeholder="Student Name">
+
+    <input type="text" id="sRoll" placeholder="Roll No">
+
+    <input type="text" id="sReg" placeholder="Reg No">
+
+    <select id="sClass">
+      <option value="">Select Class</option>
+      <option>Class-1</option>
+      <option>Class-2</option>
+      <option>Class-3</option>
+      <option>Class-4</option>
+      <option>Class-5</option>
+      <option>Class-6</option>
+      <option>Class-7</option>
+      <option>Class-8</option>
+      <option>Class-9</option>
+      <option>Class-10</option>
+      <option>Class-11</option>
+      <option>Class-12</option>
+    </select>
+
+    <input type="text" id="sFather" placeholder="Father Name">
+
+    <input type="text" id="sMobile" placeholder="Mobile No">
+
+    <input type="date" id="sDob">
+
+    <select id="sYear">
+      <option value="">Select Year</option>
+      <option>2025</option>
+      <option>2026</option>
+      <option>2027</option>
+      <option>2028</option>
+    </select>
+
+  </div>
+
+  <button onclick="submitStudent()" style="margin-top:15px">
+    Submit Student
+  </button>
+
+</div>
+  
+  <!-- Add Student -->
+  <div class="menu" onclick="toggleYear(this)">Student List</div>
+
+  <!-- Year Submenu -->
+  <div class="submenu" id="yearList">
+    <!-- 2025 -->
+    <div class="menu" onclick="toggleExclusive(this)">2025</div>
+    <div class="submenu">
+      <a href="#" onclick="showStudentList('Class-1','2025')">Class-1</a>
+      <a href="#" onclick="showStudentList('Class-2','2025')">Class-2</a>
+      <a href="#" onclick="showStudentList('Class-3','2025')">Class-3</a>
+      <a href="#" onclick="showStudentList('Class-4','2025')">Class-4</a>
+      <a href="#" onclick="showStudentList('Class-5','2025')">Class-5</a>
+      <a href="#" onclick="showStudentList('Class-6','2025')">Class-6</a>
+      <a href="#" onclick="showStudentList('Class-7','2025')">Class-7</a>
+      <a href="#" onclick="showStudentList('Class-8','2025')">Class-8</a>
+      <a href="#" onclick="showStudentList('Class-9','2025')">Class-9</a>
+      <a href="#" onclick="showStudentList('Class-10','2025')">Class-10</a>
+      <a href="#" onclick="showStudentList('Class-11','2025')">Class-11</a>
+      <a href="#" onclick="showStudentList('Class-12','2025')">Class-12</a>
+    </div>
+
+    <!-- 2026 -->
+    <div class="menu" onclick="toggleExclusive(this)">2026</div>
+    <div class="submenu">
+      <a href="#" onclick="showStudentList('Class-1','2026')">Class-1</a>
+      <a href="#" onclick="showStudentList('Class-2','2026')">Class-2</a>
+      <a href="#" onclick="showStudentList('Class-3','2026')">Class-3</a>
+      <a href="#" onclick="showStudentList('Class-4','2026')">Class-4</a>
+      <a href="#" onclick="showStudentList('Class-5','2026')">Class-5</a>
+      <a href="#" onclick="showStudentList('Class-6','2026')">Class-6</a>
+      <a href="#" onclick="showStudentList('Class-7','2026')">Class-7</a>
+      <a href="#" onclick="showStudentList('Class-8','2026')">Class-8</a>
+      <a href="#" onclick="showStudentList('Class-9','2026')">Class-9</a>
+      <a href="#" onclick="showStudentList('Class-10','2026')">Class-10</a>
+      <a href="#" onclick="showStudentList('Class-11','2026')">Class-11</a>
+      <a href="#" onclick="showStudentList('Class-12','2026')">Class-12</a>
+    </div>
+
+    <!-- 2027 -->
+    <div class="menu" onclick="toggleExclusive(this)">2027</div>
+    <div class="submenu">
+      <a href="#" onclick="showStudentList('Class-1','2027')">Class-1</a>
+      <a href="#" onclick="showStudentList('Class-2','2027')">Class-2</a>
+      <a href="#" onclick="showStudentList('Class-3','2027')">Class-3</a>
+      <a href="#" onclick="showStudentList('Class-4','2027')">Class-4</a>
+      <a href="#" onclick="showStudentList('Class-5','2027')">Class-5</a>
+      <a href="#" onclick="showStudentList('Class-6','2027')">Class-6</a>
+      <a href="#" onclick="showStudentList('Class-7','2027')">Class-7</a>
+      <a href="#" onclick="showStudentList('Class-8','2027')">Class-8</a>
+      <a href="#" onclick="showStudentList('Class-9','2027')">Class-9</a>
+      <a href="#" onclick="showStudentList('Class-10','2027')">Class-10</a>
+      <a href="#" onclick="showStudentList('Class-11','2027')">Class-11</a>
+      <a href="#" onclick="showStudentList('Class-12','2027')">Class-12</a>
+    </div>
+
+    <!-- 2028 -->
+    <div class="menu" onclick="toggleExclusive(this)">2028</div>
+    <div class="submenu">
+      <a href="#" onclick="showStudentList('Class-1','2028')">Class-1</a>
+      <a href="#" onclick="showStudentList('Class-2','2028')">Class-2</a>
+      <a href="#" onclick="showStudentList('Class-3','2028')">Class-3</a>
+      <a href="#" onclick="showStudentList('Class-4','2028')">Class-4</a>
+      <a href="#" onclick="showStudentList('Class-5','2028')">Class-5</a>
+      <a href="#" onclick="showStudentList('Class-6','2028')">Class-6</a>
+      <a href="#" onclick="showStudentList('Class-7','2028')">Class-7</a>
+      <a href="#" onclick="showStudentList('Class-8','2028')">Class-8</a>
+      <a href="#" onclick="showStudentList('Class-9','2028')">Class-9</a>
+      <a href="#" onclick="showStudentList('Class-10','2028')">Class-10</a>
+      <a href="#" onclick="showStudentList('Class-11','2028')">Class-11</a>
+      <a href="#" onclick="showStudentList('Class-12','2028')">Class-12</a>
+    </div>
+  </div>
+
+  
+  <a href="#">ID Card</a>
+  
+  <div class="menu" onclick="toggleExclusive(this)">From</div>
+    <div class="submenu">
+      <a href="ST_Application_From_1.html">Registration_From</a>
+      <a href="#">Addmission_From</a>
+    </div>
+ </div>
+
+ <div class="menu" onclick="toggleSub(this)">Answer_Sheet</div>
+ <div class="submenu">
+      <div class="menu" onclick="toggleExclusive(this)">Class-3</div>
+        <div class="submenu">
+          <div class="menu" onclick="toggleExclusive(this)">Geography</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">History</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">Bengali</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+        </div>
+      <div class="menu" onclick="toggleExclusive(this)">Class-4</div>
+        <div class="submenu">
+          <div class="menu" onclick="toggleExclusive(this)">Geography</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">History</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">Bengali</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+        </div>
+      <div class="menu" onclick="toggleExclusive(this)">Class-5</div>
+        <div class="submenu">
+          <div class="menu" onclick="toggleExclusive(this)">Geography</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">History</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">Bengali</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+        </div>
+      <div class="menu" onclick="toggleExclusive(this)">Class-6</div>
+        <div class="submenu">
+          <div class="menu" onclick="toggleExclusive(this)">Geography</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">History</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+          <div class="menu" onclick="toggleExclusive(this)">Bengali</div>
+            <div class="submenu">
+              <a href="#">Leson-1</a>
+              <a href="#">Leson-2</a>
+            </div>
+        </div>
+ </div>
+
+ <div class="menu" onclick="toggleSub(this)">Result</div>
+ <div class="submenu">
+  <a href="#">Create Result</a>
+  <a href="#">View Result</a>
+  <a href="#">Merit List</a>
+ </div>
+
+ <div class="menu" onclick="toggleSub(this)">Admit Card</div>
+ <div class="submenu">
+  <a href="#">Create Admit</a>
+
+ <div class="menu" onclick="toggleSub(this)">Download Admit</div>
+    <div class="submenu">
+      <div class="menu" onclick="toggleExclusive(this)">2025</div>
+        <div class="submenu">
+          <a href="#">Class-1</a>
+          <a href="#">Class-2</a>
+          <a href="#">Class-3</a>
+          <a href="#">Class-4</a>
+          <a href="#">Class-5</a>
+          <a href="#">Class-6</a>
+          <a href="#">Class-7</a>
+          <a href="#">Class-8</a>
+          <a href="#">Class-9</a>
+          <a href="#">Class-10</a>
+          <a href="#">Class-11</a>
+          <a href="#">Class-12</a>
+        </div>
+      <div class="menu" onclick="toggleExclusive(this)">2026</div>
+        <div class="submenu">
+          <a href="#">Class-1</a>
+          <a href="#">Class-2</a>
+          <a href="#">Class-3</a>
+          <a href="#">Class-4</a>
+          <a href="#">Class-5</a>
+          <a href="#">Class-6</a>
+          <a href="#">Class-7</a>
+          <a href="#">Class-8</a>
+          <a href="#">Class-9</a>
+          <a href="#">Class-10</a>
+          <a href="#">Class-11</a>
+          <a href="#">Class-12</a>
+        </div>
+      <div class="menu" onclick="toggleExclusive(this)">2027</div>
+        <div class="submenu">
+          <a href="#">Class-1</a>
+          <a href="#">Class-2</a>
+          <a href="#">Class-3</a>
+          <a href="#">Class-4</a>
+          <a href="#">Class-5</a>
+          <a href="#">Class-6</a>
+          <a href="#">Class-7</a>
+          <a href="#">Class-8</a>
+          <a href="#">Class-9</a>
+          <a href="#">Class-10</a>
+          <a href="#">Class-11</a>
+          <a href="#">Class-12</a>
+        </div>
+      <div class="menu" onclick="toggleExclusive(this)">2028</div>
+        <div class="submenu">
+          <a href="#">Class-1</a>
+          <a href="#">Class-2</a>
+          <a href="#">Class-3</a>
+          <a href="#">Class-4</a>
+          <a href="#">Class-5</a>
+          <a href="#">Class-6</a>
+          <a href="#">Class-7</a>
+          <a href="#">Class-8</a>
+          <a href="#">Class-9</a>
+          <a href="#">Class-10</a>
+          <a href="#">Class-11</a>
+          <a href="#">Class-12</a>
+        </div>
+    </div>
+ </div>
+
+ <div class="menu" onclick="toggleSub(this)">Settings</div>
+ <div class="submenu">
+  <a href="#">School Info</a>
+  <a href="#">User Management</a>
+  
+ <a href="#" onclick="downloadStudentData()">
+ Download Student Data
+</a>
+
+<a href="#" onclick="importStudentData()">
+ Import Student Data
+</a>
+
+<input
+ type="file"
+ id="importFile"
+ accept=".json"
+ style="display:none"
+> 
+ </div>
+
+</div>
+
+<div id="main">
+<!-- ========= এই অংশটি শুধু <div id="main"> এর ভিতরের card এর জায়গায় বসান ========= -->
+
+<div class="card">
+  <h2>Welcome</h2>
+
+  <!-- DEFAULT CONTENT -->
+  <div id="defaultContent">
+    <p>
+      এই জায়গায় আপনি নিজের page / iframe / content বসাতে পারবেন।  
+      Sidebar এর submenu গুলোর <b>href</b> আপনি নিজে পরিবর্তন করবেন।
+    </p>
+  </div>
+
+  <!-- STUDENT LIST DISPLAY -->
+  <div id="studentListBox" style="display:none">
+
+    <div style="overflow:auto; margin-left:230px;">
+
+      <table border="1" cellpadding="8" width="100%" 
+      style="border-collapse:collapse;text-align:center">
+
+        <thead style="background:#4f46e5;color:#fff">
+          <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Reg No</th>
+            <th>Class</th>
+            <th>Father Name</th>
+            <th>Mobile No</th>
+            <th>Date of Birth</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+
+        <tbody id="studentTableBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+</div>
+
+ 
+ <script src="students.js"></script>
+<script>
+
+/* ---------- LOGIN ---------- */
+function login(){
+ if(user.value==="admin" && pass.value==="admin123"){
+  localStorage.setItem("login","yes");
+  loginPage.style.display="none";
+  dashboard.style.display="block";
+ }else alert("Wrong Login");
+}
+if(localStorage.getItem("login")){
+ loginPage.style.display="none";
+ dashboard.style.display="block";
+}
+
+/* ---------- LOGOUT ---------- */
+function logout(){
+ localStorage.removeItem("login");
+ location.reload();
+}
+
+/* ---------- SIDEBAR ---------- */
+function toggleSidebar(){
+ sidebar.style.left = sidebar.style.left==="0px" ? "-260px" : "0px";
+}
+
+/* ---------- SUB MENU ---------- */
+function toggleSub(el){
+ let next = el.nextElementSibling;
+ if(next && next.classList.contains("submenu")){
+  next.style.display = next.style.display==="block" ? "none" : "block";
+ }
+}
+
+/* ---------- Add Student → Year ---------- */
+function toggleYear(el){
+ let yearMenu = document.getElementById("yearList");
+ if(yearMenu){
+   yearMenu.style.display = (yearMenu.style.display==="block") ? "none" : "block";
+ }
+}
+
+/* ---------- EXCLUSIVE NESTED SUBMENU ---------- */
+function toggleExclusive(el){
+ let parent = el.parentElement;
+ let allMenus = parent.querySelectorAll(":scope > .menu");
+ allMenus.forEach(menu=>{
+   let submenu = menu.nextElementSibling;
+   if(menu!==el && submenu) submenu.style.display="none";
+ });
+ let next = el.nextElementSibling;
+ if(next && next.classList.contains("submenu")){
+   next.style.display = next.style.display==="block" ? "none" : "block";
+ }
+}
+ 
+ 
+/* ========= নিচের SCRIPT টি আপনার বর্তমান script এর নিচে বসান ========= */
+
+
+
+/* ---------- SHOW STUDENT LIST ---------- */
+
+function showStudentList(className,year){
+
+ let key = year + "-" + className;
+
+ let data = studentData[key] || [];
+
+ defaultContent.style.display="none";
+ studentListBox.style.display="block";
+
+ let html = "";
+
+ if(data.length===0){
+
+   html = `
+   <tr>
+    <td colspan="8" style="text-align:center">
+      No Student Found
+    </td>
+   </tr>
+   `;
+
+ }else{
+
+   data.forEach((s,index)=>{
+
+    html += `
+
+    <tr>
+
+      <td contenteditable="true">${s.name}</td>
+
+      <td contenteditable="true">${s.roll}</td>
+
+      <td contenteditable="true">${s.reg}</td>
+
+      <td contenteditable="true">${s.class}</td>
+
+      <td contenteditable="true">${s.father}</td>
+
+      <td contenteditable="true">${s.mobile}</td>
+
+      <td contenteditable="true">${s.dob}</td>
+
+      <td contenteditable="true">${s.year}</td>
+
+    </tr>
+
+    `;
+
+   });
+
+ }
+
+ studentTableBody.innerHTML = html;
+
+}
+
+
+/* ---------- HIDE LIST ON OTHER CLICK ---------- */
+
+document.addEventListener("click",function(e){
+
+ let insideList = studentListBox.contains(e.target);
+
+ let classLink = e.target.closest("a");
+
+ if(!insideList && !classLink){
+
+   studentListBox.style.display="none";
+   defaultContent.style.display="block";
+
+ }
+
+});
+ 
+ 
+ /* ---------- SHOW ADD STUDENT FORM ---------- */
+
+function showAddStudentForm(){
+
+ defaultContent.style.display="none";
+
+ studentListBox.style.display="none";
+
+ addStudentFormBox.style.display="block";
+
+}
+
+
+/* ---------- SUBMIT STUDENT ---------- */
+
+function submitStudent(){
+
+ /* SAFE CHECK */
+
+ if(typeof studentData==="undefined"){
+   window.studentData = {};
+ }
+
+ let name = sName.value.trim();
+ let roll = sRoll.value.trim();
+ let reg = sReg.value.trim();
+ let studentClass = sClass.value;
+ let father = sFather.value.trim();
+ let mobile = sMobile.value.trim();
+ let dob = sDob.value;
+ let year = sYear.value;
+
+ if(
+   !name ||
+   !roll ||
+   !reg ||
+   !studentClass ||
+   !father ||
+   !mobile ||
+   !dob ||
+   !year
+ ){
+   alert("Fill all fields");
+   return;
+ }
+
+ let key = year + "-" + studentClass;
+
+ if(!studentData[key]){
+   studentData[key] = [];
+ }
+
+ studentData[key].push({
+
+   name:name,
+   roll:roll,
+   reg:reg,
+   class:studentClass,
+   father:father,
+   mobile:mobile,
+   dob:dob,
+   year:year
+
+ });
+
+ /* LOCAL STORAGE SAVE */
+
+ try{
+
+   localStorage.setItem(
+     "studentData",
+     JSON.stringify(studentData)
+   );
+
+ }catch(err){
+
+   alert("Storage Error");
+ }
+
+ alert("Student Added Successfully");
+
+ addStudentFormBox.style.display="none";
+
+ showStudentList(studentClass,year);
+
+ /* CLEAR FORM */
+
+ sName.value="";
+ sRoll.value="";
+ sReg.value="";
+ sClass.value="";
+ sFather.value="";
+ sMobile.value="";
+ sDob.value="";
+ sYear.value="";
+
+}
+
+
+/* ---------- HIDE FORM/LIST ---------- */
+
+document.addEventListener("click",function(e){
+
+ let insideList = studentListBox.contains(e.target);
+
+ let insideForm = addStudentFormBox.contains(e.target);
+
+ let classLink = e.target.closest("a");
+
+ if(!insideList && !insideForm && !classLink){
+
+   studentListBox.style.display="none";
+
+   addStudentFormBox.style.display="none";
+
+   defaultContent.style.display="block";
+
+ }
+
+});
+ 
+ /* ---------- DOWNLOAD STUDENT DATA ---------- */
+
+function downloadStudentData(){
+
+  let data = localStorage.getItem("studentData");
+
+  if(!data){
+    alert("No Student Data Found");
+    return;
+  }
+
+  let blob = new Blob(
+    [data],
+    {type:"application/json"}
+  );
+
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+
+  a.href = url;
+
+  a.download = "student-data.json";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+
+}
+
+
+/* ---------- IMPORT STUDENT DATA ---------- */
+
+function importStudentData(){
+
+  importFile.click();
+
+}
+
+
+importFile.addEventListener("change",function(e){
+
+  let file = e.target.files[0];
+
+  if(!file) return;
+
+  let reader = new FileReader();
+
+  reader.onload = function(event){
+
+    try{
+
+      let importedData = JSON.parse(
+        event.target.result
+      );
+
+      localStorage.setItem(
+        "studentData",
+        JSON.stringify(importedData)
+      );
+
+      window.studentData = importedData;
+
+      alert("Student Data Imported Successfully");
+
+    }catch(err){
+
+      alert("Invalid JSON File");
+
+    }
+
+  };
+
+  reader.readAsText(file);
+
+});
+</script>
+
+</body>
+</html>
