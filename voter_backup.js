@@ -5626,5 +5626,275 @@ window.voterData=[
     "dob": "43",
     "epic": "JLG3199833",
     "religion": ""
+  },
+    {
+    "serial": "614",
+    "name": "BISHESHWAR ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "FULESHWAR ADHIKARI",
+    "house": "n0157",
+    "dob": "38",
+    "epic": "JLG2597440"
+  },
+  {
+    "serial": "615",
+    "name": "NARENDRA NATH ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "KHAGENDRA NATH ADHIKARI",
+    "house": "n0116",
+    "dob": "55",
+    "epic": "WB/03/015/186606"
+  },
+  {
+    "serial": "616",
+    "name": "SHIPRA ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "MAHESHWAR ADHIKARI",
+    "house": "n0148",
+    "dob": "22",
+    "epic": "SKW2640480"
+  },
+  {
+    "serial": "617",
+    "name": "KANTESHWAR ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "FULESHWAR ADHIKARI",
+    "house": "n0157",
+    "dob": "37",
+    "epic": "JLG3597432"
+  },
+  {
+    "serial": "618",
+    "name": "DHANJAY ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "KHAGENDRA ADHIKARI",
+    "house": "n0142",
+    "dob": "49",
+    "epic": "JLG1337062"
+  },
+  {
+    "serial": "619",
+    "name": "JAYANTI ROY ADHIKARI",
+    "relationType": "HUSBAND",
+    "relation": "MAHESHWAR ADHIKARI",
+    "house": "n0148",
+    "dob": "39",
+    "epic": "JLG3294519"
+  },
+  {
+    "serial": "620",
+    "name": "BIKASH ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "HARENDRA NATH ADHIKARI",
+    "house": "n0144",
+    "dob": "36",
+    "epic": "SKW0482984"
+  },
+  {
+    "serial": "621",
+    "name": "ANITA ADHIKARI",
+    "relationType": "HUSBAND",
+    "relation": "BISHESHWAR ADHIKARI",
+    "house": "n0157",
+    "dob": "35",
+    "epic": "SKW1256601"
+  },
+  {
+    "serial": "622",
+    "name": "MILON ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "SHIBESHWAR ADHIKARI",
+    "house": "n0142",
+    "dob": "29",
+    "epic": "SKW1862499"
+  },
+  {
+    "serial": "623",
+    "name": "NIROBALA ADHIKARI",
+    "relationType": "HUSBAND",
+    "relation": "FAJIN CHANDRA ADHIKARI",
+    "house": "n0148",
+    "dob": "71",
+    "epic": "WB/03/015/186496"
+  },
+  {
+    "serial": "624",
+    "name": "NARESH CHANDRA ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "TILOK CHANDRA ADHIKARI",
+    "house": "n0123",
+    "dob": "50",
+    "epic": "WB/03/015/186069"
+  },
+  {
+    "serial": "625",
+    "name": "GIROBALA ADHIKARI",
+    "relationType": "HUSBAND",
+    "relation": "TILOK ADHIKARI",
+    "house": "n0123",
+    "dob": "91",
+    "epic": "WB/03/015/186378"
+  },
+  {
+    "serial": "626",
+    "name": "TILOK ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "TERPU ADHIKARI",
+    "house": "n0123",
+    "dob": "96",
+    "epic": "WB/03/015/186868"
+  },
+  {
+    "serial": "627",
+    "name": "TAPAS ADHIKARI",
+    "relationType": "FATHER",
+    "relation": "NARENDRA NATH ADHIKARI",
+    "house": "n0116",
+    "dob": "34",
+    "epic": "SKW1388883"
+  },
+  {
+    "serial": "628",
+    "name": "RANJITA ADHIKARI ROY",
+    "relationType": "HUSBAND",
+    "relation": "PANKAJ ADHIKARI",
+    "house": "n0278",
+    "dob": "29",
+    "epic": "SKW2068666"
+  },
+  {
+    "serial": "629",
+    "name": "RINA DAS",
+    "relationType": "HUSBAND",
+    "relation": "BINAY KUMAR DAS",
+    "house": "n0136",
+    "dob": "61",
+    "epic": "WB/03/015/186323"
+  },
+  {
+    "serial": "630",
+    "name": "SUJAN DAS",
+    "relationType": "FATHER",
+    "relation": "BINAY DAS",
+    "house": "n0136",
+    "dob": "26",
+    "epic": "SKW2145803"
+  },
+  {
+    "serial": "631",
+    "name": "SHIBU DAS",
+    "relationType": "FATHER",
+    "relation": "BINAY DAS",
+    "house": "n0136",
+    "dob": "37",
+    "epic": "JLG3686680"
+  },
+  {
+    "serial": "632",
+    "name": "CHANDANA ADHIKARI ROY",
+    "relationType": "HUSBAND",
+    "relation": "BIKASH ADHIKARI",
+    "house": "n0136",
+    "dob": "30",
+    "epic": "SKW1741404"
+  },
+  {
+    "serial": "633",
+    "name": "BINAY KUMAR DAS",
+    "relationType": "FATHER",
+    "relation": "BASANTA KUMAR DAS",
+    "house": "n0136",
+    "dob": "67",
+    "epic": "WB/03/015/186650"
+  },
+  {
+    "serial": "634",
+    "name": "SANTANA BARMAN ROY",
+    "relationType": "HUSBAND",
+    "relation": "BISHNU ROY",
+    "house": "n0211",
+    "dob": "35",
+    "epic": "NEV1085216"
+  },
+  {
+    "serial": "635",
+    "name": "JYOTSNA BARMAN ROY",
+    "relationType": "HUSBAND",
+    "relation": "SUNIL ROY",
+    "house": "n0300",
+    "dob": "38",
+    "epic": "JLG3587060"
+  },
+  {
+    "serial": "636",
+    "name": "KANIKA MAHANTA",
+    "relationType": "FATHER",
+    "relation": "MANORANJAN MAHANTA",
+    "house": "n0112",
+    "dob": "42",
+    "epic": "JLG3058047"
+  },
+  {
+    "serial": "637",
+    "name": "SANGITA MODAK SARKAR",
+    "relationType": "HUSBAND",
+    "relation": "AMIT SARKAR",
+    "house": "n0082",
+    "dob": "25",
+    "epic": "SKW2482602"
+  },
+  {
+    "serial": "638",
+    "name": "BEBI MODAK",
+    "relationType": "HUSBAND",
+    "relation": "PRAHLAD MODAK",
+    "house": "n0152",
+    "dob": "37",
+    "epic": "JLG3597580"
+  },
+  {
+    "serial": "639",
+    "name": "HEMLATA MODAK SARKAR",
+    "relationType": "HUSBAND",
+    "relation": "MANIK SARKAR",
+    "house": "n0153",
+    "dob": "30",
+    "epic": "SKW1741479"
+  },
+  {
+    "serial": "640",
+    "name": "BADAL MODAK",
+    "relationType": "FATHER",
+    "relation": "KHAGENDRA NATH MODAK",
+    "house": "n0126",
+    "dob": "37",
+    "epic": "JLG3686672"
+  },
+  {
+    "serial": "641",
+    "name": "KALYANI SARKAR",
+    "relationType": "HUSBAND",
+    "relation": "PARESH CHANDRA SARKAR",
+    "house": "n0153",
+    "dob": "63",
+    "epic": "SKW2775153"
+  },
+  {
+    "serial": "642",
+    "name": "PRADIP KUMAR MODAK",
+    "relationType": "FATHER",
+    "relation": "SUSHIL MODAK",
+    "house": "n0152",
+    "dob": "53",
+    "epic": "WB/03/015/084134"
+  },
+  {
+    "serial": "643",
+    "name": "PUSHPA MODAK",
+    "relationType": "HUSBAND",
+    "relation": "SUSHIL MODAK",
+    "house": "n0152",
+    "dob": "73",
+    "epic": "WB/03/015/084487"
   }
 ]
