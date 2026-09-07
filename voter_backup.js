@@ -6436,5 +6436,275 @@ window.voterData=[
     "house": "n0125",
     "dob": "36",
     "epic": "SKW1388909"
-  } 
+  },
+  {
+    "serial": "704",
+    "name": "MINATI ROY",
+    "relationType": "HUSBAND",
+    "relation": "ALOK ROY",
+    "house": "n0125",
+    "dob": "41",
+    "epic": "JLG3199791"
+  },
+  {
+    "serial": "705",
+    "name": "SANJIT ROY",
+    "relationType": "FATHER",
+    "relation": "SWADESH ROY",
+    "house": "n0122",
+    "dob": "34",
+    "epic": "SKW1606870"
+  },
+  {
+    "serial": "706",
+    "name": "SUDIP ROY",
+    "relationType": "FATHER",
+    "relation": "NIREN ROY",
+    "house": "n0261",
+    "dob": "24",
+    "epic": "SKW2486447"
+  },
+  {
+    "serial": "707",
+    "name": "AMITRA ROY",
+    "relationType": "HUSBAND",
+    "relation": "SUDIP ROY",
+    "house": "n0261",
+    "dob": "22",
+    "epic": "SKW2731818"
+  },
+  {
+    "serial": "708",
+    "name": "SUMITRA ROY",
+    "relationType": "HUSBAND",
+    "relation": "PURNYA ROY",
+    "house": "n0121",
+    "dob": "37",
+    "epic": "SKW1741370"
+  },
+  {
+    "serial": "709",
+    "name": "TAPU ROY",
+    "relationType": "FATHER",
+    "relation": "SACHINDRA NATH ROY",
+    "house": "n0114",
+    "dob": "38",
+    "epic": "JLG3597465"
+  },
+  {
+    "serial": "710",
+    "name": "SABITRI ROY",
+    "relationType": "HUSBAND",
+    "relation": "GAJIN ROY",
+    "house": "n0171",
+    "dob": "66",
+    "epic": "WB/03/015/030515"
+  },
+  {
+    "serial": "711",
+    "name": "MANORANJAN ROY",
+    "relationType": "FATHER",
+    "relation": "SHACHIN ROY",
+    "house": "n0114",
+    "dob": "34",
+    "epic": "SKW1389352"
+  },
+  {
+    "serial": "712",
+    "name": "SUCHITRA SARKAR MODAK",
+    "relationType": "HUSBAND",
+    "relation": "KAJAL SARKAR",
+    "house": "n0146",
+    "dob": "40",
+    "epic": "SKW1606946"
+  },
+  {
+    "serial": "713",
+    "name": "SHANKAR ROY",
+    "relationType": "FATHER",
+    "relation": "NACHIN ROY",
+    "house": "n0118",
+    "dob": "66",
+    "epic": "WB/03/015/186396"
+  },
+  {
+    "serial": "714",
+    "name": "SUNIL ROY",
+    "relationType": "FATHER",
+    "relation": "HARIDAS ROY",
+    "house": "n0117",
+    "dob": "41",
+    "epic": "JLG3600616"
+  },
+  {
+    "serial": "715",
+    "name": "MITHUN ROY",
+    "relationType": "FATHER",
+    "relation": "DHARANI ROY",
+    "house": "n0143",
+    "dob": "36",
+    "epic": "JLG3600533"
+  },
+  {
+    "serial": "716",
+    "name": "BIBHUTI ROY",
+    "relationType": "FATHER",
+    "relation": "GOBINDA ROY",
+    "house": "n0113",
+    "dob": "38",
+    "epic": "JLG3464021"
+  },
+  {
+    "serial": "717",
+    "name": "UTTAM ROY",
+    "relationType": "FATHER",
+    "relation": "ALOK ROY",
+    "house": "n0125",
+    "dob": "25",
+    "epic": "SKW2482537"
+  },
+  {
+    "serial": "718",
+    "name": "JITEN ROY",
+    "relationType": "FATHER",
+    "relation": "BACHCHA ROY",
+    "house": "n0130",
+    "dob": "45",
+    "epic": "JLG3294568"
+  },
+  {
+    "serial": "719",
+    "name": "LAXMI ROY",
+    "relationType": "HUSBAND",
+    "relation": "NARENDRA NATH ROY",
+    "house": "n0169",
+    "dob": "51",
+    "epic": "JLG3293784"
+  },
+  {
+    "serial": "720",
+    "name": "SWAPNA ROY",
+    "relationType": "HUSBAND",
+    "relation": "MALAY ROY",
+    "house": "n0156",
+    "dob": "33",
+    "epic": "SKW1741362"
+  },
+  {
+    "serial": "721",
+    "name": "SHIBU ROY",
+    "relationType": "FATHER",
+    "relation": "SWADESH CHANDRA ROY",
+    "house": "n0122",
+    "dob": "36",
+    "epic": "SKW1389360"
+  },
+  {
+    "serial": "722",
+    "name": "HARIDAS ROY",
+    "relationType": "FATHER",
+    "relation": "NACHIN ROY",
+    "house": "n0117",
+    "dob": "76",
+    "epic": "WB/03/015/186692"
+  },
+  {
+    "serial": "723",
+    "name": "AMRITA ROY",
+    "relationType": "HUSBAND",
+    "relation": "RAMESH ROY",
+    "house": "n0120",
+    "dob": "28",
+    "epic": "SKW1961010"
+  },
+  {
+    "serial": "724",
+    "name": "ANITABALA ROY",
+    "relationType": "HUSBAND",
+    "relation": "SUSHIL ROY",
+    "house": "n0145",
+    "dob": "53",
+    "epic": "WB/03/015/195161"
+  },
+  {
+    "serial": "725",
+    "name": "DHARANI ROY",
+    "relationType": "FATHER",
+    "relation": "RAJALI ROY",
+    "house": "n0143",
+    "dob": "66",
+    "epic": "WB/03/015/186648"
+  },
+  {
+    "serial": "726",
+    "name": "SONA ROY",
+    "relationType": "FATHER",
+    "relation": "SURJYA MOHAN ROY",
+    "house": "n0130",
+    "dob": "24",
+    "epic": "SKW2546059"
+  },
+  {
+    "serial": "727",
+    "name": "GOPAL ROY",
+    "relationType": "FATHER",
+    "relation": "JAGABANDHU ROY",
+    "house": "n0121",
+    "dob": "25",
+    "epic": "SKW2528198"
+  },
+  {
+    "serial": "728",
+    "name": "PURNYA ROY",
+    "relationType": "FATHER",
+    "relation": "NACHIM ROY",
+    "house": "n0121",
+    "dob": "41",
+    "epic": "JLG3686516"
+  },
+  {
+    "serial": "729",
+    "name": "SUSHIL CHANDRA ROY",
+    "relationType": "FATHER",
+    "relation": "BHELURAM ROY",
+    "house": "n0145",
+    "dob": "58",
+    "epic": "WB/03/015/195029"
+  },
+  {
+    "serial": "730",
+    "name": "SANJIT ROY",
+    "relationType": "FATHER",
+    "relation": "DHARANI ROY",
+    "house": "n0143",
+    "dob": "31",
+    "epic": "SKW1606888"
+  },
+  {
+    "serial": "731",
+    "name": "BARNALI ROY",
+    "relationType": "FATHER",
+    "relation": "NARENDRA NATH ROY",
+    "house": "n0170",
+    "dob": "24",
+    "epic": "SKW2486520"
+  },
+  {
+    "serial": "732",
+    "name": "RUMA ROY",
+    "relationType": "FATHER",
+    "relation": "NARENDRA NATH ROY",
+    "house": "n0170",
+    "dob": "26",
+    "epic": "SKW2145761"
+  },
+  {
+    "serial": "733",
+    "name": "ARATI ROY",
+    "relationType": "HUSBAND",
+    "relation": "KRISHNA ROY",
+    "house": "n0121",
+    "dob": "47",
+    "epic": "JLG3199817"
+  }  
 ]
