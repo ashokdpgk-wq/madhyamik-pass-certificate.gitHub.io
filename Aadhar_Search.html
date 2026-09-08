@@ -251,7 +251,7 @@ Search Result
 
 <input type="file"
 id="restoreFile"
-accept=".json"
+accept=".json,.js"
 hidden>
 
 </div>
@@ -293,11 +293,23 @@ Save Customer
 No Record Found
 </div>
   
- <script>
+ <script src="aadhaar_backup_magurmari_I.js"></script>
+<script>
 
-let data = JSON.parse(localStorage.getItem("aadhaarData")) || [
+let data;
 
- {
+/* Load saved data first; only use built-in data when nothing has ever been saved */
+try {
+    const saved = localStorage.getItem("aadhaarData");
+    if (saved !== null) {
+        data = JSON.parse(saved);
+    } else if (Array.isArray(window.aadhaarData)) {
+        data = window.aadhaarData;
+        localStorage.setItem("aadhaarData", JSON.stringify(data));
+    } else {
+        data = [
+
+     {
     "name": "Ashok Sarkar",
     "relationType": "Father",
     "relationName": "BIBHUTI SARKAR",
@@ -387,10 +399,171 @@ let data = JSON.parse(localStorage.getItem("aadhaarData")) || [
     "relationName": "JAGMOHAN ROY",
     "raw": "590655738413",
     "format": "5906-5573-8413"
+  },
+  {
+    "name": "SUCHITRA SARKAR",
+    "relationType": "Husband",
+    "relationName": "BIBHUTI SARKAR",
+    "raw": "943801812512",
+    "format": "9438-0181-2512"
+  },
+  {
+    "name": "NILIMA SARKAR MODAK",
+    "relationType": "Husband",
+    "relationName": "KHOKAN SARKAR",
+    "raw": "690924934669",
+    "format": "6909-2493-4669"
+  },
+  {
+    "name": "SADHANA ROY",
+    "relationType": "Husband",
+    "relationName": "SANTOSH KR ROY",
+    "raw": "974789357216",
+    "format": "9747-8935-7216"
+  },
+  {
+    "name": "BIBEK ROY",
+    "relationType": "Father",
+    "relationName": "SANTOSH KR ROY",
+    "raw": "958431240224",
+    "format": "9584-3124-0224"
+  },
+  {
+    "name": "JAY ROY",
+    "relationType": "Father",
+    "relationName": "SANTOSH KR ROY",
+    "raw": "428695525245",
+    "format": "4286-9552-5245"
+  },
+  {
+    "name": "SANTOSH KUMAR ROY",
+    "relationType": "Father",
+    "relationName": "NARENDRA NATH ROY",
+    "raw": "760923200335",
+    "format": "7609-2320-0335"
+  },
+  {
+    "name": "RAJDIPTA ROY",
+    "relationType": "Father",
+    "relationName": "APU ROY",
+    "raw": "592115244195",
+    "format": "5921-1524-4195"
+  },
+  {
+    "name": "PRATIMA ROY",
+    "relationType": "Husband",
+    "relationName": "APU ROY",
+    "raw": "745144066409",
+    "format": "7451-4406-6409"
+  },
+  {
+    "name": "SANJAY ROU",
+    "relationType": "Father",
+    "relationName": "NARESH ROY",
+    "raw": "907438225834",
+    "format": "9074-3822-5834"
+  },
+  {
+    "name": "ATUL CHANDRA ROY",
+    "relationType": "Father",
+    "relationName": "NARENDRA NATH ROY",
+    "raw": "566326696121",
+    "format": "5663-2669-6121"
+  },
+  {
+    "name": "ALOK ROY",
+    "relationType": "Father",
+    "relationName": "ATUL CHANDRA ROY",
+    "raw": "507414403144",
+    "format": "5074-1440-3144"
+  },
+  {
+    "name": "SANGITA MAJUMDER RAHA",
+    "relationType": "C/O",
+    "relationName": "SAJAL RAHA",
+    "raw": "804084275231",
+    "format": "8040-8427-5231"
+  },
+  {
+    "name": "MADHAB SARKAR",
+    "relationType": "Father",
+    "relationName": "MANINDRA SARKAR",
+    "raw": "512879416618",
+    "format": "5128-7941-6618"
+  },
+  {
+    "name": "ASIT SARKAR",
+    "relationType": "Father",
+    "relationName": "MADHAB SARKAR",
+    "raw": "735306255352",
+    "format": "7353-0625-5352"
+  },
+  {
+    "name": "GITA MONDAL SARKAR",
+    "relationType": "C/O",
+    "relationName": "",
+    "raw": "200737481325",
+    "format": "2007-3748-1325"
+  },
+  {
+    "name": "NANIGOPAL KIRTONIYA",
+    "relationType": "Father",
+    "relationName": "KALICHARAN KIRTONIYA",
+    "raw": "658800864310",
+    "format": "6588-0086-4310"
+  },
+  {
+    "name": "MAMATA KIRTONIYA",
+    "relationType": "Husband",
+    "relationName": "NANIGOPAL KIRTONIYA",
+    "raw": "365543483450",
+    "format": "3655-4348-3450"
+  },
+  {
+    "name": "SHANTO KIRTONIYA",
+    "relationType": "Father",
+    "relationName": "NANIGOPAL KIRTONIYA",
+    "raw": "851477200377",
+    "format": "8514-7720-0377"
+  },
+  {
+    "name": "BISWAJIT KIRTONIA",
+    "relationType": "Father",
+    "relationName": "NANIGOPAL KIRTONIA",
+    "raw": "281016568651",
+    "format": "2810-1656-8651"
+  },
+  {
+    "name": "SABITA ROY",
+    "relationType": "Husband",
+    "relationName": "BISWAJIT KIRTONIA",
+    "raw": "724575243786",
+    "format": "7245-7524-3786"
+  },
+  {
+    "name": "JYOTSNA ROY",
+    "relationType": "Husband",
+    "relationName": "DHIRENDRA NATH ROY",
+    "raw": "203916859604",
+    "format": "2039-1685-9604"
+  },
+  {
+    "name": "DEBBRATA ROY",
+    "relationType": "Father",
+    "relationName": "DHIRENDRA NATH ROY",
+    "raw": "848772006383",
+    "format": "8487-7200-6383"
   }
 
 
-];
+
+
+
+        ];
+    }
+} catch(e) {
+    data = Array.isArray(window.aadhaarData) ? window.aadhaarData : [];
+}
 
 const searchInput=document.getElementById("searchInput");
 const result=document.getElementById("result");
@@ -597,17 +770,17 @@ backupBtn.addEventListener("click", function(){
         return;
     }
 
-    const jsonData = JSON.stringify(data, null, 2);
+    const jsData = `window.aadhaarData = ${JSON.stringify(data, null, 2)};\n`;
 
-    const blob = new Blob([jsonData], {
-        type: "application/json"
+    const blob = new Blob([jsData], {
+        type: "application/javascript"
     });
 
     const url = window.URL.createObjectURL(blob);
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "aadhaar_backup.json";
+    a.download = "aadhaar_backup.js";
 
     document.body.appendChild(a);
     a.click();
@@ -639,7 +812,16 @@ restoreFile.addEventListener("change", function (e) {
 
         try {
 
-            const backupData = JSON.parse(reader.result);
+            let backupData;
+            const text = reader.result.trim();
+
+            if (file.name.toLowerCase().endsWith(".js")) {
+                const match = text.match(/(?:window\.)?aadhaarData\s*=\s*([\s\S]*?)\s*;?\s*$/);
+                if (!match) throw new Error("Invalid JS backup");
+                backupData = JSON.parse(match[1].replace(/;\s*$/, ""));
+            } else {
+                backupData = JSON.parse(text);
+            }
 
             if (!Array.isArray(backupData)) {
                 alert("Invalid Backup File");
@@ -664,7 +846,7 @@ restoreFile.addEventListener("change", function (e) {
 
         } catch (err) {
 
-            alert("Invalid JSON File");
+            alert("Invalid JSON or JS Backup File");
 
         }
 
